@@ -3,7 +3,13 @@ var db = openDatabase('headached', '1.0', 'headached DB', 2 * 1024 * 1024);
 
 //INITIAL CREATE TABLE TRANSACTIONS
 db.transaction(function (tx) {
-    tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username)');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username char, password char, FOREIGN KEY (quesid) REFERENCES (QUESTIONS), answer integer )');
+    db.transaction(function (tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS Reults (FOREIGN KEY (userid) REFERENCES (USERS) , FOREIGN KEY (username) REFERENCES(USERS) , headache integer )');
+        db.transaction(function (tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS MEDICINES (FOREIGN KEY (patientid) REFERENCES (USERS) , headache integer, mediname char  )');
+            db.transaction(function (tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question char)');
     //tx.executeSql('DROP TABLE USERS');
 });
 
