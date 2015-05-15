@@ -33,6 +33,7 @@ db.transaction(function (tx) {
     tx.executeSql('INSERT INTO USERS VALUES (1, "abhay")');
     //tx.executeSql('DROP TABLE USERS');
 });
+            
 
 
 var mydatabase = angular.module('database', ['controllers']);
