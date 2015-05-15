@@ -37,7 +37,7 @@ db.transaction(function (tx) {
 
 
 var mydatabase = angular.module('database', ['controllers']);
-    /* .factory('MyDatabase1', function ($location ) {
+    /*.factory('MyDatabase1', function ($location ) {
         
         //WRITE DATABASE QUERIES HERE, IT WILL RETURN
         return {
@@ -68,4 +68,4 @@ var mydatabase = angular.module('database', ['controllers']);
                 };
             },
         }
-    });  */
+    }); */
