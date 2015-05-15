@@ -67,4 +67,4 @@ var mydatabase = angular.module('database', ['controllers']);
                 };
             },
         }
-    });*/
+    }); */
