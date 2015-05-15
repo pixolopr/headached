@@ -34,6 +34,96 @@ db.transaction(function (tx) {
     //tx.executeSql('DROP TABLE USERS');
 });
             
+           db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (1,"Are you feeling pain, Pressure or fullness in your cheeks, brows or forehead?")')
+                  });
+              
+           db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (2,"How much is the pain worsening when bending or lying down?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (3,"Do you have Yellow- Green or Blood-Tingled Nasal Discharge?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (4,"Do you have a stuffy nose?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (5,"How much fever do you have?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (6,"Howmuch cough are you suffering from?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (7,"Have you lost the ability to smell or taste?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (8,"Are you feeling restless or nervous?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (9,"Are you feeling Thirsty and hungry or may not feel like eating?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (10,"How much is the pain on one side or both sides of the head? ")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (11,"Does the pain getting worsen from moderate to very bad? Is the pain so bad that you cannot do your usual activities? ")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (12,"Do you ahve the feeling of Nausea or vommiting or both?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (13,"Does the pain get worsen  when you are around light , noise or near a strong odour? ")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (14,"Does the pain generally located in or around one eye? Does the pain radiate to other areas of your face, head, neck and shoulders?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (15,"How much is the intensity of one sided pain?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (16,"Do you have excessive tearing from eyes?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (17,"Are you suffering from stuffy or runny nasal passage on the affected side of your face?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (18,"Do you have swelling around the eye on the affected side of your face?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (19,"Do you have Drooping eye-lid?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (20,"Doe sheadache ocur at nighyt, usually for one to two hours after you go to bed or lasts for fifteen minutes to three hours?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (21,"Do you feel fatigued(tired)?")')
+                  });
+                        
+     db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (22,"Do you suffer from irritability?")')
+                  });
+                        
+
+        
 
 
 var mydatabase = angular.module('database', ['controllers']);
