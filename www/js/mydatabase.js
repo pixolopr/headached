@@ -35,11 +35,7 @@ db.transaction(function (tx) {
 				tx.executeSql('INSERT INTO USERS VALUES (1, "abhay")');
 				//tx.executeSql('DROP TABLE USERS');
 			});
-			//FILL DATABASE HERE< ALL INSERT STATEMENTS
-			db.transaction(function (tx) {
-				tx.executeSql('INSERT INTO USERS VALUES (1, "abhay")');
-				//tx.executeSql('DROP TABLE USERS');
-			});
+			
 
 			db.transaction(function (tx) {
 				tx.executeSql('INSERT INTO QUESTIONS VALUES (1,"Are you feeling pain, Pressure or fullness in your cheeks, brows or forehead?")')
