@@ -16,7 +16,7 @@ db.transaction(function (tx) {
 
 			console.log("heay");
 
-			var user = {};
+			var user = [{}];
 			//user = $.jStorage.get("user");
 			users = [];
 
@@ -26,13 +26,13 @@ db.transaction(function (tx) {
 					for (var i = 0; i < results.rows.length; i++) {
 						users.push(results.rows.item(i));
 					};
-					console.log(users);
+					console.log("hi");
 				}, null);
 			});
 
 			//FILL DATABASE HERE< ALL INSERT STATEMENTS
 			db.transaction(function (tx) {
-				tx.executeSql('INSERT INTO USERS VALUES (1, "abhay")');
+				tx.executeSql('INSERT INTO users VALUES (1, "abhay")');
 				//tx.executeSql('DROP TABLE USERS');
 			});
 			
