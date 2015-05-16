@@ -33,10 +33,47 @@ var cont = angular.module('controllers', [])
 })
 
 .controller('signupCtrl', function ($scope) {
+    $scope.user={};
 	$scope.change = function () {
-		console.log("jyoti");
-	}
+    
+    console.log($scope.user);
+    
+    
+    }
+
+
+
+
+
+
+
 })
+       /* $scope.addBook = function()*/
+
+/*db({
+
+data: {username:$scope.user.name , password : $scope.user.password},
+headers : {'Content-type' : 'application/json'} 
+}).success(function(data, status, headers, config){
+
+if(data.success)
+{ 
+$scope.books.push(data); 
+ }
+
+}).error(function(data, status, headers, config){
+
+//set error message.
+
+});
+
+}*/
+		/*console.log("jyoti");
+        $scope.user={};
+        $scope.user.name="";
+    console.log($scope.user.name);*/
+	//})
+
 
 .controller('questionsCtrl', function ($scope, MyDatabase) {
 	$scope.done = function () {
