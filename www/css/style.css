@@ -1,13 +1,5 @@
 /* Empty. Add your own CSS if you like */
-
 a:link {
-	color: black;
-	text-decoration: none;
-}
-
-.inputfields {
-	width: 90%%;
-	border-color: skyblue !important;
-	height: 30%;
-	border: solid !important;
+    color: black;
+    text-decoration: none;
 }

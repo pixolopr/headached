@@ -33,9 +33,7 @@ var cont = angular.module('controllers', [])
 })
 
 .controller('signupCtrl', function ($scope) {
-	$scope.change = function () {
-		console.log("jyoti");
-	}
+
 })
 
 .controller('questionsCtrl', function ($scope, MyDatabase) {
