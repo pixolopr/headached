@@ -21,7 +21,7 @@ var cont = angular.module('controllers', [])
     })
 
 
-=======
+
     .factory('usersignup', function ($location) {
         var uid = 1;
 
@@ -133,7 +133,7 @@ return{
 }).error(function(data, status, headers, config) {
   // Handle error
 });*/
-=======
+
 })
 
 .controller('signupCtrl', function ($scope,usersignup) {
