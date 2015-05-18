@@ -134,7 +134,7 @@ return{
   // Handle error
 });*/
 
-})
+
 
 .controller('signupCtrl', function ($scope,usersignup) {
         $scope.user = {};
@@ -155,7 +155,7 @@ $scope.save=usersignup.save($scope.user);
 
 
 /* $scope.addBook = function()*/
-=======
+
     })
     /* $scope.addBook = function()*/
 
