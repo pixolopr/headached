@@ -1,10 +1,103 @@
 <ion-view view-title="Questionare">
-  <ion-content>
-    <ion-list>
+    <ion-content>
+        <!-- <ion-list>
       <ion-item ng-repeat="question in questions">
           <input type="radio" name="{{question.id}}">Yes
           <input type="radio" name="{{question.id}}">No
       </ion-item>
-    </ion-list>
-  </ion-content>
+    </ion-list>-->
+        <p class="para"><strong><span>1) </span>Are you feeling Pain, Pressure or Fullness in Your cheeks, brows or Fore-head ?</strong>
+        </p>
+        <div class="list">
+
+
+            <label class="item item-radio">
+                <input type="radio" name="group">
+                <div class="item-content font">
+                    Yes
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+
+
+
+            <label class="item item-radio">
+                <input type="radio" name="group">
+                <div class="item-content">
+                    No
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+
+
+
+        </div>
+
+        <p class="para"><strong><span>2) </span>How much is the Pain worsening when bending or Lying down ?</strong>
+        </p>
+        <div class="list ">
+
+            <label class="item item-radio">
+                <input type="radio" name="group">
+                <div class="item-content font">
+                    Low
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+
+
+            <label class="item item-radio">
+                <input type="radio" name="group">
+                <div class="item-content font">
+                    Medium
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+
+
+            <label class="item item-radio">
+                <input type="radio" name="group">
+                <div class="item-content font">
+                    High
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+
+
+
+        </div>
+        <p class="para"><strong><span>3) </span>Do you have a Stuffy Nose ?</strong>
+        </p>
+        <div class="list">
+
+
+            <label class="item item-radio">
+                <input type="radio" name="group">
+                <div class="item-content font">
+                    Yes
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+
+
+
+            <label class="item item-radio">
+                <input type="radio" name="group">
+                <div class="item-content">
+                    No
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+
+
+
+        </div>
+        <a href="#app/report"><div class="submit" style="text-align:center;">
+            <button class="button button-positive">
+                <span>Submit</span>
+            </button>
+        </div></a>
+
+
+    </ion-content>
 </ion-view>
