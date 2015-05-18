@@ -19,7 +19,7 @@ var cont = angular.module('controllers', [])
             },
         }
     })
-<<<<<<< HEAD
+
 
 =======
     .factory('usersignup', function ($location) {
@@ -63,8 +63,7 @@ return{
 }
 
 
-    })
->>>>>>> origin/master
+
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
         // Form data for the login modal
         $scope.loginData = {};
@@ -77,7 +76,7 @@ return{
 
 .controller('loginCtrl', function ($scope) {
     console.log("hi");
-<<<<<<< HEAD
+
     
     $scope.forgetpassword=function(){
         
@@ -142,7 +141,7 @@ return{
         $scope.change = function () {
 $scope.save=usersignup.save($scope.user);
             console.log($scope.user);
->>>>>>> origin/master
+
 
 
         }
@@ -153,13 +152,13 @@ $scope.save=usersignup.save($scope.user);
 
 
 
-<<<<<<< HEAD
+
 
 /* $scope.addBook = function()*/
 =======
     })
     /* $scope.addBook = function()*/
->>>>>>> origin/master
+
 
 /*db({
 
