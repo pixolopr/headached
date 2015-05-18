@@ -19,7 +19,52 @@ var cont = angular.module('controllers', [])
             },
         }
     })
+<<<<<<< HEAD
 
+=======
+    .factory('usersignup', function ($location) {
+        var uid = 1;
+
+        //contacts array to hold list of all contacts
+        $location.users = [{}];
+return{
+        //save method create a new contact if not already exists
+        //else update the existing object
+        save: function (user) {
+            if (user.id == null) {
+                //if this is new contact, add it in contacts array
+                user.id = uid++;
+                users.push(user);
+            } else {
+                //for existing contact, find this contact using id
+                //and update it.
+                for (i in users) {
+                    if (users[i].id == user.id) {
+                        users[i] = user;
+                    }
+                }
+            }
+
+        }
+}
+return{
+        //simply search contacts list for given id
+        //and returns the contact object if found
+        get: function (id) {
+            for (i in users) {
+                if (users[i].id == id) {
+                    return users[i];
+                }
+            }
+
+        }
+
+
+}
+
+
+    })
+>>>>>>> origin/master
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
         // Form data for the login modal
         $scope.loginData = {};
@@ -32,6 +77,7 @@ var cont = angular.module('controllers', [])
 
 .controller('loginCtrl', function ($scope) {
     console.log("hi");
+<<<<<<< HEAD
     
     $scope.forgetpassword=function(){
         
@@ -88,6 +134,18 @@ var cont = angular.module('controllers', [])
 }).error(function(data, status, headers, config) {
   // Handle error
 });*/
+=======
+})
+
+.controller('signupCtrl', function ($scope,usersignup) {
+        $scope.user = {};
+        $scope.change = function () {
+$scope.save=usersignup.save($scope.user);
+            console.log($scope.user);
+>>>>>>> origin/master
+
+
+        }
 
 
 
@@ -95,10 +153,13 @@ var cont = angular.module('controllers', [])
 
 
 
-
-
+<<<<<<< HEAD
 
 /* $scope.addBook = function()*/
+=======
+    })
+    /* $scope.addBook = function()*/
+>>>>>>> origin/master
 
 /*db({
 
