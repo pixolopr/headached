@@ -22,45 +22,45 @@ var cont = angular.module('controllers', [])
 
 
 
-    .factory('usersignup', function ($location) {
+.factory('usersignup', function ($location) {
         var uid = 1;
 
         //contacts array to hold list of all contacts
         $location.users = [{}];
-return{
-        //save method create a new contact if not already exists
-        //else update the existing object
-        save: function (user) {
-            if (user.id == null) {
-                //if this is new contact, add it in contacts array
-                user.id = uid++;
-                users.push(user);
-            } else {
-                //for existing contact, find this contact using id
-                //and update it.
-                for (i in users) {
-                    if (users[i].id == user.id) {
-                        users[i] = user;
+        return {
+            //save method create a new contact if not already exists
+            //else update the existing object
+            save: function (user) {
+                if (user.id == null) {
+                    //if this is new contact, add it in contacts array
+                    user.id = uid++;
+                    users.push(user);
+                } else {
+                    //for existing contact, find this contact using id
+                    //and update it.
+                    for (i in users) {
+                        if (users[i].id == user.id) {
+                            users[i] = user;
+                        }
                     }
                 }
-            }
 
+            }
         }
-}
-return{
-        //simply search contacts list for given id
-        //and returns the contact object if found
-        get: function (id) {
-            for (i in users) {
-                if (users[i].id == id) {
-                    return users[i];
+        return {
+            //simply search contacts list for given id
+            //and returns the contact object if found
+            get: function (id) {
+                for (i in users) {
+                    if (users[i].id == id) {
+                        return users[i];
+                    }
                 }
+
             }
 
+
         }
-
-
-}
 
 
     })
@@ -77,57 +77,53 @@ return{
 .controller('loginCtrl', function ($scope) {
     console.log("hi");
 
-    
-    $scope.forgetpassword=function(){
-        
-    
+
+    $scope.forgetpassword = function () {
+
+
         console.log("yo");
     };
 })
 
-.controller('signupCtrl', function ($scope,$http) {
-    $scope.user = [{}];
-       
-    $scope.change = function () {
+.controller('signupCtrl', function ($scope, $http) {
+        $scope.user = {};
 
-        console.log($scope.user);
-        $scope.namerequired = '';
-        $scope.genderrequired = '';
-        $scope.emailrequired = '';
-        $scope.passwordrequired = '';
-        $scope.contactrequired='';
+        $scope.change = function () {
 
-        if (!$scope.user.name) {
-            $scope.namerequired = 'Name Required !';
-        }
-        if(!$scope.user.gender){
-        $scope.genderrequired='Gender Required !';
-        }
+            console.log($scope.user);
+            $scope.namerequired = '';
+            $scope.genderrequired = '';
+            $scope.emailrequired = '';
+            $scope.passwordrequired = '';
+            $scope.contactrequired = '';
 
-    if (!$scope.user.email) {
-            $scope.emailrequired = 'Email Required !';
-        }
+            if (!$scope.user.name) {
+                $scope.namerequired = 'Name Required !';
+            };
+            if (!$scope.user.gender) {
+                $scope.genderrequired = 'Gender Required !';
+            };
+            if (!$scope.user.email) {
+                $scope.emailrequired = 'Email Required !';
+            };
+            if (!$scope.user.password) {
+                $scope.passwordrequired = 'Password Required !';
+            };
+            if (!$scope.user.contact) {
+                $scope.contactrequired = 'Contact Required !';
+            } else {
 
-         if (!$scope.user.password) {
-            $scope.passwordrequired = 'Password Required !';
-        }
-         if (!$scope.user.contact) {
-            $scope.contactrequired = 'Contact Required !';
-        }
-        else{
-         $http.get('js/mydatabase.js', $scope.user
-).success(function(data, status, headers, config) {
-  // Do something successful
-}).error(function(data, status, headers, config) {
-  // Handle error
-});
-        }
-        //$scope.reset();
-    };
-   // $scope.reset=function(){
-    //$scope.user=[];
+                db.transaction(function (tx) {
+                    tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact) VALUES ('"+$scope.user.name+"', '"+$scope.user.password+"','"+$scope.user.gender+"','"+$scope.user.email+"','"+$scope.user.contact+"')", [], function (tx, results) {
+                        console.log("ADDED TO DAtABASE");
+                    }, null);
+                });
+
+                //$http.get('http://localhost/headached/headached/www/js/mydatabase.js', $scope.user).success(function (data, status, headers, config) {                    console.log("hey i successfully vcalled file");                }).error(function (data, status, headers, config) {                });
+            };
+        };
     })
-  /*  $http.get('js/mydatabase.js', $scope.user
+    /*  $http.get('js/mydatabase.js', $scope.user
 ).success(function(data, status, headers, config) {
   // Do something successful
 }).error(function(data, status, headers, config) {
@@ -136,28 +132,7 @@ return{
 
 
 
-.controller('signupCtrl', function ($scope,usersignup) {
-        $scope.user = {};
-        $scope.change = function () {
-$scope.save=usersignup.save($scope.user);
-            console.log($scope.user);
-
-
-
-        }
-
-
-
-
-
-
-
-
-
 /* $scope.addBook = function()*/
-
-    })
-    /* $scope.addBook = function()*/
 
 
 /*db({
