@@ -120,6 +120,16 @@ var cont = angular.module('controllers', [])
             $scope.passwordrequired = '';
             $scope.contactrequired = '';
 
+            var signup = function () {
+                db.transaction(function (tx) {
+                    tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "')", [], function (tx, results) {
+                        console.log("ADDED TO DAtABASE");
+                        $location.path('/app/questions');
+                        $scope.$apply();
+                    }, null);
+                });
+            };
+
             if (!$scope.user.name) {
                 $scope.namerequired = 'Name Required !';
             };
@@ -137,11 +147,16 @@ var cont = angular.module('controllers', [])
             } else {
 
                 db.transaction(function (tx) {
-                    tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "')", [], function (tx, results) {
-                        console.log("ADDED TO DAtABASE");
-                        $location.path('/app/questions');
-                        $scope.$apply();
+                    tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.name + "'", [], function (tx, results) {
+                        console.log(results.rows);
+                        if (results.rows.length > 0) {
+                            //SHOW MESSAGE THAT USERNAME ALREADY EXIST
+                        } else {
+                            //NEW USER
+                            signup();
+                        };
                     }, null);
+
                 });
 
                 //$http.get('http://localhost/headached/headached/www/js/mydatabase.js', $scope.user).success(function (data, status, headers, config) {                    console.log("hey i successfully vcalled file");                }).error(function (data, status, headers, config) {                });
