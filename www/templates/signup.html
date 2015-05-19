@@ -23,6 +23,7 @@
 			<!--<p ng-model="user.question">Your favourite movie</p>
             <input type="text" ng-model="user.answer" placeholder="Answer" class="inputfields"><br>
 -->
+			<input type="checkbox" ng-model="secret.que" ng-change="question()">
 			<input type="button" value="Sign Up" ng-click="change()">
 		</div>
 		<div ng-repeat="y in users">{{y}}</div>

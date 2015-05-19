@@ -135,6 +135,7 @@ var cont = angular.module('controllers', [])
 						$scope.$apply();
 					}, null);
 				});
+
 			};
 
 			if (!$scope.user.name) {
@@ -153,6 +154,7 @@ var cont = angular.module('controllers', [])
 				$scope.contactrequired = 'Contact Required !';
 			} else {
 
+				//$.jStorage.set("users", $scope.user);
 				db.transaction(function (tx) {
 					tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.name + "'", [], function (tx, results) {
 						console.log(results.rows);
@@ -163,6 +165,7 @@ var cont = angular.module('controllers', [])
 							//SHOW MESSAGE THAT USERNAME ALREADY EXIST
 						} else {
 							//NEW USER
+							/*$jStorage.set("user", 9);*/
 							signup();
 						};
 					}, null);
@@ -211,17 +214,27 @@ $scope.books.push(data);
 
 
 .controller('questionsCtrl', function ($scope, MyDatabase) {
-	$scope.done = function () {
-		console.log("done");
-	};
+	/*$scope.done = function () {
+	console.log("done");
+};*/
+	$scope.user = [];
 
 	db.transaction(function (tx) {
-		tx.executeSql("SELECT `username` FROM `users` WHERE `id`= '1'", [], function (tx, results) {
-			user = results.rows.item(0);
-			console.log(user);
+		//
+		tx.executeSql("SELECT `question` FROM `QUESTIONS`", [], function (tx, results) {
+			console.log("hi");
+			for (var i = 0; i < 22; i++) {
+				$scope.user.push(results.rows.item(i));
+				//	console.log(results.rows);
+			}
+			console.log($scope.user);
 		}, null);
-	});
+
+	})
 })
+
+
+
 
 .controller('answersCtrl', function ($scope) {
 
