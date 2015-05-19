@@ -76,6 +76,7 @@ var cont = angular.module('controllers', [])
 
 .controller('loginCtrl', function ($scope, $location) {
 	$scope.logindata = {};
+
 	$scope.logindata.username = "";
 	$scope.logindata.password = "";
 
@@ -156,6 +157,9 @@ var cont = angular.module('controllers', [])
 					tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.name + "'", [], function (tx, results) {
 						console.log(results.rows);
 						if (results.rows.length > 0) {
+							$scope.exist = "Username already exist !";
+							console.log($scope.exist);
+							$scope.user.name = "";
 							//SHOW MESSAGE THAT USERNAME ALREADY EXIST
 						} else {
 							//NEW USER
