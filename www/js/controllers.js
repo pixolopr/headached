@@ -79,6 +79,7 @@ var cont = angular.module('controllers', [])
     $scope.logindata.username = "";
     $scope.logindata.password = "";
 
+    //REDIRECT USER FUNCTION
     var loginsuccess = function (pass) {
         if ($scope.logindata.password == pass) {
             $location.path('/app/questions');
@@ -86,6 +87,7 @@ var cont = angular.module('controllers', [])
         };
     };
 
+    //LOGIN BUTTON FUNCTION
     $scope.login = function () {
         db.transaction(function (tx) {
             tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
@@ -93,16 +95,20 @@ var cont = angular.module('controllers', [])
                 if (results.rows.length > 0) {
                     console.log(results.rows.item(0));
                     loginsuccess(results.rows.item(0).password);
+                } else {
+                    //SHOW MESSAGE THAt USER DOES NOT EXIST
                 };
             }, null);
         });
     };
+
+    //FORGOT PASSWORD FUNCTION
     $scope.forgetpassword = function () {
         console.log("yo");
     };
 })
 
-.controller('signupCtrl', function ($scope, $http) {
+.controller('signupCtrl', function ($scope, $http, $location) {
         $scope.user = {};
 
         $scope.change = function () {
@@ -133,6 +139,8 @@ var cont = angular.module('controllers', [])
                 db.transaction(function (tx) {
                     tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "')", [], function (tx, results) {
                         console.log("ADDED TO DAtABASE");
+                        $location.path('/app/questions');
+                        $scope.$apply();
                     }, null);
                 });
 
