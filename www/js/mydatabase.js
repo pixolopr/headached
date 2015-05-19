@@ -11,7 +11,8 @@ db.transaction(function (tx) {
 			tx.executeSql('CREATE TABLE IF NOT EXISTS MEDICINES ( headache char, method char, mediname char )');
 			db.transaction(function (tx) {
 				tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question char)');
-				//tx.executeSql('DROP TABLE USERS');
+				tx.executeSql('DROP TABLE USERS');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username varchar, password varchar, gender varchar, email varchar, contact varchar )');
 
 			});
 
