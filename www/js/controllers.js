@@ -74,13 +74,30 @@ var cont = angular.module('controllers', [])
 
 })
 
-.controller('loginCtrl', function ($scope) {
-    console.log("hi");
+.controller('loginCtrl', function ($scope, $location) {
+    $scope.logindata = {};
+    $scope.logindata.username = "";
+    $scope.logindata.password = "";
 
+    var loginsuccess = function (pass) {
+        if ($scope.logindata.password == pass) {
+            $location.path('/app/questions');
+            $scope.$apply();
+        };
+    };
 
+    $scope.login = function () {
+        db.transaction(function (tx) {
+            tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
+                console.log(results.rows);
+                if (results.rows.length > 0) {
+                    console.log(results.rows.item(0));
+                    loginsuccess(results.rows.item(0).password);
+                };
+            }, null);
+        });
+    };
     $scope.forgetpassword = function () {
-
-
         console.log("yo");
     };
 })
