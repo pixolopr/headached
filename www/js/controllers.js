@@ -83,6 +83,8 @@ var cont = angular.module('controllers', [])
 	//REDIRECT USER FUNCTION
 	var loginsuccess = function (pass) {
 		if ($scope.logindata.password == pass) {
+			$.jStorage.set("login", $scope.logindata);
+			$.jStorage.get("login", $scope.logindata);
 			$location.path('/app/questions');
 			$scope.$apply();
 		} else {
@@ -117,6 +119,14 @@ var cont = angular.module('controllers', [])
 
 .controller('signupCtrl', function ($scope, $http, $location) {
 		$scope.user = {};
+		$scope.que = [];
+		db.transaction(function (tx) {
+			tx.executeSql('select * from secret_question', [], function (tx, results) {
+				for (var j = 0; j <= 4; j++) {
+					$scope.que.push(results.rows.item(j));
+				}
+			}, null);
+		})
 
 		$scope.change = function () {
 
@@ -132,6 +142,7 @@ var cont = angular.module('controllers', [])
 					tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "')", [], function (tx, results) {
 						console.log("ADDED TO DAtABASE");
 						$location.path('/app/login');
+
 						$scope.$apply();
 					}, null);
 				});
@@ -166,6 +177,8 @@ var cont = angular.module('controllers', [])
 						} else {
 							//NEW USER
 							/*$jStorage.set("user", 9);*/
+							$.jStorage.set("USERS", $scope.user);
+
 							signup();
 						};
 					}, null);
@@ -175,6 +188,10 @@ var cont = angular.module('controllers', [])
 				//$http.get('http://localhost/headached/headached/www/js/mydatabase.js', $scope.user).success(function (data, status, headers, config) {                    console.log("hey i successfully vcalled file");                }).error(function (data, status, headers, config) {                });
 			};
 		};
+		$scope.question = function (i) {
+			console.log(i);
+			console.log($scope.que.queid);
+		}
 	})
 	/*  $http.get('js/mydatabase.js', $scope.user
 ).success(function(data, status, headers, config) {
@@ -213,21 +230,22 @@ $scope.books.push(data);
 //})
 
 
+
 .controller('questionsCtrl', function ($scope, MyDatabase) {
 	/*$scope.done = function () {
 	console.log("done");
 };*/
-	$scope.user = [];
+	$scope.question = [];
 
 	db.transaction(function (tx) {
 		//
 		tx.executeSql("SELECT `question` FROM `QUESTIONS`", [], function (tx, results) {
 			console.log("hi");
 			for (var i = 0; i < 22; i++) {
-				$scope.user.push(results.rows.item(i));
+				$scope.question.push(results.rows.item(i));
 				//	console.log(results.rows);
 			}
-			console.log($scope.user);
+			console.log($scope.question);
 		}, null);
 
 	})
