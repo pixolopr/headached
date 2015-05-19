@@ -1,12 +1,13 @@
 <ion-view view-title="Login">
-  <ion-content>
-    <h1>Login</h1>
-      <input type="text" class="inputfields" ng-model="logindata.username" placeholder="username" required>
-      <br>
-      <input type="password" class="inputfields" ng-model="logindata.password" placeholder="password"
-             required>
-      <button ng-click="login()">Login</button>
-      <div ng-click="forgetpassword()" style="text-decoration:underline">Forget Password?</div> 
-      
-  </ion-content>
+	<ion-content>
+		<h1>Login</h1>
+		<div ng-hide="results.rows.length > 0">{{error}}</div>
+		<input type="text" class="inputfields" ng-model="logindata.username" placeholder="username" required>
+		<br>
+		<input type="password" class="inputfields" ng-model="logindata.password" placeholder="password" required>
+		<div ng-hide="$scope.logindata.password != pass">{{invalid}}</div>
+		<button ng-click="login()">Login</button>
+		<div ng-click="forgetpassword()" style="text-decoration:underline">Forget Password?</div>
+
+	</ion-content>
 </ion-view>
