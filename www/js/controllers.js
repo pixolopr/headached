@@ -114,7 +114,7 @@ var cont = angular.module('controllers', [])
             } else {
 
                 db.transaction(function (tx) {
-                    tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact) VALUES ('"+$scope.user.name+"', '"+$scope.user.password+"','"+$scope.user.gender+"','"+$scope.user.email+"','"+$scope.user.contact+"')", [], function (tx, results) {
+                    tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "')", [], function (tx, results) {
                         console.log("ADDED TO DAtABASE");
                     }, null);
                 });
@@ -177,8 +177,11 @@ $scope.books.push(data);
 
 })
 
-.controller('reportCtrl', function ($scope) {
-
-    $scope.value = '50%';
+.controller('reportCtrl', function ($scope, $interval) {
+    $scope.value = '0%';
+    var givevalue = function () {
+        $scope.value = '50%';
+    };
+    var giveval = $interval(givevalue, 1000);
 
 });
