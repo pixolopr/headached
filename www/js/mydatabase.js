@@ -4,7 +4,7 @@ var db = openDatabase('headached', '1.0', 'headached DB', 2 * 1024 * 1024);
 //INITIAL CREATE TABLE TRANSACTIONS
 db.transaction(function (tx) {
     //tx.executeSql('DROP TABLE USERS');
-	tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username varchar, password varchar, gender varchar, email varchar, contact varchar )');
+	/*tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username varchar, password varchar, gender varchar, email varchar, contact varchar )');*/
 	db.transaction(function (tx) {
 		tx.executeSql('CREATE TABLE IF NOT EXISTS REPORTS (FOREIGN KEY (userid) REFERENCES (USERS) , FOREIGN KEY (username) REFERENCES (USERS) , FOREIGN KEY (headache) REFERENCES (MEDICINES) )');
 		db.transaction(function (tx) {
