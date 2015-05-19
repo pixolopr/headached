@@ -17,7 +17,7 @@ db.transaction(function (tx) {
 
 			console.log("heay");
 
-			var user = [{}];
+			var user = [];
 			//user = $.jStorage.get("user");
 			users = [];
 

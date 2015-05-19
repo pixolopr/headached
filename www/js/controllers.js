@@ -177,4 +177,8 @@ $scope.books.push(data);
 
 })
 
-.controller('reportCtrl', function ($scope) {});
+.controller('reportCtrl', function ($scope) {
+
+    $scope.value = '50%';
+
+});

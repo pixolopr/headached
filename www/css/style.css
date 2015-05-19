@@ -15,8 +15,8 @@ a:link {
 .para {
     padding: 8px;
     padding-left: 16px;
-  padding-right: 10px;
-  padding-top: 4px;
+    padding-right: 10px;
+    padding-top: 4px;
 }
 
 .checkbox {
@@ -29,6 +29,24 @@ a:link {
     border: 1px;
     display: table-cell;
 }
-.font{
+
+.font {
     font-size: 14px;
+}
+
+.loader {
+    height: 26px;
+    border-color: blueviolet;
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+}
+
+.loaderfill {
+    height: 26px;
+    background-color: blueviolet;
+    transition: 1s linear;
+    color: white;
+    width:0%;
+    padding: 3px;
 }
