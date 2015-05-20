@@ -94,17 +94,17 @@ var cont = angular.module('controllers', [])
 	};
 
 	//LOGIN BUTTON FUNCTION
-	$scope.login = function (x, y) {
+	$scope.login = function (x) {
 		db.transaction(function (tx) {
 			tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
 				console.log(results.rows);
 				if (results.rows.length > 0) {
 					console.log(results.rows.item(0));
-
+					$scope.forget = results.rows.item(0).question;
 
 					loginsuccess(results.rows.item(0).password);
 				} else {
-
+					$scope.logindata.username = "";
 					$scope.error = "User does not exist!";
 					console.log($scope.error);
 					//SHOW MESSAGE THAt USER DOES NOT EXIST
@@ -115,7 +115,8 @@ var cont = angular.module('controllers', [])
 
 	//FORGOT PASSWORD FUNCTION
 	$scope.forgetpassword = function (x) {
-			db.transaction(function (tx) {
+			$scope.login($scope.logindata.username);
+			/*db.transaction(function (tx) {
 				tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
 					console.log(results.rows);
 					if (results.rows.length > 0) {
@@ -124,7 +125,7 @@ var cont = angular.module('controllers', [])
 
 					};
 				});
-			})
+			})*/
 		}
 		/*$scope.forget = {};
 $scope.forget.user = "";*/
