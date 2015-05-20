@@ -261,7 +261,7 @@ $scope.books.push(data);
 
 	db.transaction(function (tx) {
 		//
-		tx.executeSql("SELECT `question` FROM `QUESTIONS`", [], function (tx, results) {
+		tx.executeSql("SELECT * FROM `QUESTIONS`", [], function (tx, results) {
 			console.log("hi");
 			for (var i = 0; i < 22; i++) {
 				$scope.question.push(results.rows.item(i));

@@ -6,7 +6,19 @@
           <input type="radio" name="{{question.id}}">No
       </ion-item>
     </ion-list>-->
-		<p class="para"><strong><span>1) </span>Are you feeling Pain, Pressure or Fullness in Your cheeks, brows or Fore-head ?</strong>
+
+
+		<!--<ul>
+			<li ng-repeat="y in question"> {{y.question}}</li>
+		</ul>-->
+		<ion-list>
+			<ion-item ng-repeat="y in question">
+
+				{{y.quesid}}<span>)</span> {{y.question}}
+
+			</ion-item>
+		</ion-list>
+		<!--<p class="para"><strong><span>1) </span>Are you feeling Pain, Pressure or Fullness in Your cheeks, brows or Fore-head ?</strong>
 		</p>
 		<div class="list">
 
@@ -89,9 +101,8 @@
 				<i class="radio-icon ion-checkmark"></i>
 			</label>
 
-		</div>
-		<div ng-repeat="y in question">{{y.question}}
-		</div>
+		</div>-->
+
 		<a href="#app/report">
 			<div class="submit" style="text-align:center;">
 				<button class="button button-positive">
