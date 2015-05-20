@@ -24,13 +24,15 @@
             <input type="text" ng-model="user.answer" placeholder="Answer" class="inputfields"><br>
 -->
 			<div>
-				<select ng-model="secret.que" ng-change="question({{z.queid}})">
-					<option value="select">--Choose any question--</option>
-					<option ng-repeat="z in que">{{z.questions}}</option>
+				<select ng-model="user.que" ng-change="question()">
+					<!--<option value="select" ng-model="secret.choose">--Choose any question--</option>-->
+					<option ng-repeat="z in que" >{{z.questions}}</option>
 				</select>
+                
 				<br>
+                <span>{{querequired}}</span>
 				<br>
-				<input type="text" ng-model="secret.ans" ng-change="question($index)" class="inputfields" placeholder="Answer">
+				<input type="text" ng-model="user.ans" ng-change="question($index)" class="inputfields" placeholder="Answer"><span>{{ansrequired}}</span>
 			</div>
 			<br>
 			<input type="button" value="Sign Up" ng-click="change()">

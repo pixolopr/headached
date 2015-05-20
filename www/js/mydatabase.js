@@ -6,13 +6,13 @@ db.transaction(function (tx) {
 	//tx.executeSql('DROP TABLE USERS');
 	/*tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username varchar, password varchar, gender varchar, email varchar, contact varchar )');*/
 	db.transaction(function (tx) {
-		tx.executeSql('CREATE TABLE IF NOT EXISTS REPORTS (FOREIGN KEY (userid) REFERENCES (USERS) , FOREIGN KEY (username) REFERENCES (USERS) , FOREIGN KEY (headache) REFERENCES (MEDICINES) )');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS REPORTS (FOREIGN KEY (userid) REFERENCES USERS(id) , FOREIGN KEY (username) REFERENCES USERS(username) , FOREIGN KEY (headache) REFERENCES MEDICINES(headache) )');
 		db.transaction(function (tx) {
 			tx.executeSql('CREATE TABLE IF NOT EXISTS MEDICINES ( headache char, method char, mediname char )');
 			db.transaction(function (tx) {
 				tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question char)');
-				tx.executeSql('DROP TABLE USERS');
-				tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username varchar, password varchar, gender varchar, email varchar, contact varchar )');
+				//tx.executeSql('DROP TABLE USERS');
+				tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username varchar, password varchar, gender varchar, email varchar, contact varchar,answer varchar,question varchar )');
 
 			});
 			db.transaction(function (tx) {
@@ -55,7 +55,8 @@ db.transaction(function (tx) {
 
 			//FILL DATABASE HERE< ALL INSERT STATEMENTS
 			db.transaction(function (tx) {
-				tx.executeSql('INSERT INTO users VALUES (1, "abhay")');
+				tx.executeSql('INSERT INTO USERS VALUES (1, "abhay","","","","")');
+                console.log("yup");
 				//tx.executeSql('DROP TABLE USERS');
 			});
 

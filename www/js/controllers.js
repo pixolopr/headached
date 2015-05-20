@@ -76,15 +76,16 @@ var cont = angular.module('controllers', [])
 
 .controller('loginCtrl', function ($scope, $location) {
 	$scope.logindata = {};
-
+//$scope.jyoti=true;
+    console.log($scope.jyoti);
 	$scope.logindata.username = "";
 	$scope.logindata.password = "";
 
 	//REDIRECT USER FUNCTION
 	var loginsuccess = function (pass) {
 		if ($scope.logindata.password == pass) {
-			$.jStorage.set("login", $scope.logindata);
-			$.jStorage.get("login", $scope.logindata);
+			$.jStorage.set("logindata", $scope.logindata);
+			$.jStorage.get("logindata", $scope.logindata);
 			$location.path('/app/questions');
 			$scope.$apply();
 		} else {
@@ -110,9 +111,12 @@ var cont = angular.module('controllers', [])
 			}, null);
 		});
 	};
-
+$scope.forget={};
 	//FORGOT PASSWORD FUNCTION
 	$scope.forgetpassword = function () {
+        //$scope.jyoti=false;
+        
+        console.log($scope.forget);
 		console.log("yo");
 	};
 })
@@ -124,9 +128,20 @@ var cont = angular.module('controllers', [])
 			tx.executeSql('select * from secret_question', [], function (tx, results) {
 				for (var j = 0; j <= 4; j++) {
 					$scope.que.push(results.rows.item(j));
+                   
 				}
+                 return $scope.que.queid;
 			}, null);
 		})
+        $scope.secret={};
+        $scope.question = function (i) {
+           // $scope.secret.question=$scope.que.queid[i];
+            
+			console.log("hi");
+          //  $scope.user=$scope.que[i];
+			//console.log($scope.secret.question);
+            console.log($scope.user);
+		}
 
 		$scope.change = function () {
 
@@ -139,7 +154,7 @@ var cont = angular.module('controllers', [])
 
 			var signup = function () {
 				db.transaction(function (tx) {
-					tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "')", [], function (tx, results) {
+					tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact,answer,question) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "','"+$scope.user.ans+"','"+$scope.user.que+"')", [], function (tx, results) {
 						console.log("ADDED TO DAtABASE");
 						$location.path('/app/login');
 
@@ -163,7 +178,17 @@ var cont = angular.module('controllers', [])
 			};
 			if (!$scope.user.contact) {
 				$scope.contactrequired = 'Contact Required !';
-			} else {
+			} 
+            if (!$scope.user.que) {
+				$scope.querequired = 'Question Required !';
+			}
+            if (!$scope.user.ans) {
+				$scope.ansrequired = 'Answer Required !';
+			}
+            
+            
+            
+            else {
 
 				//$.jStorage.set("users", $scope.user);
 				db.transaction(function (tx) {
@@ -177,7 +202,7 @@ var cont = angular.module('controllers', [])
 						} else {
 							//NEW USER
 							/*$jStorage.set("user", 9);*/
-							$.jStorage.set("USERS", $scope.user);
+							$.jStorage.set("user", $scope.user);
 
 							signup();
 						};
@@ -188,10 +213,7 @@ var cont = angular.module('controllers', [])
 				//$http.get('http://localhost/headached/headached/www/js/mydatabase.js', $scope.user).success(function (data, status, headers, config) {                    console.log("hey i successfully vcalled file");                }).error(function (data, status, headers, config) {                });
 			};
 		};
-		$scope.question = function (i) {
-			console.log(i);
-			console.log($scope.que.queid);
-		}
+		
 	})
 	/*  $http.get('js/mydatabase.js', $scope.user
 ).success(function(data, status, headers, config) {
