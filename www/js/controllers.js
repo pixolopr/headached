@@ -76,11 +76,9 @@ var cont = angular.module('controllers', [])
 
 .controller('loginCtrl', function ($scope, $location) {
 	$scope.logindata = {};
-	//$scope.jyoti=true;
-	//  console.log($scope.jyoti);
+
 	$scope.logindata.username = "";
 	$scope.logindata.password = "";
-
 	//REDIRECT USER FUNCTION
 	var loginsuccess = function (pass) {
 		if ($scope.logindata.password == pass) {
@@ -91,16 +89,19 @@ var cont = angular.module('controllers', [])
 		} else {
 			$scope.invalid = "Invalid Password !";
 			console.log($scope.invalid);
+			$scope.logindata.password = "";
 		}
 	};
 
 	//LOGIN BUTTON FUNCTION
-	$scope.login = function () {
+	$scope.login = function (x, y) {
 		db.transaction(function (tx) {
 			tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
 				console.log(results.rows);
 				if (results.rows.length > 0) {
 					console.log(results.rows.item(0));
+
+
 					loginsuccess(results.rows.item(0).password);
 				} else {
 
@@ -111,13 +112,30 @@ var cont = angular.module('controllers', [])
 			}, null);
 		});
 	};
-	$scope.forget = {};
-	//FORGOT PASSWORD FUNCTION
-	$scope.forgetpassword = function () {
-		//$scope.jyoti=false;
 
-		console.log($scope.forget);
-		console.log("yo");
+	//FORGOT PASSWORD FUNCTION
+	$scope.forgetpassword = function (x) {
+			db.transaction(function (tx) {
+				tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
+					console.log(results.rows);
+					if (results.rows.length > 0) {
+						console.log(results.rows.item(0));
+						$scope.forget = results.rows.item(0).question;
+
+					};
+				});
+			})
+		}
+		/*$scope.forget = {};
+$scope.forget.user = "";*/
+	$scope.check = function () {
+		/*db.transaction(function (tx) {
+	tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
+		if (results.rows.item(0).answer == $scope.forget.user) {
+			$location.path('/app/questions');
+		}
+	});
+})*/
 	};
 })
 
