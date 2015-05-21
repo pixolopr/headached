@@ -7,7 +7,10 @@
 			<div ng-hide="results.rows.length >0">{{exist}}</div>
 			<br>
 
-			<input type="text" ng-model="user.gender" placeholder="Gender" required class="inputfields">
+			<input type="radio" value="Female" ng-model="user.gender">Female
+			<input type="radio" value="Male" ng-model="user.gender">Male
+			<br>
+			<!--<input type="text" ng-model="user.gender" placeholder="Gender" required class="inputfields">-->
 			<span ng-show="genderrequired">{{genderrequired}}</span>
 			<br>
 

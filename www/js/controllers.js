@@ -138,6 +138,23 @@ $scope.forget.user = "";*/
 	});
 })*/
 	};
+	$scope.forget = {};
+	$scope.forget.user = "";
+	$scope.check = function () {
+		//$scope.forget.user = "";
+		console.log($scope.forget);
+		db.transaction(function (tx) {
+			tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
+				if (results.rows.length > 0) {
+					if (results.rows.item(0).answer == $scope.forget.user) {
+						$location.path('/app/question');
+					}
+				}
+
+			}, null);
+		})
+
+	};
 })
 
 .controller('signupCtrl', function ($scope, $http, $location) {
