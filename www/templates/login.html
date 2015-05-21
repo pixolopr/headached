@@ -1,12 +1,14 @@
 <ion-view view-title="Login">
     <ion-content>
-
+<html>
         <head>
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
             <script>
 $(document).ready(function(){
     $("div").click(function(){
         $("#login").hide();
+        $("#login1").hide();
+        $(":button").hide();
     });
 });
 </script>
@@ -16,7 +18,7 @@ $(document).ready(function(){
         
         <input type="text" id="login" class="inputfields" ng-model="logindata.username" placeholder="username" required>
         <br>
-        <input type="password" id="login" class="inputfields" ng-model="logindata.password" placeholder="password" required>
+        <input type="password" id="login1" class="inputfields" ng-model="logindata.password" placeholder="password" required>
         <br>
         
         <button ng-click="login()">Login</button>
@@ -30,5 +32,6 @@ $(document).ready(function(){
             <input type="text" class="inputfields" placeholder="{{forget}}" ng-model="forget.user" ng-change="check()">
             <!--<div>{{wrong}}</div>-->
         </body>
+    </html>
     </ion-content>
 </ion-view>
