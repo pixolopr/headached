@@ -9,23 +9,33 @@
 
 
 		<!--<ul>
-			<li ng-repeat="y in question"> {{y.question}}</li>
-		</ul>-->
+			<li ng-repeat="y in question"> {{y.question}}</li>-->
+		<!--<ion-list>
+	<ion-item ng-repeat="y in question" ng-click="click($index)">-->
 		<ion-list>
 			<ion-item ng-repeat="y in question">
 
+				<p class="para"><strong>{{y.quesid}}<span>]</span> {{y.question}}</strong>
+				</p>
 				</p>
 
 
+				<input type="radio" value="{{y.answer1}}" ng-model="que.ans">{{y.answer1}}
+				<br>
+				<input type="radio" value="{{y.answer2}}" ng-model="que.ans">{{y.answer2}}
+				<br>
+				<input type="radio" value="{{y.answer3}}" ng-model="que.ans" ng-if="y.answer3.length>0">{{y.answer3}}
+				<br>
+
+
+
 
 
 				<br>
-				<br>
-				<br>
-
 
 			</ion-item>
 		</ion-list>
+
 		<!--<p class="para"><strong><span>1) </span>Are you feeling Pain, Pressure or Fullness in Your cheeks, brows or Fore-head ?</strong>
 		</p>
 		
