@@ -12,9 +12,13 @@
 			<li ng-repeat="y in question"> {{y.question}}</li>
 		</ul>-->
 		<ion-list>
-			<ion-item ng-repeat="y in question">
+			<ion-item ng-repeat="y in question" ng-click="click($index)">
 
 				{{y.quesid}}<span>)</span> {{y.question}}
+				<br> {{y.answer1}}
+				<br> {{y.answer2}}
+				<br> {{y.answer3}}
+
 
 			</ion-item>
 		</ion-list>

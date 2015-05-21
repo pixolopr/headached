@@ -286,9 +286,9 @@ $scope.books.push(data);
 
 
 .controller('questionsCtrl', function ($scope, MyDatabase) {
-	/*$scope.done = function () {
-	console.log("done");
-};*/
+	$scope.click = function (i) {
+		console.log(i);
+	};
 	$scope.question = [];
 
 	db.transaction(function (tx) {
