@@ -286,8 +286,12 @@ $scope.books.push(data);
 
 
 .controller('questionsCtrl', function ($scope, MyDatabase) {
+	$scope.que = {};
+	console.log($scope.que);
+
 	$scope.click = function (i) {
 		console.log(i);
+		console.log($scope.que.que);
 	};
 	$scope.question = [];
 
