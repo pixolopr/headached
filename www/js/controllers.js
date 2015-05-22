@@ -1,5 +1,9 @@
 var a;
+var answersetcarry = [];
 var cont = angular.module('controllers', [])
+
+    
+
 	.factory('MyDatabase', function ($location) {
 
 		//WRITE DATABASE QUERIES HERE
@@ -320,6 +324,7 @@ $scope.books.push(data);
         console.log($location.path());
         console.log($scope.answerset);
         $location.path("/app/report");
+        answersetcarry = $scope.answerset;
     };
 })
 
@@ -327,6 +332,8 @@ $scope.books.push(data);
 
 
 .controller('answersCtrl', function ($scope) {
+        console.log("report page");
+        console.log(answersetreport);
 
 })
 
@@ -336,5 +343,8 @@ $scope.books.push(data);
 		$scope.value = '50%';
 	};
 	var giveval = $interval(givevalue, 1000);
+    
+    console.log("report page");
+        console.log(answersetcarry);
 
 });
