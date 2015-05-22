@@ -285,7 +285,7 @@ $scope.books.push(data);
 
 
 
-.controller('questionsCtrl', function ($scope, MyDatabase) {
+.controller('questionsCtrl', function ($scope, MyDatabase, $location) {
 	$scope.que = {};
 	console.log($scope.que);
 
@@ -294,6 +294,7 @@ $scope.books.push(data);
 		console.log($scope.que.que);
 	};
 	$scope.question = [];
+    $scope.answerset = [];
 
 	db.transaction(function (tx) {
 		//
@@ -301,12 +302,25 @@ $scope.books.push(data);
 			console.log("hi");
 			for (var i = 0; i < 22; i++) {
 				$scope.question.push(results.rows.item(i));
+                $scope.$apply();
 				//	console.log(results.rows);
 			}
 			console.log($scope.question);
 		}, null);
 
-	})
+	});
+    
+    $scope.showreport = function() {
+        if($scope.answerset.length == 22)
+        {
+        
+        }else{
+            //ERROR MESSAGE TO FILL ALL QUESTONS
+        };
+        console.log($location.path());
+        console.log($scope.answerset);
+        $location.path("/app/report");
+    };
 })
 
 

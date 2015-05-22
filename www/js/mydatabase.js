@@ -12,6 +12,7 @@ db.transaction(function (tx) {
 		tx.executeSql('CREATE TABLE IF NOT EXISTS MEDICINES ( headache varchar PRIMARY KEY, method varchar, mediname varchar )');
 		db.transaction(function (tx) {
 			tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question varchar,answer1 varchar,answer2 varchar,answer3 varchar)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question varchar,answer1 varchar,answer2 varchar,answer3 varchar)');
 		});
 		//tx.executeSql('DROP TABLE  QUESTIONS');
 		db.transaction(function (tx) {

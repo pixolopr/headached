@@ -1,6 +1,6 @@
 <ion-view view-title="Questionare">
-	<ion-content>
-		<!-- <ion-list>
+    <ion-content>
+        <!-- <ion-list>
       <ion-item ng-repeat="question in questions">
           <input type="radio" name="{{question.id}}">Yes
           <input type="radio" name="{{question.id}}">No
@@ -8,35 +8,41 @@
     </ion-list>-->
 
 
-		<!--<ul>
+        <!--<ul>
 			<li ng-repeat="y in question"> {{y.question}}</li>-->
-		<!--<ion-list>
+        <!--<ion-list>
 	<ion-item ng-repeat="y in question" ng-click="click($index)">-->
-		<ion-list>
-			<ion-item ng-repeat="y in question">
+        <ion-list>
+            <ion-item ng-repeat="y in question">
 
-				<p class="para"><strong>{{y.quesid}}<span>]</span> {{y.question}}</strong>
-				</p>
-				</p>
+                <p class="para"><strong>{{y.quesid}}<span>]</span> {{y.question}}</strong>
+                </p>
+                </p>
+
+                <div ng-if="y.answer1 == 'Yes'">
+                    <input type="radio" value="1" ng-model="answerset[$index]">Yes
+                    <input type="radio" value="0" ng-model="answerset[$index]">No</div>
+                <div ng-if="y.answer1 != 'Yes'">
+                    <input type="radio" value="0" ng-model="answerset[$index]">Low
+                    <input type="radio" value="0.5" ng-model="answerset[$index]">Medium
+                    <input type="radio" value="1" ng-model="answerset[$index]">High</div>
+                <!--<input type="radio" value="{{y.answer1}}" ng-model="que.ans">{{y.answer1}}
+                <br>
+                <input type="radio" value="{{y.answer2}}" ng-model="que.ans">{{y.answer2}}
+                <br>
+                <input type="radio" value="{{y.answer3}}" ng-model="que.ans" ng-if="y.answer3.length>0">{{y.answer3}}
+                <br>-->
 
 
-				<input type="radio" value="{{y.answer1}}" ng-model="que.ans">{{y.answer1}}
-				<br>
-				<input type="radio" value="{{y.answer2}}" ng-model="que.ans">{{y.answer2}}
-				<br>
-				<input type="radio" value="{{y.answer3}}" ng-model="que.ans" ng-if="y.answer3.length>0">{{y.answer3}}
-				<br>
 
 
 
+                <br>
 
+            </ion-item>
+        </ion-list>
 
-				<br>
-
-			</ion-item>
-		</ion-list>
-
-		<!--<p class="para"><strong><span>1) </span>Are you feeling Pain, Pressure or Fullness in Your cheeks, brows or Fore-head ?</strong>
+        <!--<p class="para"><strong><span>1) </span>Are you feeling Pain, Pressure or Fullness in Your cheeks, brows or Fore-head ?</strong>
 		</p>
 		
 
@@ -98,14 +104,14 @@
 
 		</div>-->
 
-		<a href="#app/report">
-			<div class="submit" style="text-align:center;">
-				<button class="button button-positive">
-					<span>Submit</span>
-				</button>
-			</div>
-		</a>
+        <!--<a href="#app/report">-->
+            <div class="submit" style="text-align:center;">
+                <button class="button button-positive" ng-click="showreport()">
+                    <span>Submit</span>
+                </button>
+            </div>
+        <!--</a>-->
 
 
-	</ion-content>
+    </ion-content>
 </ion-view>
