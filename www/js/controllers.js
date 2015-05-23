@@ -1,5 +1,5 @@
-var a;
 var answersetcarry = [];
+var queset = [];
 var cont = angular.module('controllers', [])
 
 
@@ -133,7 +133,7 @@ var cont = angular.module('controllers', [])
 		}
 		/*$scope.forget = {};
 $scope.forget.user = "";*/
-	$scope.check = function () {
+		/*$scope.check = function () {*/
 		/*db.transaction(function (tx) {
 	tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
 		if (results.rows.item(0).answer == $scope.forget.user) {
@@ -141,16 +141,16 @@ $scope.forget.user = "";*/
 		}
 	});
 })*/
-	};
-	$scope.forget = {};
-	$scope.forget.user = "";
+		//};
+	$scope.answer = {};
+	$scope.answer.user = "";
 	$scope.check = function () {
-		//$scope.forget.user = "";
-		console.log($scope.forget);
+		//$scope.answer.user = "";
+		console.log($scope.answer);
 		db.transaction(function (tx) {
 			tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
 				if (results.rows.length > 0) {
-					if (results.rows.item(0).answer == $scope.forget.user) {
+					if (results.rows.item(0).answer == $scope.answer.user) {
 						$location.path('/app/question');
 					}
 				}
@@ -299,6 +299,7 @@ $scope.books.push(data);
 	};
 	$scope.question = [];
 	$scope.answerset = [];
+
 	console.log($scope.answerset);
 	db.transaction(function (tx) {
 		//
@@ -309,6 +310,8 @@ $scope.books.push(data);
 				$scope.$apply();
 				//	console.log(results.rows);
 			}
+			queset = $scope.question;
+			console.log(queset);
 			console.log($scope.question);
 		}, null);
 
@@ -337,7 +340,10 @@ $scope.books.push(data);
 	//console.log(answersetreport);
 	//$scope.question = [];
 	//$scope.answerset = [];
-
+	$scope.answers = answersetcarry;
+	$scope.questionset = queset;
+	//$scope.answerset = [];
+	console.log(queset);
 })
 
 .controller('reportCtrl', function ($scope, $interval) {

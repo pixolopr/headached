@@ -2,19 +2,20 @@
 	<ion-content>
 		<h1>Answers</h1>
 		<ion-list>
-			<ion-item ng-repeat="y in question">
+			<ion-item ng-repeat="z in questionset">
 
-				<p class="para"><strong>{{y.quesid}}<span>]</span> {{y.question}}</strong>
-				</p>
+				<p class="para"><strong>{{z.quesid}}<span>]</span> {{z.question}}</strong>
 				</p>
 
-				<div ng-if="y.answer1 == 'Yes'">
-					<input type="radio" value="1" ng-model="answerset[$index]" disabled>Yes
-					<input type="radio" value="0" ng-model="answerset[$index]" disabled>No</div>
-				<div ng-if="y.answer1 != 'Yes'">
-					<input type="radio" value="0" ng-model="answerset[$index]" disabled>Low
-					<input type="radio" value="0.5" ng-model="answerset[$index]" disabled>Medium
-					<input type="radio" value="1" ng-model="answerset[$index]" disabled>High</div>
+				<div ng-if="z.answer1 == 'Yes'">
+					<input type="radio" value="1" ng-model="answers[$index]" disabled>Yes
+					<input type="radio" value="0" ng-model="answers[$index]" disabled>No
+				</div>
+				<div ng-if="z.answer1 != 'Yes'">
+					<input type="radio" value="0" ng-model="answers[$index]" disabled>Low
+					<input type="radio" value="0.5" ng-model="answers[$index]" disabled>Medium
+					<input type="radio" value="1" ng-model="answers[$index]" disabled>High
+				</div>
 				<!--<input type="radio" value="{{y.answer1}}" ng-model="que.ans">{{y.answer1}}
                 <br>
                 <input type="radio" value="{{y.answer2}}" ng-model="que.ans">{{y.answer2}}
