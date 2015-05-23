@@ -2,27 +2,27 @@ var a;
 var answersetcarry = [];
 var cont = angular.module('controllers', [])
 
-    
 
-	.factory('MyDatabase', function ($location) {
 
-		//WRITE DATABASE QUERIES HERE
-		return {
+.factory('MyDatabase', function ($location) {
 
-			getusername: function () {
-				console.log("funstion called");
-				db.transaction(function (tx) {
-					tx.executeSql("SELECT `username` FROM `users` WHERE `id`= '1'", [], function (tx, results) {
-						user = results.rows.item(0);
-						console.log(user);
-						//console.log(cont.controller('questionsCtrl')().done());
-						//console.log(angular.element(document.getElementById('questionsCtrl')));
-						//console.log(angular.element(document.getElementById('questionsCtrl')).scope());
-					}, null);
-				})
-			},
-		}
-	})
+	//WRITE DATABASE QUERIES HERE
+	return {
+
+		getusername: function () {
+			console.log("funstion called");
+			db.transaction(function (tx) {
+				tx.executeSql("SELECT `username` FROM `users` WHERE `id`= '1'", [], function (tx, results) {
+					user = results.rows.item(0);
+					console.log(user);
+					//console.log(cont.controller('questionsCtrl')().done());
+					//console.log(angular.element(document.getElementById('questionsCtrl')));
+					//console.log(angular.element(document.getElementById('questionsCtrl')).scope());
+				}, null);
+			})
+		},
+	}
+})
 
 
 
@@ -298,53 +298,86 @@ $scope.books.push(data);
 		console.log($scope.que.que);
 	};
 	$scope.question = [];
-    $scope.answerset = [];
-
+	$scope.answerset = [];
+	console.log($scope.answerset);
 	db.transaction(function (tx) {
 		//
 		tx.executeSql("SELECT * FROM `QUESTIONS`", [], function (tx, results) {
 			console.log("hi");
 			for (var i = 0; i < 22; i++) {
 				$scope.question.push(results.rows.item(i));
-                $scope.$apply();
+				$scope.$apply();
 				//	console.log(results.rows);
 			}
 			console.log($scope.question);
 		}, null);
 
 	});
-    
-    $scope.showreport = function() {
-        if($scope.answerset.length == 22)
-        {
-        
-        }else{
-            //ERROR MESSAGE TO FILL ALL QUESTONS
-        };
-        console.log($location.path());
-        console.log($scope.answerset);
-        $location.path("/app/report");
-        answersetcarry = $scope.answerset;
-    };
+
+	$scope.showreport = function () {
+		if ($scope.answerset.length == 22) {
+			console.log($location.path());
+			$location.path("/app/report");
+		} else {
+			//ERROR MESSAGE TO FILL ALL QUESTONS
+			alert("All questions are Compulsory...!");
+		};
+
+		console.log($scope.answerset);
+
+		answersetcarry = $scope.answerset;
+	};
 })
 
 
 
 
 .controller('answersCtrl', function ($scope) {
-        console.log("report page");
-        console.log(answersetreport);
+	console.log("report page");
+	//console.log(answersetreport);
+	//$scope.question = [];
+	//$scope.answerset = [];
 
 })
 
 .controller('reportCtrl', function ($scope, $interval) {
 	$scope.value = '0%';
+	$scope.sinus = 0;
+	console.log($scope.sinus);
+	$scope.migrane = 0;
+	$scope.cluster = 0;
+	$scope.common = 0;
+	for (var i = 0; i < answersetcarry.length; i++) {
+		if (i <= 6) {
+			$scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
+			console.log($scope.sinus);
+		} else if (i <= 12) {
+			$scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
+		} else if (i <= 19) {
+			$scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
+		} else {
+			$scope.common = $scope.common + parseFloat(answersetcarry[i]);
+		}
+
+	};
+	var a = Math.round($scope.sinus * 100 / 7);
+	console.log($scope.sinus);
+	console.log($scope.migrane);
+	var b = Math.round($scope.migrane * 100 / 6);
+	var c = Math.round($scope.cluster * 100 / 7);
+	var d = Math.round($scope.common * 100 / 2);
+
 	var givevalue = function () {
+		console.log(i);
+		$scope.sinus = a;
+		$scope.migrane = b;
+		$scope.cluster = c;
+		$scope.common = d;
 		$scope.value = '50%';
 	};
 	var giveval = $interval(givevalue, 1000);
-    
-    console.log("report page");
-        console.log(answersetcarry);
+
+	console.log("report page");
+	console.log(answersetcarry);
 
 });

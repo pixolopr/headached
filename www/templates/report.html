@@ -1,8 +1,25 @@
 <ion-view view-title="Report">
-    <ion-content>
-        <h1>Report</h1>
-        <div class="loader">
-            <div class="loaderfill" style="width:{{value}}">{{value}}</div>
-        </div>
-    </ion-content>
+	<ion-content>
+		<h1>Report</h1>
+		<!--<div class="loader">
+
+			<div class="loaderfill" style="width:{{value}}">{{value}}</div>
+			<br>-->
+		<span>Sinus Headache</span>
+		<div class="loader">
+			<div class="loaderfill" style="width:{{sinus}}%">{{sinus}}%</div>
+		</div>
+		<br><span>Migrain Headache</span>
+		<div class="loader">
+			<div class="loaderfill" style="width:{{migrane}}%">{{migrane}}%</div>
+		</div>
+		<br><span>Cluster Headache</span>
+		<div class="loader">
+			<div class="loaderfill" style="width:{{cluster}}%">{{cluster}}%</div>
+		</div>
+		<br><span>Common Headache</span>
+		<div class="loader">
+			<div class="loaderfill" style="width:{{common}}%">{{common}}%</div>
+		</div>
+	</ion-content>
 </ion-view>
