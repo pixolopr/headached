@@ -11,10 +11,10 @@ db.transaction(function (tx) {
 	db.transaction(function (tx) {
 		tx.executeSql('CREATE TABLE IF NOT EXISTS MEDICINES ( headache varchar PRIMARY KEY, method varchar, mediname varchar )');
 		db.transaction(function (tx) {
-			tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question varchar,answer1 varchar,answer2 varchar,answer3 varchar)');
-			tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question varchar,answer1 varchar,answer2 varchar,answer3 varchar)');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question varchar,answer1 varchar)');
+			//tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question varchar,answer1 varchar,answer2 varchar,answer3 varchar)');
 		});
-		//tx.executeSql('DROP TABLE  MEDICINES ');
+		//tx.executeSql('DROP TABLE  QUESTIONS ');
 		db.transaction(function (tx) {
 			tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username varchar PRIMARY KEY, password varchar, gender varchar, email varchar, contact varchar,answer varchar,question varchar )');
 		});
@@ -67,91 +67,91 @@ db.transaction(function (tx) {
 
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (1,"Are you feeling pain, Pressure or fullness in your cheeks, brows or forehead?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (1,"Are you feeling pain, Pressure or fullness in your cheeks, brows or forehead?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (2,"How much is the pain worsening when bending or lying down?","Low","Medium","High")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (2,"How much is the pain worsening when bending or lying down?","Low")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (3,"Do you have Yellow- Green or Blood-Tingled Nasal Discharge?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (3,"Do you have Yellow- Green or Blood-Tingled Nasal Discharge?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (4,"Do you have a stuffy nose?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (4,"Do you have a stuffy nose?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (5,"How much fever do you have?","Low","Medium","High")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (5,"How much fever do you have?","Low")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (6,"How much cough are you suffering from?","Low","Medium","High")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (6,"How much cough are you suffering from?","Low")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (7,"Have you lost the ability to smell or taste?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (7,"Have you lost the ability to smell or taste?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (8,"Are you feeling restless or nervous?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (8,"Are you feeling restless or nervous?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (9,"Are you feeling Thirsty and hungry or may not feel like eating?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (9,"Are you feeling Thirsty and hungry or may not feel like eating?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (10,"How much is the pain on one side or both sides of the head? ","Low","Medium","High")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (10,"How much is the pain on one side or both sides of the head? ","Low")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (11,"Does the pain getting worsen from moderate to very bad? Is the pain so bad that you cannot do your usual activities? ","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (11,"Does the pain getting worsen from moderate to very bad? Is the pain so bad that you cannot do your usual activities? ","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (12,"Do you ahve the feeling of Nausea or vommiting or both?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (12,"Do you ahve the feeling of Nausea or vommiting or both?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (13,"Does the pain get worsen  when you are around light , noise or near a strong odour? ","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (13,"Does the pain get worsen  when you are around light , noise or near a strong odour? ","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (14,"Does the pain generally located in or around one eye? Does the pain radiate to other areas of your face, head, neck and shoulders?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (14,"Does the pain generally located in or around one eye? Does the pain radiate to other areas of your face, head, neck and shoulders?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (15,"How much is the intensity of one sided pain?","Low","Medium","High")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (15,"How much is the intensity of one sided pain?","Low")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (16,"Do you have excessive tearing from eyes?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (16,"Do you have excessive tearing from eyes?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (17,"Are you suffering from stuffy or runny nasal passage on the affected side of your face?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (17,"Are you suffering from stuffy or runny nasal passage on the affected side of your face?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (18,"Do you have swelling around the eye on the affected side of your face?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (18,"Do you have swelling around the eye on the affected side of your face?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (19,"Do you have Drooping eye-lid?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (19,"Do you have Drooping eye-lid?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (20,"Does headache ocur at nighyt, usually for one to two hours after you go to bed or lasts for fifteen minutes to three hours?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (20,"Does headache ocur at nighyt, usually for one to two hours after you go to bed or lasts for fifteen minutes to three hours?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (21,"Do you feel fatigued(tired)?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (21,"Do you feel fatigued(tired)?","Yes")')
 	});
 
 	db.transaction(function (tx) {
-		tx.executeSql('INSERT INTO QUESTIONS VALUES (22,"Do you suffer from irritability?","Yes","No","")')
+		tx.executeSql('INSERT INTO QUESTIONS VALUES (22,"Do you suffer from irritability?","Yes")')
 	});
 
 	db.transaction(function (tx) {
