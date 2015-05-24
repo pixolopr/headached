@@ -9,7 +9,7 @@
 		<div class="loader">
 			<div class="loaderfill" style="width:{{sinus}}%">{{sinus}}%</div>
 		</div>
-		<br><span>Migrain Headache</span>
+		<br><span>Migraine Headache</span>
 		<div class="loader">
 			<div class="loaderfill" style="width:{{migrane}}%">{{migrane}}%</div>
 		</div>
@@ -20,6 +20,25 @@
 		<br><span>Common Headache</span>
 		<div class="loader">
 			<div class="loaderfill" style="width:{{common}}%">{{common}}%</div>
+		</div>
+		<br>
+		<a href="#app/report">
+			<div class="submit" style="text-align:center;">
+				<button class="button button-positive">Appointment</button>
+		</a>
+		<br>
+		<br>
+		<a href="#app/report">
+			<div class="submit" style="text-align:center;">
+				<button class="button button-positive" ng-click="medicine()">Remedy</button>
+		</a>
+		<div ng-show="remedy.length>0">
+			<span>{{headache}}</span>
+			<br>
+			<ion-list>
+				<ion-item ng-repeat="j in remedy">{{j.method}}
+					<br>{{j.mediname}}</ion-item>
+			</ion-list>
 		</div>
 	</ion-content>
 </ion-view>

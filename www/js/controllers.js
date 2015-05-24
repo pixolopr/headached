@@ -152,6 +152,7 @@ $scope.forget.user = "";*/
 				if (results.rows.length > 0) {
 					if (results.rows.item(0).answer == $scope.answer.user) {
 						$location.path('/app/question');
+						$scope.$apply();
 					}
 				}
 
@@ -320,7 +321,7 @@ $scope.books.push(data);
 	$scope.showreport = function () {
 		if ($scope.answerset.length == 22) {
 			console.log($location.path());
-			$location.path("/app/report");
+			$location.path("/app/answers");
 		} else {
 			//ERROR MESSAGE TO FILL ALL QUESTONS
 			alert("All questions are Compulsory...!");
@@ -353,6 +354,7 @@ $scope.books.push(data);
 	$scope.migrane = 0;
 	$scope.cluster = 0;
 	$scope.common = 0;
+	$scope.headache = 'Common';
 	for (var i = 0; i < answersetcarry.length; i++) {
 		if (i <= 6) {
 			$scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
@@ -372,6 +374,44 @@ $scope.books.push(data);
 	var b = Math.round($scope.migrane * 100 / 6);
 	var c = Math.round($scope.cluster * 100 / 7);
 	var d = Math.round($scope.common * 100 / 2);
+	$scope.remedy = [];
+
+	if (a > b) {
+		if (a > c && a > d) {
+			$scope.headache = 'Sinus';
+		} else {
+			if (c > d) {
+				$scope.headache = 'Cluster';
+			}
+		}
+		/* else {
+		 	headache = "Common";
+		 }*/
+	} else {
+		if (b > c && b > d) {
+			$scope.headache = 'Migraine';
+		} else if (c > d) {
+			$scope.headache = 'Cluster';
+		}
+		/*else {
+				$scope.	headache = "Common";
+				}*/
+		console.log($scope.headache);
+	}
+	$scope.medicine = function () {
+		db.transaction(function (tx) {
+			tx.executeSql("SELECT * FROM `MEDICINES` WHERE `headache`='" + $scope.headache + "' ", [], function (tx, results) {
+				if ($scope.remedy.length <= results.rows.length) {
+					for (var p = 0; p < results.rows.length; p++) {
+						$scope.remedy.push(results.rows.item(p));
+					}
+
+				}
+
+			}, null);
+		});
+		console.log($scope.remedy);
+	};
 
 	var givevalue = function () {
 		console.log(i);
