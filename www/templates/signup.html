@@ -1,48 +1,51 @@
 <ion-view view-title="Sign-up">
-	<ion-content>
-		<h1>Sign-up</h1>
-		<div>
-			<input type="text" ng-model="user.name" placeholder="Name" required class="inputfields">
-			<span ng-show="namerequired">{{namerequired}}</span>
-			<div ng-hide="results.rows.length >0">{{exist}}</div>
-			<br>
+    <ion-content>
+        <h1>Sign-up</h1>
+        <div>
+            <input type="text" ng-model="user.name" placeholder="Name" required class="inputfields">
+            <span ng-show="namerequired">{{namerequired}}</span>
+            <div ng-hide="results.rows.length >0">{{exist}}</div>
+            <br>
 
-			<input type="radio" value="Female" ng-model="user.gender">Female
-			<input type="radio" value="Male" ng-model="user.gender">Male
-			<br>
-			<!--<input type="text" ng-model="user.gender" placeholder="Gender" required class="inputfields">-->
-			<span ng-show="genderrequired">{{genderrequired}}</span>
-			<br>
+            <input type="radio" value="Female" ng-model="user.gender">Female
+            <input type="radio" value="Male" ng-model="user.gender">Male
+            <br>
+            <!--<input type="text" ng-model="user.gender" placeholder="Gender" required class="inputfields">-->
+            <span ng-show="genderrequired">{{genderrequired}}</span>
+            <br>
+            <input type="text" ng-model="user.age" placeholder="Age" required class="inputfields">
+            <span ng-show="agerequired">{{agerequired}}</span>
+            <br>
 
-			<input type="email" ng-model="user.email" placeholder="Email" required class="inputfields">
-			<span ng-show="emailrequired">{{emailrequired}}</span>
-			<br>
-			<input type="password" ng-model="user.password" placeholder="Password" required class="inputfields">
-			<span ng-show="passwordrequired">{{passwordrequired}}</span>
-			<br>
-			<input type="text" ng-model="user.contact" placeholder="Contact" class="inputfields">
-			<span ng-show="contactrequired">{{contactrequired}}</span>
-			<br>
-			<!--<p ng-model="user.question">Your favourite movie</p>
+            <input type="email" ng-model="user.email" placeholder="Email" required class="inputfields">
+            <span ng-show="emailrequired">{{emailrequired}}</span>
+            <br>
+            <input type="password" ng-model="user.password" placeholder="Password" required class="inputfields">
+            <span ng-show="passwordrequired">{{passwordrequired}}</span>
+            <br>
+            <input type="text" ng-model="user.contact" placeholder="Contact" class="inputfields">
+            <span ng-show="contactrequired">{{contactrequired}}</span>
+            <br>
+            <!--<p ng-model="user.question">Your favourite movie</p>
             <input type="text" ng-model="user.answer" placeholder="Answer" class="inputfields"><br>
 -->
-			<div>
-				<select ng-model="user.que">
-					<!--<option value="select">--Choose any question--</option>-->
-					<option ng-repeat="z in que">{{z.questions}}</option>
-				</select>
+            <div>
+                <select ng-model="user.que">
+                    <!--<option value="select">--Choose any question--</option>-->
+                    <option ng-repeat="z in que">{{z.questions}}</option>
+                </select>
 
-				<br>
-				<span>{{querequired}}</span>
-				<br>
-				<input type="text" ng-model="user.ans" class="inputfields" placeholder="Answer"><span>{{ansrequired}}</span>
-			</div>
-			<br>
-			<input type="button" value="Sign Up" ng-click="change()">
-		</div>
-		<div ng-repeat="y in users">{{y}}</div>
-		<!-- <div>
+                <br>
+                <span>{{querequired}}</span>
+                <br>
+                <input type="text" ng-model="user.ans" class="inputfields" placeholder="Answer"><span>{{ansrequired}}</span>
+            </div>
+            <br>
+            <input type="button" value="Sign Up" ng-click="change()">
+        </div>
+        <div ng-repeat="y in users">{{y}}</div>
+        <!-- <div>
         {{user.name}}<br>{{user.gender}}<br>{{user.email}}<br>{{user.password}}<br>{{user.contact}}
         </div>-->
-	</ion-content>
+    </ion-content>
 </ion-view>

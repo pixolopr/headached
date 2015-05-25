@@ -1,5 +1,6 @@
 var answersetcarry = [];
 var queset = [];
+var userinfo={};
 var cont = angular.module('controllers', [])
 
 
@@ -104,6 +105,7 @@ var cont = angular.module('controllers', [])
 				console.log(results.rows);
 				if (results.rows.length > 0) {
 					console.log(results.rows.item(0));
+                    userinfo=results.rows.item(0);
                   /*  if($scope.logindata.password.length<=0){
 					$scope.forget = results.rows.item(0).question;
                     }*/
@@ -216,7 +218,7 @@ $scope.forget.user = "";*/
 
 			var signup = function () {
 				db.transaction(function (tx) {
-					tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact,answer,question) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "','" + $scope.user.ans + "','" + $scope.user.que + "')", [], function (tx, results) {
+					tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact,answer,question,age) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "','" + $scope.user.ans + "','" + $scope.user.que + "','" + $scope.user.age + "')", [], function (tx, results) {
 						console.log("ADDED TO DAtABASE");
 						$location.path('/app/login');
 
@@ -376,6 +378,13 @@ $scope.books.push(data);
 	$scope.cluster = 0;
 	$scope.common = 0;
 	$scope.headache = 'Common';
+    $scope.reportinfo={};
+    $scope.reportinfo.userid=userinfo.id;
+    $scope.reportinfo.username=userinfo.username;
+    $scope.reportinfo.age=userinfo.age;
+    $scope.reportinfo.headache=$scope.headche;
+    $scope.reportinfo.gender=userinfo.gender;
+    
 	for (var i = 0; i < answersetcarry.length; i++) {
 		if (i <= 6) {
 			$scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
@@ -445,6 +454,7 @@ $scope.books.push(data);
 	var giveval = $interval(givevalue, 1000);
 
 	console.log("report page");
+    console.log(userinfo);
 	console.log(answersetcarry);
 
 });
