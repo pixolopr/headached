@@ -11,10 +11,10 @@ db.transaction(function (tx) {
 	db.transaction(function (tx) {
 		tx.executeSql('CREATE TABLE IF NOT EXISTS MEDICINES ( headache varchar PRIMARY KEY, method varchar, mediname varchar )');
 		db.transaction(function (tx) {
-			tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question varchar,answer1 varchar)');
+				tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question varchar,answer1 varchar)');
 			//tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question varchar,answer1 varchar,answer2 varchar,answer3 varchar)');
 		});
-		//tx.executeSql('DROP TABLE  QUESTIONS ');
+	//tx.executeSql('DROP TABLE  MEDICINES ');
 		db.transaction(function (tx) {
 			tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username varchar PRIMARY KEY, password varchar, gender varchar, email varchar, contact varchar,answer varchar,question varchar )');
 		});

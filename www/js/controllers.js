@@ -93,7 +93,7 @@ var cont = angular.module('controllers', [])
 		} else {
 			$scope.invalid = "Invalid Password !";
 			console.log($scope.invalid);
-			$scope.logindata.password = "";
+			//$scope.logindata.password = "";
 		}
 	};
 
@@ -104,8 +104,9 @@ var cont = angular.module('controllers', [])
 				console.log(results.rows);
 				if (results.rows.length > 0) {
 					console.log(results.rows.item(0));
+                  /*  if($scope.logindata.password.length<=0){
 					$scope.forget = results.rows.item(0).question;
-
+                    }*/
 					loginsuccess(results.rows.item(0).password);
 				} else {
 					$scope.logindata.username = "";
@@ -119,17 +120,36 @@ var cont = angular.module('controllers', [])
 
 	//FORGOT PASSWORD FUNCTION
 	$scope.forgetpassword = function (x) {
-			$scope.login($scope.logindata.username);
+        $scope.userenter=0;
+        console.log($scope.userenter);
+        if($scope.logindata.username){
+      db.transaction(function (tx) {
+			tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
+				console.log(results.rows);
+				if (results.rows.length > 0) {
+					console.log(results.rows.item(0));
+                    
+					$scope.forget = results.rows.item(0).question;
+                }
+                else{
+                $scope.error="User does not exists !";
+                     $scope.userenter=1;
+                }
+            },null)});}
+			
 			/*db.transaction(function (tx) {
 				tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
 					console.log(results.rows);
 					if (results.rows.length > 0) {
 						console.log(results.rows.item(0));
 						$scope.forget = results.rows.item(0).question;
-
 					};
 				});
 			})*/
+       /* else{
+        $scope.userenter=1;
+            console.log($scope.userenter);
+        }*/
 		}
 		/*$scope.forget = {};
 $scope.forget.user = "";*/
@@ -151,7 +171,8 @@ $scope.forget.user = "";*/
 			tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
 				if (results.rows.length > 0) {
 					if (results.rows.item(0).answer == $scope.answer.user) {
-						$location.path('/app/question');
+						$scope.password=results.rows.item(0).password;
+                        
 						$scope.$apply();
 					}
 				}
