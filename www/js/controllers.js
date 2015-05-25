@@ -378,13 +378,8 @@ $scope.books.push(data);
 	$scope.cluster = 0;
 	$scope.common = 0;
 	$scope.headache = 'Common';
-    $scope.reportinfo={};
-    $scope.reportinfo.userid=userinfo.id;
-    $scope.reportinfo.username=userinfo.username;
-    $scope.reportinfo.age=userinfo.age;
-    $scope.reportinfo.headache=$scope.headche;
-    $scope.reportinfo.gender=userinfo.gender;
-    
+    $scope.reportinfo=userinfo;
+   
 	for (var i = 0; i < answersetcarry.length; i++) {
 		if (i <= 6) {
 			$scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
@@ -442,6 +437,9 @@ $scope.books.push(data);
 		});
 		console.log($scope.remedy);
 	};
+    db.transaction(function(tx){
+    tx.executeSql("INSERT INTO reports(userid ,username ,headache) VALUES('"+$scope.reportinfo.id+"','"+$scope.reportinfo.username+"','"+$scope.headache+"')",[],function(tx,results){console.log("Added");$.jStorage.set("reports",$scope.reportinfo);},null);
+    })
 
 	var givevalue = function () {
 		console.log(i);
