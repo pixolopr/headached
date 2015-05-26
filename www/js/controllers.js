@@ -487,15 +487,20 @@ $scope.books.push(data);
     $scope.date =[];
     $scope.day =[];
     $scope.month =[];
+    
+    $scope.modelvalues = [];
     for(var i=0; i<7; i++)
     {
         $scope.week[i] = d.getDay() + i;
         $scope.date[i] = d.getDate() + i;
         $scope.month[i] = d.getMonth();
+        
+        $scope.modelvalues[i] = $scope.date[i].toString() + $scope.month[i].toString() + $scope.y.toString() + '4';
+        $scope.modelvalues[i] = parseInt($scope.modelvalues[i]);
     };
     
     //get all appvalues from database and store in array
-    $scope.appvalues = ['26420154', '26420156'];
+    $scope.appvalues = [26420154, 26420156];
         
     $scope.setappointment = function(appvalue){
     //insert app value in database
