@@ -313,7 +313,7 @@ $scope.books.push(data);
 
 
 
-.controller('questionsCtrl', function ($scope, MyDatabase, $location) {
+.controller('questionsCtrl', function ($scope, MyDatabase, $location,$ionicPopup) {
 	$scope.que = {};
 	console.log($scope.que);
 
@@ -346,14 +346,32 @@ $scope.books.push(data);
 			console.log($location.path());
 			$location.path("/app/answers");
 		} else {
+            $scope.showpopup("Fill all answers !");
 			//ERROR MESSAGE TO FILL ALL QUESTONS
-			alert("All questions are Compulsory...!");
+			//alert("All questions are Compulsory...!");
 		};
 
 		console.log($scope.answerset);
 
 		answersetcarry = $scope.answerset;
 	};
+    $scope.showpopup=function(msg){
+        var mypopup=$ionicPopup.show({
+        template:'<div style="text-align:center">'+msg+'</div>',
+            buttons: [
+
+                {
+                    text: '<b>Ok</b>',
+                    type: 'button-positive',
+                 //   onTap: function () {
+                      //  $location.path("/app/questions");
+                  //  }
+      }
+    ]
+        });
+    
+    }
+    
 })
 
 
@@ -379,7 +397,8 @@ $scope.books.push(data);
 	$scope.common = 0;
 	$scope.headache = 'Common';
     $scope.reportinfo=userinfo;
-   
+   $scope.reportinfo.headache=$scope.headache;
+    console.log($scope.reportinfo);
 	for (var i = 0; i < answersetcarry.length; i++) {
 		if (i <= 6) {
 			$scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
