@@ -1,0 +1,22 @@
+<ion-view view-title="Report">
+    <ion-content>
+        <h1>Report</h1>
+        <!--<div class="loader">
+
+			<div class="loaderfill" style="width:{{value}}">{{value}}</div>
+			<br>-->
+        <div>We recommend you Dr. Hamish D'Souza. His clinic is open from 4pm-7pm on Mondays to Saturdays </br> Call to take an appointment</br> for any cancellations please call 7679879878</div>
+        <h4>Address: vidya bhavan schoole se straight fir left, pan patti ke opposite, Ghatkopar (East)</h4>
+
+
+        <div ng-repeat="w in week">{{w | daystring}}</div>
+        <div ng-repeat="d in date"> {{d}}</div>
+        <div ng-repeat="m in month"> {{m | monthstring}} </div>
+        <div>{{y}}</div>
+        <div class="slot" ng-class="{bookedslot: appvalues.indexOf('26420154') > -1 }" ng-click="setappointment('26420154')">4:00 pm-5:00 pm</div>{{appvalues.indexOf('26420154')}}
+        <div class="slot" ng-class="{bookedslot: appvalues.indexOf('26420155') > -1 }" ng-click="setappointment('26420155')">5:00 pm-6:00 pm</div>
+        <div class="slot" ng-class="{bookedslot: appvalues.indexOf('26420156') > -1 }" ng-click="setappointment('26420156')">6:00 pm-7:00 pm</div>
+
+
+    </ion-content>
+</ion-view>

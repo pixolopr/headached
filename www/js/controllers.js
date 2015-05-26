@@ -474,4 +474,32 @@ $scope.books.push(data);
     console.log(userinfo);
 	console.log(answersetcarry);
 
+})
+.controller('appointmentCtrl', function ($scope) {
+    var d = new Date();
+    $scope.w = d.getDay();
+    $scope.d = d.getDate();
+    $scope.m = d.getMonth();
+    $scope.y = d.getFullYear();
+    
+    //array of days
+    $scope.week =[];
+    $scope.date =[];
+    $scope.day =[];
+    $scope.month =[];
+    for(var i=0; i<7; i++)
+    {
+        $scope.week[i] = d.getDay() + i;
+        $scope.date[i] = d.getDate() + i;
+        $scope.month[i] = d.getMonth();
+    };
+    
+    //get all appvalues from database and store in array
+    $scope.appvalues = ['26420154', '26420156'];
+        
+    $scope.setappointment = function(appvalue){
+    //insert app value in database
+        
+    //add into appvaue array to change color in design
+    };
 });

@@ -47,6 +47,14 @@ a:link {
     background-color: blueviolet;
     transition: 1s ease;
     color: white;
-    width:0%;
+    width: 0%;
     padding: 3px;
+}
+
+.slot {
+    background-color: greenyellow;
+}
+
+.bookedslot {
+    background-color: darkred;
 }
