@@ -394,8 +394,8 @@ $scope.books.push(data);
 	console.log($scope.sinus);
 	$scope.migrane = 0;
 	$scope.cluster = 0;
-	$scope.common = 0;
-	$scope.headache = 'Common';
+	//$scope.common = 0;
+	//$scope.headache = 'Common';
     $scope.reportinfo=userinfo;
    $scope.reportinfo.headache=$scope.headache;
     console.log($scope.reportinfo);
@@ -408,7 +408,10 @@ $scope.books.push(data);
 		} else if (i <= 19) {
 			$scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
 		} else {
-			$scope.common = $scope.common + parseFloat(answersetcarry[i]);
+			//$scope.common = $scope.common + parseFloat(answersetcarry[i]);
+            $scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
+            $scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
+            $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
 		}
 
 	};
@@ -419,8 +422,25 @@ $scope.books.push(data);
 	var c = Math.round($scope.cluster * 100 / 7);
 	var d = Math.round($scope.common * 100 / 2);
 	$scope.remedy = [];
+    if(a>b){
+    if(a>c){
+$scope.headache='Sinus';
+}
+    else{$scope.headache='Cluster';}
+}
+    else if(b>a) {
+        if(b>c){
+        $scope.headache='Migrane';
+        }
+        else {
+    $scope.headache='Cluster';
+    }
+    }
+    else{
+    $scope.headche='Sinus';
+    }
 
-	if (a > b) {
+	/*if (a > b) {
 		if (a > c && a > d) {
 			$scope.headache = 'Sinus';
 		} else {
@@ -428,20 +448,20 @@ $scope.books.push(data);
 				$scope.headache = 'Cluster';
 			}
 		}
-		/* else {
+		 else {
 		 	headache = "Common";
-		 }*/
+		 }
 	} else {
 		if (b > c && b > d) {
 			$scope.headache = 'Migraine';
 		} else if (c > d) {
 			$scope.headache = 'Cluster';
 		}
-		/*else {
+		else {
 				$scope.	headache = "Common";
-				}*/
+				}
 		console.log($scope.headache);
-	}
+	}*/
 	$scope.medicine = function () {
 		db.transaction(function (tx) {
 			tx.executeSql("SELECT * FROM `MEDICINES` WHERE `headache`='" + $scope.headache + "' ", [], function (tx, results) {
@@ -465,7 +485,7 @@ $scope.books.push(data);
 		$scope.sinus = a;
 		$scope.migrane = b;
 		$scope.cluster = c;
-		$scope.common = d;
+		//$scope.common = d;
 		$scope.value = '50%';
 	};
 	var giveval = $interval(givevalue, 1000);
@@ -475,10 +495,11 @@ $scope.books.push(data);
 	console.log(answersetcarry);
 
 })
-.controller('appointmentCtrl', function ($scope) {
+.controller('appointmentCtrl', function ($scope,$ionicPopup) {
     var d = new Date();
     $scope.w = d.getDay();
     $scope.d = d.getDate();
+    console.log($scope.d);
     $scope.m = d.getMonth();
     $scope.y = d.getFullYear();
     
@@ -487,24 +508,70 @@ $scope.books.push(data);
     $scope.date =[];
     $scope.day =[];
     $scope.month =[];
-    
+   
     $scope.modelvalues = [];
-    for(var i=0; i<7; i++)
+    for(var k=1,i=0; i<7; i++,k++)
     {
-        $scope.week[i] = d.getDay() + i;
-        $scope.date[i] = d.getDate() + i;
+       
+        $scope.week[i] = d.getDay() + k;
+        $scope.date[i] = d.getDate() + k;
+        //console.log($scope.date);
         $scope.month[i] = d.getMonth();
         
         $scope.modelvalues[i] = $scope.date[i].toString() + $scope.month[i].toString() + $scope.y.toString() + '4';
         $scope.modelvalues[i] = parseInt($scope.modelvalues[i]);
     };
-    
+    console.log($scope.modelvalues);
+     console.log($scope.date);
+     db.transaction(function(tx){
+    tx.executeSql("SELECT * FROM appointments",[],function(tx,results){
+       
+        for(var j=0;j<results.rows.length;j++){
+            // if($scope.appvalues.indexOf[results.rows.item(j).app_id]>-1){
+        $scope.appvalues.push(results.rows.item(j).app_id);
+                 //console.log($scope.appvalues);
+       // }
+            
+           // console.log("hey");
+        };
+    },null);});
     //get all appvalues from database and store in array
     $scope.appvalues = [26420154, 26420156];
         
-    $scope.setappointment = function(appvalue){
+    $scope.setappointment = function(appvalue,i,mv){
+         if($scope.appvalues.indexOf(mv)<=-1){
     //insert app value in database
+        db.transaction(function(tx){
+tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date) VALUES('"+mv+"','"+appvalue+"','"+userinfo.username+"','"+$scope.date[i]+"')",[],function(tx,results){
+        console.log("added");
+   
+        },null);})
+      
+       $scope.appvalues.push(mv);
         
+        //console.log($scope.appvalues.indexOf(mv));
     //add into appvaue array to change color in design
+        }
+        else{
+            $scope.changepopup("The appointment is already booked !<br>Take another appointment.");
+        }
     };
+    $scope.changepopup=function(msg){
+    var p=$ionicPopup.show({ template:'<div style="text-align:center">'+msg+'</div>',
+            buttons: [
+
+                {
+                    text: '<b>Ok</b>',
+                    type: 'button-positive',
+                 //   onTap: function () {
+                      //  $location.path("/app/questions");
+                  //  }
+      }
+    ]});
+    
+    };
+    //insert app value in database
+        console.log("appvalues");
+    //add into appvaue array to change color in design
+    
 });

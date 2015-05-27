@@ -18,12 +18,12 @@
 		<div class="loader">
 			<div class="loaderfill" style="width:{{cluster}}%">{{cluster}}%</div>
 		</div>
-		<br><span>Common Headache</span>
+		<br><!--<span>Common Headache</span>
 		<div class="loader">
 			<div class="loaderfill" style="width:{{common}}%">{{common}}%</div>
 		</div>
-		<br>
-		<a href="#app/report">
+		<br>-->
+		<a href="#app/appointment">
 			<div class="submit" style="text-align:center;">
 				<button class="button button-positive">Appointment</button>
 		</a>
@@ -38,7 +38,7 @@
 			<br>
 			<ion-list>
 				<ion-item ng-repeat="j in remedy">{{j.method}}
-					<br>{{j.mediname}}</ion-item>
+					<br><div>{{j.mediname}}</div></ion-item>
 			</ion-list>
 		</div>
 	</ion-content>

@@ -1,6 +1,6 @@
 <ion-view view-title="Report">
     <ion-content>
-        <h1>Report</h1>
+        <h1>Appointment</h1>
         <!--<div class="loader">
 
 			<div class="loaderfill" style="width:{{value}}">{{value}}</div>
@@ -15,10 +15,11 @@
         <div>{{y}}</div>
         {{w.toString() + d.toString() + m.toString() + y.toString() + '4'}}
         <div ng-repeat="mv in modelvalues">
-            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv) > -1 }" ng-click="setappointment('26420154')">4:00 pm-5:00 pm</div>{{appvalues.indexOf(mv)}}
-            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 1) > -1 }" ng-click="setappointment('26420155')">5:00 pm-6:00 pm</div>{{appvalues.indexOf(mv + 1)}}
-            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 2) > -1 }" ng-click="setappointment('26420156')">6:00 pm-7:00 pm</div>
-            {{mv}}
+            {{mv}}<br>
+            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv) > -1 }" ng-click="setappointment('26420154',$index,mv)">4:00 pm-5:00 pm</div><!--{{appvalues.indexOf(mv)}}--><br>
+            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 1) > -1 }" ng-click="setappointment('26420155',$index,mv+1)">5:00 pm-6:00 pm</div><!--{{appvalues.indexOf(mv + 1)}}--><br>
+            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 2) > -1 }" ng-click="setappointment('26420156',$index,mv+2)">6:00 pm-7:00 pm</div><br>
+            
         </div>
 
     </ion-content>
