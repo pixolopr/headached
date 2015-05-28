@@ -524,7 +524,9 @@ $scope.headache='Sinus';
     $scope.date[0] = d.getDate()+1;
     $scope.week[0] = d.getDay()+1 ;
      $scope.month[0] = d.getMonth();
-    $scope.modelvalues = [];
+     $scope.modelvalues = [];
+  
+   
      
     for(var  i=1; i<7; i++)
     {
@@ -564,9 +566,11 @@ $scope.headache='Sinus';
         //console.log($scope.date);
         $scope.month[i] = $scope.month[i-1];
         
-        $scope.modelvalues[i] = $scope.date[i].toString() + $scope.month[i].toString() + $scope.y.toString() + '4';
-        $scope.modelvalues[i] = parseInt($scope.modelvalues[i]);
+        $scope.modelvalues[i-1] = $scope.date[i-1].toString() + $scope.month[i-1].toString() + $scope.y.toString() + '4';
+        $scope.modelvalues[i-1] = parseInt($scope.modelvalues[i-1]);
     };
+    $scope.modelvalues[i-1] = $scope.date[i-1].toString() + $scope.month[i-1].toString() + $scope.y.toString() + '4';
+        $scope.modelvalues[i-1] = parseInt($scope.modelvalues[i-1]);
     console.log($scope.modelvalues);
      console.log($scope.date);
     console.log($scope.week);
@@ -574,6 +578,7 @@ $scope.headache='Sinus';
     $scope.appvalues = [26420154, 26420156];
         
     $scope.setappointment = function(appvalue,i,mv){
+        console.log(mv);
          if($scope.appvalues.indexOf(mv)<=-1){
     //insert app value in database
         db.transaction(function(tx){
