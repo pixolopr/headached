@@ -11,7 +11,7 @@
 
         <div ng-repeat="w in week">{{w | daystring}}</div>
         <div ng-repeat="d in date"> {{d}}</div>
-        <div ng-repeat="m in month"> {{m | monthstring}} </div>
+        <!--<div ng-repeat="m in month"> {{m | monthstring}} </div>-->
         <div>{{y}}</div>
         {{w.toString() + d.toString() + m.toString() + y.toString() + '4'}}
         <div ng-repeat="mv in modelvalues">
@@ -21,6 +21,7 @@
             <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 2) > -1 }" ng-click="setappointment('26420156',$index,mv+2)">6:00 pm-7:00 pm</div><br>
             
         </div>
+            
 
     </ion-content>
 </ion-view>

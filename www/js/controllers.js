@@ -430,7 +430,7 @@ $scope.headache='Sinus';
 }
     else if(b>a) {
         if(b>c){
-        $scope.headache='Migrane';
+        $scope.headache='Migraine';
         }
         else {
     $scope.headache='Cluster';
@@ -496,34 +496,7 @@ $scope.headache='Sinus';
 
 })
 .controller('appointmentCtrl', function ($scope,$ionicPopup) {
-    var d = new Date();
-    $scope.w = d.getDay();
-    $scope.d = d.getDate();
-    console.log($scope.d);
-    $scope.m = d.getMonth();
-    $scope.y = d.getFullYear();
-    
-    //array of days
-    $scope.week =[];
-    $scope.date =[];
-    $scope.day =[];
-    $scope.month =[];
-   
-    $scope.modelvalues = [];
-    for(var k=1,i=0; i<7; i++,k++)
-    {
-       
-        $scope.week[i] = d.getDay() + k;
-        $scope.date[i] = d.getDate() + k;
-        //console.log($scope.date);
-        $scope.month[i] = d.getMonth();
-        
-        $scope.modelvalues[i] = $scope.date[i].toString() + $scope.month[i].toString() + $scope.y.toString() + '4';
-        $scope.modelvalues[i] = parseInt($scope.modelvalues[i]);
-    };
-    console.log($scope.modelvalues);
-     console.log($scope.date);
-     db.transaction(function(tx){
+      db.transaction(function(tx){
     tx.executeSql("SELECT * FROM appointments",[],function(tx,results){
        
         for(var j=0;j<results.rows.length;j++){
@@ -536,6 +509,54 @@ $scope.headache='Sinus';
         };
     },null);});
     //get all appvalues from database and store in array
+    var d = new Date();
+    $scope.w = d.getDay();
+    $scope.d = d.getDate();
+    console.log($scope.d);
+    $scope.m = d.getMonth();
+    $scope.y = d.getFullYear();
+    
+    //array of days
+    $scope.week =[];
+    $scope.date =[];
+    $scope.day =[];
+    $scope.month =[];
+    $scope.date[0] = d.getDate()+1;
+    $scope.week[0] = d.getDay()+1 ;
+     $scope.month[0] = d.getMonth();
+    $scope.modelvalues = [];
+     
+    for(var  i=1; i<7; i++)
+    {
+        if($scope.month[i]==5){
+        if($scope.$scope.date[i-1]>30){
+         $scope.date[i-1]=1;
+        }
+          
+       };
+         if ($scope.date[i-1]>31)
+        {
+        $scope.date[i-1]=1;
+            
+        };
+        if($scope.week[i-1]>=7){
+           $scope.week[i-1]=0;
+           };
+       
+        $scope.date[i]=$scope.date[i-1]+1;
+        $scope.week[i]=$scope.week[i-1]+1;
+       // $scope.week[i] = d.getDay() + k;
+        //$scope.date[i] = d.getDate() + k;
+        //console.log($scope.date);
+        $scope.month[i] = d.getMonth();
+        
+        $scope.modelvalues[i] = $scope.date[i].toString() + $scope.month[i].toString() + $scope.y.toString() + '4';
+        $scope.modelvalues[i] = parseInt($scope.modelvalues[i]);
+    };
+    console.log($scope.modelvalues);
+     console.log($scope.date);
+    console.log($scope.week);
+   
     $scope.appvalues = [26420154, 26420156];
         
     $scope.setappointment = function(appvalue,i,mv){
