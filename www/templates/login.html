@@ -1,6 +1,6 @@
 <ion-view view-title="Login">
-	<ion-content>
-		<!--<html>
+    <ion-content>
+        <!--<html>
         <head>
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
             <script>
@@ -14,30 +14,84 @@ $(document).ready(function(){
 </script>
         </head>
         <body>-->
-		<h1>Login</h1>
-		<div ng-hide="forget.length>0">
-			<input type="text" id="login" class="inputfields" ng-model="logindata.username" placeholder="username" required>
-            <span ng-show="!loginsuccess(results.rows.item(0).password)" ng-hide="error.length<0" > {{error}}</span>
-			<div ng-hide="error.length>0" >Enter your username !</div>
-			<br>
-			<input type="password" id="login1" class="inputfields" ng-model="logindata.password" placeholder="password" required>
+
+        <!--  <div ng-hide="forget.length>0">
+            <input type="text" id="login" class="inputfields" ng-model="logindata.username" placeholder="username" required>
+            <span ng-show="!loginsuccess(results.rows.item(0).password)" ng-hide="error.length<0"> {{error}}</span>
+            <div ng-hide="error.length>0">Enter your username !</div>
+            <br>
+            <input type="password" id="login1" class="inputfields" ng-model="logindata.password" placeholder="password" required>
             <span ng-show="logindata.password != pass">{{invalid}}</span>
-			<br>
+            <br>
 
-			<button ng-click="login()">Login</button>
-			<div ng-click="forgetpassword()" style="text-decoration:underline">Forgot Password?</div>
-		</div>
-		<br>
-		<br>
+            <button ng-click="login()">Login</button>
+            <div ng-click="forgetpassword()" style="text-decoration:underline">Forgot Password?</div>
+        </div>
+        <br>
+        <br>
 
-		<!--<div>{{forget}}</div>
+        -->
+
+        <!--<div ng-hide="forget.length>0" class="list">
+    <label class="item item-input">
+        <span ng-show="!loginsuccess(results.rows.item(0).password)" ng-hide="error.length<0"> {{error}}</span>
+        <span class="input-label ">Username</span>
+        <input type="text" id="login" ng-model="logindata.username" placeholder="username" required>
+        <div ng-hide="error.length>0">Enter your username !</div>
+    </label>
+    <label class="item item-input">
+        <span class="input-label">Password</span>
+        <input type="password" type="password" id="login1" ng-model="logindata.password" placeholder="password" required>
+        <span ng-show="logindata.password != pass">{{invalid}}</span>
+    </label>
+    <button ng-click="login()">Login</button>
+    <div ng-click="forgetpassword()" style="text-decoration:underline">Forgot Password?</div>
+</div>-->
+
+        <div class="loginbg">
+            <div ng-hide="forget.length>0" class="list list-inset loginbox">
+                <label class="item item-input ">
+                    <span ng-show="!loginsuccess(results.rows.item(0).password)" ng-hide="error.length<0"> {{error}}</span>
+
+                    <input type="text" id="login" ng-model="logindata.username" placeholder="Username" required>
+                    <div ng-hide="error.length>0">Enter username!</div>
+
+                </label>
+                <label class="item item-input ">
+
+                    <input type="password" type="password" id="login1" ng-model="logindata.password" placeholder="Password" required>
+                    <span ng-show="logindata.password != pass">{{invalid}}</span>
+
+                </label>
+
+            </div>
+
+            <button ng-click="login()" class="button button-assertive loginbutton">
+                Login
+            </button>
+            <!--<div>{{forget}}</div>
 <br>
 <br>-->
-		<input type="text" class="inputfields" placeholder="{{forget}}" ng-model="answer.user" ng-change="check()" ng-show="forget.length>0"><br>
-        <div ng-show="forget.length>0" >Your password :-{{password}}<br>
-       <div class="submit" style="text-align:center;"> <button class="button button-positive" ng-click="forget=[]">Login</button></div></div>
-		<!--      <div>{{wrong}}</div>
+            <input type="text" class="inputfields" placeholder="{{forget}}" ng-model="answer.user" ng-change="check()" ng-show="forget.length>0">
+            <br>
+            <div ng-show="forget.length>0">Your password :-{{password}}
+                <br>
+                <div class="submit" style="text-align:center;">
+                    <button class="button button-positive" ng-click="forget=[]">Login</button>
+                </div>
+            </div>
+            <!--      <div>{{wrong}}</div>
+
         </body>
     </html>-->
-	</ion-content>
+            <div style="    margin-top: 88%;">Don't have an account? Register yourself. 
+            <a href="#app/signup">
+                <button class="button button-balanced signupbutton">
+                   Sign Up
+                </button>
+            </a>
+                </div>
+
+        </div>
+    </ion-content>
 </ion-view>

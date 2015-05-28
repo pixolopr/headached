@@ -1,7 +1,78 @@
 <ion-view view-title="Sign-up">
     <ion-content>
-        <h1>Sign-up</h1>
-        <div>
+
+        <div class="signupbg list list-inset">
+            <label class="item item-input">
+                <input type="text" ng-model="user.name" placeholder="First Name" required>
+                <span ng-show="namerequired">{{namerequired}}</span>
+                <div ng-hide="results.rows.length >0">{{exist}}</div>
+            </label>
+            <label class="item item-input">
+                <input type="text" ng-model="user.name" placeholder="Last Name" required>
+                <span ng-show="namerequired">{{namerequired}}</span>
+                <div ng-hide="results.rows.length >0">{{exist}}</div>
+            </label>
+            <!-- <label class="item item-input">
+                <input type="text" placeholder="Gender" required>
+                <span ng-show="genderrequired">{{genderrequired}}</span>
+            </label>-->
+            <span class="list">
+                <label class="item item-radio">
+                <input type="radio" name="group">
+                <div class="item-content">
+                    Male
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio">
+                <input type="radio" name="group">
+                <div class="item-content">
+                    Female
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </span>
+
+
+            <label class="item item-input">
+                <input type="text" ng-model="user.age" placeholder="Age" required>
+                <span ng-show="agerequired">{{agerequired}}</span>
+            </label>
+            <label class="item item-input">
+                <input type="text" ng-model="user.email" placeholder="Email" required>
+                <span ng-show="emailrequired">{{emailrequired}}</span>
+            </label>
+            <label class="item item-input">
+                <input type="text" ng-model="user.password" placeholder="Password" required>
+                <span ng-show="passwordrequired">{{passwordrequired}}</span>
+            </label>
+            <label class="item item-input">
+                <input type="text" ng-model="user.contact" placeholder="Contact" required>
+                <span ng-show="contactrequired">{{contactrequired}}</span>
+            </label>
+            <div>
+                <select ng-model="user.que">
+                    <!--<option value="select">--Choose any question--</option>-->
+                    <option ng-repeat="z in que">{{z.questions}}</option>
+                </select>
+
+                <br>
+                <span>{{querequired}}</span>
+                <br>
+                <label class="item item-input">
+                    <input type="text" ng-model="user.ans" placeholder="Answer" required>
+                    <span>{{ansrequired}}</span>
+                </label>
+
+
+            </div>
+        </div>
+        <div ng-repeat="y in users">{{y}}</div>
+          <button ng-click= "change()" class="button button-balanced signupbutton">
+                   Sign Up
+                </button>
+        
+        <!--   <div class="signupbg">
             <input type="text" ng-model="user.name" placeholder="Name" required class="inputfields">
             <span ng-show="namerequired">{{namerequired}}</span>
             <div ng-hide="results.rows.length >0">{{exist}}</div>
@@ -10,7 +81,7 @@
             <input type="radio" value="Female" ng-model="user.gender">Female
             <input type="radio" value="Male" ng-model="user.gender">Male
             <br>
-            <!--<input type="text" ng-model="user.gender" placeholder="Gender" required class="inputfields">-->
+            <input type="text" ng-model="user.gender" placeholder="Gender" required class="inputfields">
             <span ng-show="genderrequired">{{genderrequired}}</span>
             <br>
             <input type="text" ng-model="user.age" placeholder="Age" required class="inputfields">
@@ -26,12 +97,10 @@
             <input type="text" ng-model="user.contact" placeholder="Contact" class="inputfields">
             <span ng-show="contactrequired">{{contactrequired}}</span>
             <br>
-            <!--<p ng-model="user.question">Your favourite movie</p>
-            <input type="text" ng-model="user.answer" placeholder="Answer" class="inputfields"><br>
--->
+           
             <div>
                 <select ng-model="user.que">
-                    <!--<option value="select">--Choose any question--</option>-->
+                   
                     <option ng-repeat="z in que">{{z.questions}}</option>
                 </select>
 
@@ -43,7 +112,7 @@
             <br>
             <input type="button" value="Sign Up" ng-click="change()">
         </div>
-        <div ng-repeat="y in users">{{y}}</div>
+        <div ng-repeat="y in users">{{y}}</div>-->
         <!-- <div>
         {{user.name}}<br>{{user.gender}}<br>{{user.email}}<br>{{user.password}}<br>{{user.contact}}
         </div>-->
