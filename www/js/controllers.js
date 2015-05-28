@@ -529,26 +529,40 @@ $scope.headache='Sinus';
     for(var  i=1; i<7; i++)
     {
         if($scope.month[i]==5){
-        if($scope.$scope.date[i-1]>30){
+        if($scope.$scope.date[i-1]==31){
          $scope.date[i-1]=1;
+           $scope.month[i-1]=d.getMonth()+1;
+           
         }
           
        };
-         if ($scope.date[i-1]>31)
+         if ($scope.date[i-1]==32)
         {
         $scope.date[i-1]=1;
-            
+            $scope.month[i-1]=d.getMonth()+1;
+            console.log($scope.month); 
         };
-        if($scope.week[i-1]>=7){
-           $scope.week[i-1]=0;
-           };
+        if($scope.week[i-1]==7){
+         $scope.week[i-1]=0;
+        }
+       /* if($scope.week[i-1]==8){
+           $scope.week[i-1]=1;
+              console.log("hi");
+        }
+            if($scope.week[i-1]==7){
+              
+            $scope.date.splice(--i,1);
+                console.log($scope.date);
+                $scope.week.splice(--i,1);
+            
+           };*/
        
         $scope.date[i]=$scope.date[i-1]+1;
         $scope.week[i]=$scope.week[i-1]+1;
        // $scope.week[i] = d.getDay() + k;
         //$scope.date[i] = d.getDate() + k;
         //console.log($scope.date);
-        $scope.month[i] = d.getMonth();
+        $scope.month[i] = $scope.month[i-1];
         
         $scope.modelvalues[i] = $scope.date[i].toString() + $scope.month[i].toString() + $scope.y.toString() + '4';
         $scope.modelvalues[i] = parseInt($scope.modelvalues[i]);
