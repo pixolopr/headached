@@ -415,12 +415,12 @@ $scope.books.push(data);
 		}
 
 	};
-	var a = Math.round($scope.sinus * 100 / 7);
+	var a = Math.round($scope.sinus * 100 / 9);
 	console.log($scope.sinus);
 	console.log($scope.migrane);
-	var b = Math.round($scope.migrane * 100 / 6);
-	var c = Math.round($scope.cluster * 100 / 7);
-	var d = Math.round($scope.common * 100 / 2);
+	var b = Math.round($scope.migrane * 100 / 8);
+	var c = Math.round($scope.cluster * 100 / 9);
+	//var d = Math.round($scope.common * 100 / 2);
 	$scope.remedy = [];
     if(a>b){
     if(a>c){

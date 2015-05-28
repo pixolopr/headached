@@ -36,10 +36,10 @@
 		<div ng-show="remedy.length>0">
 			<span>Probably,you have {{headache}}</span>
 			<br>
-			<ion-list>
-				<ion-item ng-repeat="j in remedy">{{j.method}}
-					<br><div>{{j.mediname}}</div></ion-item>
-			</ion-list>
+			<div>
+				<div ng-repeat="j in remedy">{{j.method}}
+					<br><div>{{j.mediname}}</div></div>
+			</div>
 		</div>
 	</ion-content>
 </ion-view>
