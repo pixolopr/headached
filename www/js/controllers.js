@@ -99,7 +99,8 @@ var cont = angular.module('controllers', [])
                         $scope.patienthistory.push(results.rows.item(s));
                         console.log("created");
 
-                    };console.log($scope.patienthistory);
+                    };
+                    console.log($scope.patienthistory);
                 }, null);
             });
         };
@@ -387,9 +388,6 @@ var cont = angular.module('controllers', [])
                         {
                             text: '<b>Ok</b>',
                             type: 'button-positive',
-                            //   onTap: function () {
-                            //  $location.path("/app/questions");
-                            //  }
       }
     ]
                 });
@@ -430,237 +428,210 @@ var cont = angular.module('controllers', [])
 })
 
 .controller('reportCtrl', function ($scope, $interval, $location) {
-        /*  $scope.$on('$ionicView.enter', function () {
 
-             $scope.reportctrl();
-             console.log("quesCtrl");
+    //CHECK IF LOGGED IN
+    if ($.jStorage.get("user") == null) {
+        $location.path("/app/login");
+    };
 
+    //INITIATE HEAD ACHE TYPES
+    $scope.sinus = 0;
+    $scope.migrane = 0;
+    $scope.cluster = 0;
 
-         });
-         */
-        if ($.jStorage.get("user") == null) {
-            $location.path("/app/login");
-        } else {
-            $scope.value = '0%';
-            $scope.sinus = 0;
+    $scope.user = $.jStorage.get("user");
+
+    //ADDING ANSWER VALUES TO HEAD ACHE COUNTER
+    for (var i = 0; i < answersetcarry.length; i++) {
+        if (i < 7) {
+            $scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
             console.log($scope.sinus);
-            $scope.migrane = 0;
-            $scope.cluster = 0;
-            // $scope.reportinfo = userinfo;
-            $scope.reportinfo = $.jStorage.get("user");
-            jStoragevalue = $scope.reportinfo;
-            //$scope.reportinfo.headache = $scope.headache;
-            console.log($scope.reportinfo);
-
-            for (var i = 0; i < answersetcarry.length; i++) {
-                if (i < 7) {
-                    $scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
-                    console.log($scope.sinus);
-                } else if (i < 13) {
-                    $scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
-                } else if (i < 20) {
-                    $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
-                } else {
-                    //$scope.common = $scope.common + parseFloat(answersetcarry[i]);
-                    $scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
-                    $scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
-                    $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
-                }
-
-            };
-            var a = Math.round($scope.sinus * 100 / 9);
-            var b = Math.round($scope.migrane * 100 / 8);
-            var c = Math.round($scope.cluster * 100 / 9);
-
-            $scope.remedy = [];
-
-            if (a > b) {
-                if (a > c) {
-                    $scope.headache = 'Sinus';
-                } else {
-                    $scope.headache = 'Cluster';
-                }
-            } else if (b > a) {
-                if (b > c) {
-                    $scope.headache = 'Migraine';
-                } else {
-                    $scope.headache = 'Cluster';
-                }
-            } else {
-                $scope.headche = 'Sinus';
-            };
-
-            $scope.medicine = function () {
-
-                db.transaction(function (tx) {
-                    tx.executeSql("SELECT * FROM `MEDICINES` WHERE `headache`='" + $scope.headache + "' ", [], function (tx, results) {
-                        if ($scope.remedy.length <= results.rows.length) {
-                            for (var p = 0; p < results.rows.length; p++) {
-                                $scope.remedy.push(results.rows.item(p));
-                            }
-
-                        }
-
-                    }, null);
-                });
-                console.log($scope.remedy);
-            };
-            db.transaction(function (tx) {
-                tx.executeSql("INSERT INTO reports(userid ,username ,headache) VALUES('" + $scope.reportinfo.id + "','" + $scope.reportinfo.username + "','" + $scope.headache + "')", [], function (tx, results) {
-                    console.log("Added");
-                    console.log(results.insertId);
-                    reportinsertid = results.insertId;
-                }, null);
-            })
-
-            var givevalue = function () {
-                console.log(reportinfo1);
-                console.log(i);
-                $scope.sinus = a;
-                $scope.migrane = b;
-                $scope.cluster = c;
-                $scope.value = '50%';
-            };
-            var giveval = $interval(givevalue, 1000, 1);
-
-            console.log("report page");
-            console.log(userinfo);
-            console.log(answersetcarry);
+        } else if (i < 13) {
+            $scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
+        } else if (i < 20) {
+            $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
+        } else {
+            //$scope.common = $scope.common + parseFloat(answersetcarry[i]);
+            $scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
+            $scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
+            $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
         };
 
-    })
-    .controller('appointmentCtrl', function ($scope, $ionicPopup, $location) {
-        clearques;
-        if ($.jStorage.get("user") == null) {
-            $location.path("/app/login");
+    };
+
+    console.log($scope.sinus);
+    console.log($scope.migrane);
+    console.log($scope.cluster);
+
+    //CALCULATING HEAD ACHE PERCENTAGE
+    var a = Math.round($scope.sinus * 100 / 9);
+    var b = Math.round($scope.migrane * 100 / 8);
+    var c = Math.round($scope.cluster * 100 / 9);
+
+    //INITIALIZE REMEDY ARRAY
+    $scope.remedy = [];
+
+    //DETECT GREATEST HEAD ACHE
+    if (a > b) {
+        if (a > c) {
+            $scope.headache = 'Sinus';
         } else {
-            db.transaction(function (tx) {
-                tx.executeSql("SELECT * FROM appointments", [], function (tx, results) {
+            $scope.headache = 'Cluster';
+        };
+    } else if (b > a) {
+        if (b > c) {
+            $scope.headache = 'Migraine';
+        } else {
+            $scope.headache = 'Cluster';
+        };
+    } else {
+        $scope.headche = 'Sinus';
+    };
 
-                    for (var j = 0; j < results.rows.length; j++) {
-                        // if($scope.appvalues.indexOf[results.rows.item(j).app_id]>-1){
-                        $scope.appvalues.push(results.rows.item(j).app_id);
-                        //console.log($scope.appvalues);
-                        // }
+    //INSERT INTO REPORT THE HEADACHE
+    db.transaction(function (tx) {
+        tx.executeSql("INSERT INTO reports(userid ,username ,headache) VALUES('" + $scope.user.id + "','" + $scope.user.username + "','" + $scope.headache + "')", [], function (tx, results) {
+            console.log("Added");
+            console.log(results.insertId);
+            reportinsertid = results.insertId;
+        }, null);
+    })
 
-                        // console.log("hey");
-                    };
-                }, null);
-            });
-            //get all appvalues from database and store in array
-            var d = new Date();
-            $scope.w = d.getDay();
-            $scope.d = d.getDate();
-            console.log($scope.d);
-            $scope.m = d.getMonth();
-            $scope.y = d.getFullYear();
+    var givevalue = function () {
+        console.log(i);
+        $scope.sinus = a;
+        $scope.migrane = b;
+        $scope.cluster = c;
+        $scope.value = '50%';
+    };
+    var giveval = $interval(givevalue, 1000, 1);
 
-            //array of days
-            $scope.week = [];
-            $scope.date = [];
-            $scope.day = [];
-            $scope.month = [];
-            $scope.date[0] = d.getDate() + 1;
-            $scope.week[0] = d.getDay() + 1;
-            $scope.month[0] = d.getMonth();
-            $scope.modelvalues = [];
+    //GET REMEDY FUNTION
+    $scope.medicine = function () {
 
-
-
-            for (var i = 1; i < 7; i++) {
-                if ($scope.month[i] == 5) {
-                    if ($scope.$scope.date[i - 1] == 31) {
-                        $scope.date[i - 1] = 1;
-                        $scope.month[i - 1] = d.getMonth() + 1;
-
+        db.transaction(function (tx) {
+            tx.executeSql("SELECT * FROM `MEDICINES` WHERE `headache`='" + $scope.headache + "' ", [], function (tx, results) {
+                if ($scope.remedy.length <= results.rows.length) {
+                    for (var p = 0; p < results.rows.length; p++) {
+                        $scope.remedy.push(results.rows.item(p));
                     }
 
-                };
-                if ($scope.date[i - 1] == 32) {
-                    $scope.date[i - 1] = 1;
-                    $scope.month[i - 1] = d.getMonth() + 1;
-                    console.log($scope.month);
-                };
-                if ($scope.week[i - 1] == 7) {
-                    $scope.week[i - 1] = 0;
                 }
-                /* if($scope.week[i-1]==8){
-                    $scope.week[i-1]=1;
-                       console.log("hi");
-                 }
-                     if($scope.week[i-1]==7){
-                       
-                     $scope.date.splice(--i,1);
-                         console.log($scope.date);
-                         $scope.week.splice(--i,1);
-                     
-                    };*/
 
-                $scope.date[i] = $scope.date[i - 1] + 1;
-                $scope.week[i] = $scope.week[i - 1] + 1;
-                // $scope.week[i] = d.getDay() + k;
-                //$scope.date[i] = d.getDate() + k;
-                //console.log($scope.date);
-                $scope.month[i] = $scope.month[i - 1];
+            }, null);
+        });
+    };
 
-                $scope.modelvalues[i - 1] = $scope.date[i - 1].toString() + $scope.month[i - 1].toString() + $scope.y.toString() + '4';
-                $scope.modelvalues[i - 1] = parseInt($scope.modelvalues[i - 1]);
+})
+
+.controller('appointmentCtrl', function ($scope, $ionicPopup, $location) {
+
+    //CHECK IF YSER AVAILAB:E
+    if ($.jStorage.get("user") == null) {
+        $location.path("/app/login");
+    };
+
+    //TAKE USER DETAILS IN VAR
+    $scope.user = $.jStorage.get('user');
+
+    //BOOKED APPOINTMENT ARRAY
+    $scope.appvalues = [];
+
+    //FILL BOOKED APPOINTMENTS IN ARRAY
+    db.transaction(function (tx) {
+        tx.executeSql("SELECT * FROM appointments", [], function (tx, results) {
+            for (var j = 0; j < results.rows.length; j++) {
+                $scope.appvalues.push(results.rows.item(j).app_id);
             };
-            $scope.modelvalues[i - 1] = $scope.date[i - 1].toString() + $scope.month[i - 1].toString() + $scope.y.toString() + '4';
-            $scope.modelvalues[i - 1] = parseInt($scope.modelvalues[i - 1]);
-            console.log($scope.modelvalues);
-            console.log($scope.date);
-            console.log($scope.week);
+        }, null);
+    });
 
-            $scope.appvalues = [26420154, 26420156];
+    var d = new Date();
+    $scope.w = d.getDay();
+    $scope.d = d.getDate();
+    console.log($scope.d);
+    $scope.m = d.getMonth();
+    $scope.y = d.getFullYear();
 
-            $scope.setappointment = function (appvalue, i, mv, time) {
-                console.log(mv);
-                if ($scope.appvalues.indexOf(mv) <= -1) {
-                    //insert app value in database
-                    db.transaction(function (tx) {
-                        tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date,month,time) VALUES('" + mv + "','" + appvalue + "','" + userinfo.username + "','" + $scope.date[i] + "','" + $scope.month[i] + "','" + time + "')", [], function (tx, results) {
-                            console.log("added");
-                            console.log(results.insertId);
-                            $scope.updateid(results.insertId);
-                        }, null);
+    //array of days
+    $scope.week = [];
+    $scope.date = [];
+    $scope.day = [];
+    $scope.month = [];
+    $scope.date[0] = d.getDate() + 1;
+    $scope.week[0] = d.getDay() + 1;
+    $scope.month[0] = d.getMonth();
+    $scope.modelvalues = [];
 
-                    })
+    //CREATE ARRAY OF DATE AND STUFF TO SHOW
+    for (var i = 1; i < 7; i++) {
+        if ($scope.month[i] == 5) {
+            if ($scope.$scope.date[i - 1] == 31) {
+                $scope.date[i - 1] = 1;
+                $scope.month[i - 1] = d.getMonth() + 1;
 
-                    $scope.appvalues.push(mv);
-
-                    //console.log($scope.appvalues.indexOf(mv));
-                    //add into appvaue array to change color in design
-                } else {
-                    $scope.changepopup("The appointment is already booked !<br>Take another appointment.");
-                }
             };
-            $scope.updateid = function (appointmentinsertid) {
-                db.transaction(function (tx) {
-                    tx.executeSql("UPDATE `reports` SET `appointment_id`=" + appointmentinsertid + " WHERE `rowid`='" + reportinsertid + "'", [], function (tx, results) {
-                        console.log("updated");
+        };
+        if ($scope.date[i - 1] == 32) {
+            $scope.date[i - 1] = 1;
+            $scope.month[i - 1] = d.getMonth() + 1;
+            console.log($scope.month);
+        };
+        if ($scope.week[i - 1] == 7) {
+            $scope.week[i - 1] = 0;
+        };
+
+        $scope.date[i] = $scope.date[i - 1] + 1;
+        $scope.week[i] = $scope.week[i - 1] + 1;
+        $scope.month[i] = $scope.month[i - 1];
+
+        $scope.modelvalues[i - 1] = $scope.date[i - 1].toString() + $scope.month[i - 1].toString() + $scope.y.toString() + '4';
+        $scope.modelvalues[i - 1] = parseInt($scope.modelvalues[i - 1]);
+    };
+    $scope.modelvalues[i - 1] = $scope.date[i - 1].toString() + $scope.month[i - 1].toString() + $scope.y.toString() + '4';
+    $scope.modelvalues[i - 1] = parseInt($scope.modelvalues[i - 1]);
+
+    //FUNCTION TO UPDATE REPORT TABLEW WITH APPOINTMENT ID
+    $scope.updateid = function (appointmentinsertid) {
+        db.transaction(function (tx) {
+            tx.executeSql("UPDATE `reports` SET `appointment_id`=" + appointmentinsertid + " WHERE `rowid`='" + reportinsertid + "'", [], function (tx, results) {
+                console.log("updated");
+            }, null);
+        });
+
+    };
+
+    //BOOKING AN APPOINTMENT FUNCTION
+    $scope.setappointment = function (appvalue, i, mv, time) {
+        if ($scope.appvalues.indexOf(mv) <= -1) {
+            //insert app value in database
+            db.transaction(function (tx) {
+                    tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date,month,time) VALUES('" + mv + "','" + appvalue + "','" + user.username + "','" + $scope.date[i] + "','" + $scope.month[i] + "','" + time + "')", [], function (tx, results) {
+                        console.log("added with ID");
+                        console.log(results.insertId);
+                        $scope.updateid(results.insertId);
                     }, null);
-                });
 
-            };
-            $scope.changepopup = function (msg) {
-                var p = $ionicPopup.show({
-                    template: '<div style="text-align:center">' + msg + '</div>',
-                    buttons: [
+                })
+                //ADDING INTO BOOKED ARRAY TO CHANGE COLOR
+                $scope.appvalues.push(mv);
+        } else {
+            $scope.changepopup("The appointment is already booked !<br>Take another appointment.");
+        };
+    };
 
-                        {
-                            text: '<b>Ok</b>',
-                            type: 'button-positive',
-                            //   onTap: function () {
-                            //  $location.path("/app/questions");
-                            //  }
+
+    $scope.changepopup = function (msg) {
+        var p = $ionicPopup.show({
+            template: '<div style="text-align:center">' + msg + '</div>',
+            buttons: [
+
+                {
+                    text: '<b>Ok</b>',
+                    type: 'button-positive',
                     }
     ]
-                });
+        });
 
-            };
-            //insert app value in database
-            console.log("appvalues");
-            //add into appvaue array to change color in design
-        };
-    })
+    };
+})
