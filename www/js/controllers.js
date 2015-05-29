@@ -2,6 +2,7 @@ var answersetcarry = [];
 var queset = [];
 var userinfo = {};
 var clearques = true;
+ var reportinsertid; 
 var cont = angular.module('controllers', [])
 
 
@@ -76,20 +77,38 @@ var cont = angular.module('controllers', [])
     })
 
 .controller('termsCtrl', function ($scope) {
-    clearques;
+
 })
+    .controller('homeCtrl', function ($scope) {
+    
+    })
 
 .controller('loginCtrl', function ($scope, $location) {
     clearques;
     $scope.logindata = {};
 
+    user = $.jStorage.get("user");
+    if (user != null) {
+        $location.path('app/home');
+    };
+
+
+    /*//login
+    SELECT *.....$anchorScroll
+    $.jStorage.set('user', result {name, age....})
+    
+    //logout
+    $.jStorage.set('user', null)*/
+
+
     $scope.logindata.username = "";
     $scope.logindata.password = "";
     //REDIRECT USER FUNCTION
     var loginsuccess = function (pass) {
-        if ($scope.logindata.password == pass) {
-            $.jStorage.set("logindata", $scope.logindata);
-            $.jStorage.get("logindata", $scope.logindata);
+        if ($scope.logindata.password == pass.password) {
+            /*$.jStorage.set("logindata", $scope.logindata);
+            var a = $.jStorage.get("logindata");*/
+            $.jStorage.set("user",pass);
             $location.path('/app/questions');
             $scope.$apply();
         } else {
@@ -110,7 +129,7 @@ var cont = angular.module('controllers', [])
                     /*  if($scope.logindata.password.length<=0){
 					$scope.forget = results.rows.item(0).question;
                     }*/
-                    loginsuccess(results.rows.item(0).password);
+                    loginsuccess(results.rows.item(0));
                 } else {
                     $scope.logindata.username = "";
                     $scope.error = "User does not exist!";
@@ -169,7 +188,7 @@ var cont = angular.module('controllers', [])
     };
 })
 
-.controller('signupCtrl', function ($scope, $http, $location) {
+.controller('signupCtrl', function ($scope,  $location) {
     clearques = '';
     $scope.user = {};
     $scope.que = [];
@@ -282,7 +301,7 @@ var cont = angular.module('controllers', [])
         if (clearques == true) {
             $scope.answerset = [];
         };
-        
+
         clearques = true;
 
 
@@ -350,7 +369,7 @@ var cont = angular.module('controllers', [])
     //$scope.answerset = [];
     console.log(queset);
     $scope.submit = function () {
-        
+
         if ($scope.answers.length == 22) {
             clearques = true;
             $location.path("/app/report");
@@ -362,7 +381,7 @@ var cont = angular.module('controllers', [])
 })
 
 .controller('reportCtrl', function ($scope, $interval) {
-        clearques;
+       
         $scope.value = '0%';
         $scope.sinus = 0;
         console.log($scope.sinus);
@@ -427,7 +446,8 @@ var cont = angular.module('controllers', [])
         db.transaction(function (tx) {
             tx.executeSql("INSERT INTO reports(userid ,username ,headache) VALUES('" + $scope.reportinfo.id + "','" + $scope.reportinfo.username + "','" + $scope.headache + "')", [], function (tx, results) {
                 console.log("Added");
-                $.jStorage.set("reports", $scope.reportinfo);
+                console.log(results.insertId);
+                reportinsertid=results.insertId;
             }, null);
         })
 
@@ -527,15 +547,17 @@ var cont = angular.module('controllers', [])
 
         $scope.appvalues = [26420154, 26420156];
 
-        $scope.setappointment = function (appvalue, i, mv) {
+        $scope.setappointment = function (appvalue, i, mv,time) {
             console.log(mv);
             if ($scope.appvalues.indexOf(mv) <= -1) {
                 //insert app value in database
                 db.transaction(function (tx) {
-                    tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date) VALUES('" + mv + "','" + appvalue + "','" + userinfo.username + "','" + $scope.date[i] + "')", [], function (tx, results) {
+                    tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date,month,time) VALUES('" + mv + "','" + appvalue + "','" + userinfo.username + "','" + $scope.date[i] + "','"+$scope.month[i]+"','"+time+"')", [], function (tx, results) {
                         console.log("added");
-
+console.log(results.insertId);
+                        $scope.updateid(results.insertId);
                     }, null);
+                    
                 })
 
                 $scope.appvalues.push(mv);
@@ -545,6 +567,14 @@ var cont = angular.module('controllers', [])
             } else {
                 $scope.changepopup("The appointment is already booked !<br>Take another appointment.");
             }
+        };
+        $scope.updateid=function(appointmentinsertid){
+        db.transaction(function(tx){
+        tx.executeSql("UPDATE `reports` SET `appointment_id`="+appointmentinsertid+" WHERE `rowid`='"+reportinsertid+"'",[],function(tx,results){
+            console.log("updated");
+                     } ,null);
+        });
+        
         };
         $scope.changepopup = function (msg) {
             var p = $ionicPopup.show({

@@ -16,9 +16,9 @@
         {{w.toString() + d.toString() + m.toString() + y.toString() + '4'}}
         <div ng-repeat="mv in modelvalues">
             {{mv}}<br>
-            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv) > -1 }" ng-click="setappointment('26420154',$index,mv)">4:00 pm-5:00 pm</div><!--{{appvalues.indexOf(mv)}}--><br>
-            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 1) > -1 }" ng-click="setappointment('26420155',$index,mv+1)">5:00 pm-6:00 pm</div><!--{{appvalues.indexOf(mv + 1)}}--><br>
-            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 2) > -1 }" ng-click="setappointment('26420156',$index,mv+2)">6:00 pm-7:00 pm</div><br>
+            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv) > -1 }" ng-click="setappointment('26420154',$index,mv,4)">4:00 pm-5:00 pm</div><!--{{appvalues.indexOf(mv)}}--><br>
+            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 1) > -1 }" ng-click="setappointment('26420155',$index,mv+1,5)">5:00 pm-6:00 pm</div><!--{{appvalues.indexOf(mv + 1)}}--><br>
+            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 2) > -1 }" ng-click="setappointment('26420156',$index,mv+2,6)">6:00 pm-7:00 pm</div><br>
             
         </div>
             
