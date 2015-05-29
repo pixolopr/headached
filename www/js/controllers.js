@@ -1,8 +1,8 @@
 var answersetcarry = [];
 var queset = [];
 var userinfo = {};
+var clearques = true;
 var cont = angular.module('controllers', [])
-
 
 
 .factory('MyDatabase', function ($location) {
@@ -76,10 +76,11 @@ var cont = angular.module('controllers', [])
     })
 
 .controller('termsCtrl', function ($scope) {
-
+    clearques;
 })
 
 .controller('loginCtrl', function ($scope, $location) {
+    clearques;
     $scope.logindata = {};
 
     $scope.logindata.username = "";
@@ -122,77 +123,54 @@ var cont = angular.module('controllers', [])
 
     //FORGOT PASSWORD FUNCTION
     $scope.forgetpassword = function (x) {
-            $scope.userenter = 0;
-            console.log($scope.userenter);
-            if ($scope.logindata.username) {
-                db.transaction(function (tx) {
-                    tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
-                        console.log(results.rows);
-                        if (results.rows.length > 0) {
-                            console.log(results.rows.item(0));
+        $scope.userenter = 0;
+        console.log($scope.userenter);
+        if ($scope.logindata.username) {
+            db.transaction(function (tx) {
+                tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
+                    console.log(results.rows);
+                    if (results.rows.length > 0) {
+                        console.log(results.rows.item(0));
 
-                            $scope.forget = results.rows.item(0).question;
-                        } else {
-                            $scope.error = "User does not exists !";
-                            $scope.userenter = 1;
-                        }
-                    }, null)
-                });
-            }
-
-            /*db.transaction(function (tx) {
-				tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
-					console.log(results.rows);
-					if (results.rows.length > 0) {
-						console.log(results.rows.item(0));
-						$scope.forget = results.rows.item(0).question;
-					};
-				});
-			})*/
-            /* else{
-             $scope.userenter=1;
-                 console.log($scope.userenter);
-             }*/
+                        $scope.forget = results.rows.item(0).question;
+                    } else {
+                        $scope.error = "User does not exists !";
+                        $scope.userenter = 1;
+                    }
+                }, null)
+            });
         }
-        /*$scope.forget = {};
-$scope.forget.user = "";*/
-        /*$scope.check = function () {*/
-        /*db.transaction(function (tx) {
-	tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
-		if (results.rows.item(0).answer == $scope.forget.user) {
-			$location.path('/app/questions');
-		}
-	});
-})*/
-        //};
 
-    $scope.passwordval = '';
-    db.transaction(function (tx) {
-        tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
-            if (results.rows.length > 0) {
-                $scope.passwordval = results.rows.item(0).password;
-                $scope.answerval = results.rows.item(0).answer;
-            }
 
-        }, null);
-    });
+        $scope.passwordval = '';
+        db.transaction(function (tx) {
+            tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
+                if (results.rows.length > 0) {
+                    $scope.passwordval = results.rows.item(0).password;
+                    $scope.answerval = results.rows.item(0).answer;
+                }
 
-    $scope.answer = {};
-    $scope.answer.user = "";
-    $scope.check = function () {
-        //$scope.answer.user = "";
-        console.log($scope.answer);
-        if ($scope.answer.user == $scope.answerval) {
-            $scope.password = $scope.passwordval;
-        } else {
-            $scope.password = '';
+            }, null);
+        });
+
+        $scope.answer = {};
+        $scope.answer.user = "";
+        $scope.check = function () {
+            //$scope.answer.user = "";
+            console.log($scope.answer);
+            if ($scope.answer.user == $scope.answerval) {
+                $scope.password = $scope.passwordval;
+            } else {
+                $scope.password = '';
+            };
+
+
         };
-
-
     };
 })
 
 .controller('signupCtrl', function ($scope, $http, $location) {
+    clearques = '';
     $scope.user = {};
     $scope.que = [];
     db.transaction(function (tx) {
@@ -283,87 +261,108 @@ $scope.forget.user = "";*/
 })
 
 .controller('questionsCtrl', function ($scope, MyDatabase, $location, $ionicPopup) {
+    console.log(clearques);
+
     $scope.$on('$ionicView.enter', function () {
-         $scope.quesctrl();
+
+        $scope.questionctrl();
         console.log("quesCtrl");
-        
-});
-    $scope.quesctrl=function(){
-    $scope.que = {};
-    console.log($scope.que);
 
-    $scope.click = function (i) {
-        console.log(i);
-        console.log($scope.que.que);
-    };
-   $scope.question = [];
-    $scope.answerset = [];
-
-    console.log($scope.answerset);
-    db.transaction(function (tx) {
-        //
-        tx.executeSql("SELECT * FROM `QUESTIONS`", [], function (tx, results) {
-            console.log("hi");
-            for (var i = 0; i < 22; i++) {
-                $scope.question.push(results.rows.item(i));
-                $scope.$apply();
-                //	console.log(results.rows);
-            }
-            queset = $scope.question;
-            console.log(queset);
-            console.log($scope.question);
-        }, null);
 
     });
 
-    $scope.showreport = function () {
-        if ($scope.answerset.length == 22) {
-            console.log($location.path());
-            $location.path("/app/answers");
-        } else {
-            $scope.showpopup("Fill all answers !");
-            //ERROR MESSAGE TO FILL ALL QUESTONS
-            //alert("All questions are Compulsory...!");
+
+    $scope.questionctrl = function () {
+        $scope.que = {};
+        console.log($scope.que);
+
+
+        console.log(clearques);
+        $scope.question = [];
+        if (clearques == true) {
+            $scope.answerset = [];
         };
+        
+        clearques = true;
+
 
         console.log($scope.answerset);
+        db.transaction(function (tx) {
+            //
+            tx.executeSql("SELECT * FROM `QUESTIONS`", [], function (tx, results) {
+                console.log("hi");
+                for (var i = 0; i < 22; i++) {
+                    $scope.question.push(results.rows.item(i));
+                    $scope.$apply();
+                    //	console.log(results.rows);
+                }
+                queset = $scope.question;
+                console.log(queset);
+                console.log($scope.question);
+            }, null);
 
-        answersetcarry = $scope.answerset;
-    };
-    $scope.showpopup = function (msg) {
-        var mypopup = $ionicPopup.show({
-            template: '<div style="text-align:center">' + msg + '</div>',
-            buttons: [
-
-                {
-                    text: '<b>Ok</b>',
-                    type: 'button-positive',
-                    //   onTap: function () {
-                    //  $location.path("/app/questions");
-                    //  }
-      }
-    ]
         });
 
+        $scope.showreport = function () {
+            if ($scope.answerset.length == 22) {
+                console.log($location.path());
+                $location.path("/app/answers");
+            } else {
+                $scope.showpopup("Fill all answers !");
+                //ERROR MESSAGE TO FILL ALL QUESTONS
+                //alert("All questions are Compulsory...!");
+            };
+
+            console.log($scope.answerset);
+
+            answersetcarry = $scope.answerset;
+        };
+        $scope.showpopup = function (msg) {
+            var mypopup = $ionicPopup.show({
+                template: '<div style="text-align:center">' + msg + '</div>',
+                buttons: [
+
+                    {
+                        text: '<b>Ok</b>',
+                        type: 'button-positive',
+                        //   onTap: function () {
+                        //  $location.path("/app/questions");
+                        //  }
+      }
+    ]
+            });
+
+        }
     }
-}
 })
 
 
 
 
-.controller('answersCtrl', function ($scope) {
+.controller('answersCtrl', function ($scope, $location) {
     console.log("report page");
     //console.log(answersetreport);
     //$scope.question = [];
     //$scope.answerset = [];
+    clearques = false;
     $scope.answers = answersetcarry;
     $scope.questionset = queset;
     //$scope.answerset = [];
     console.log(queset);
+    $scope.submit = function () {
+        
+        if ($scope.answers.length == 22) {
+            clearques = true;
+            $location.path("/app/report");
+        } else {
+            clearques = false;
+            $location.path("/app/questions");
+        };
+    }
 })
 
 .controller('reportCtrl', function ($scope, $interval) {
+        clearques;
         $scope.value = '0%';
         $scope.sinus = 0;
         console.log($scope.sinus);
@@ -447,6 +446,7 @@ $scope.forget.user = "";*/
 
     })
     .controller('appointmentCtrl', function ($scope, $ionicPopup) {
+        clearques;
         db.transaction(function (tx) {
             tx.executeSql("SELECT * FROM appointments", [], function (tx, results) {
 
