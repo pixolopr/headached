@@ -12,6 +12,7 @@ db.transaction(function (tx) {
 
 db.transaction(function (tx) {
    tx.executeSql('CREATE TABLE IF NOT EXISTS MEDICINES ( id Integer PRIMARY KEY,headache varchar , method varchar, mediname varchar )');
+    //tx.executeSql('DROP TABLE MEDICINES');
     db.transaction(function (tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS  QUESTIONS ( quesid Integer, question varchar,answer1 varchar)');
      //    tx.executeSql('DROP TABLE  MEDICINES ');
@@ -158,6 +159,9 @@ db.transaction(function (tx) {
 
 db.transaction(function (tx) {
     tx.executeSql('INSERT INTO QUESTIONS VALUES (22,"Do you suffer from irritability?","Yes")')
+});
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO QUESTIONS VALUES (23,"new question?","Yes")')
 });
 
 db.transaction(function (tx) {
