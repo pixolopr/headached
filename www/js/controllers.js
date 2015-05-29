@@ -3,7 +3,7 @@ var queset = [];
 var userinfo = {};
 var clearques = true;
 var reportinsertid;
-
+var jstoragevalue={};
 var cont = angular.module('controllers', [])
 
 
@@ -46,7 +46,7 @@ var cont = angular.module('controllers', [])
                 } else {
                     //for existing contact, find this contact using id
                     //and update it.
-                    for (i in users) {
+                  +  for (i in users) {
                         if (users[i].id == user.id) {
                             users[i] = user;
                         }
@@ -417,6 +417,14 @@ var cont = angular.module('controllers', [])
 })
 
 .controller('reportCtrl', function ($scope, $interval,$location) {
+   /*  $scope.$on('$ionicView.enter', function () {
+
+        $scope.reportctrl();
+        console.log("quesCtrl");
+
+
+    });
+    */
         if ($.jStorage.get("user") == null) {
             $location.path("/app/login");
         } else {
@@ -425,8 +433,10 @@ var cont = angular.module('controllers', [])
             console.log($scope.sinus);
             $scope.migrane = 0;
             $scope.cluster = 0;
-            $scope.reportinfo = userinfo;
-            $scope.reportinfo.headache = $scope.headache;
+           // $scope.reportinfo = userinfo;
+            $scope.reportinfo=$.jStorage.get("user");
+            jStoragevalue=$scope.reportinfo;
+            //$scope.reportinfo.headache = $scope.headache;
             console.log($scope.reportinfo);
 
             for (var i = 0; i < answersetcarry.length; i++) {
@@ -468,6 +478,7 @@ var cont = angular.module('controllers', [])
             };
 
             $scope.medicine = function () {
+                
                 db.transaction(function (tx) {
                     tx.executeSql("SELECT * FROM `MEDICINES` WHERE `headache`='" + $scope.headache + "' ", [], function (tx, results) {
                         if ($scope.remedy.length <= results.rows.length) {
@@ -490,6 +501,7 @@ var cont = angular.module('controllers', [])
             })
 
             var givevalue = function () {
+                 console.log(reportinfo1);
                 console.log(i);
                 $scope.sinus = a;
                 $scope.migrane = b;
@@ -502,7 +514,7 @@ var cont = angular.module('controllers', [])
             console.log(userinfo);
             console.log(answersetcarry);
         };
-
+  
     })
     .controller('appointmentCtrl', function ($scope, $ionicPopup,$location) {
         clearques;
