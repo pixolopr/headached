@@ -33,7 +33,17 @@ var myapp = angular.module('starter', ['ionic', 'controllers', 'database'])
             url: "/terms",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/terms.html"
+                    templateUrl: "templates/terms.html",
+                    controller: 'termsCtrl'
+                }
+            }
+        })
+        .state('app.home', {
+            url: "/home",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/home.html",
+                    controller: 'homeCtrl'
                 }
             }
         })
@@ -96,29 +106,29 @@ var myapp = angular.module('starter', ['ionic', 'controllers', 'database'])
     $urlRouterProvider.otherwise('/app/login');
 });
 
-myapp.filter('daystring', function() {
-    return function(input) {
+myapp.filter('daystring', function () {
+    return function (input) {
         var week = [];
-        week[0]="Sunday";
-        week[1]="Monday";
-        week[2]="Tuesday";
-        week[3]="Wednesday";
-        week[4]="Thursday";
-        week[5]="Friday";
-        week[6]="Saturday";
+        week[0] = "Sunday";
+        week[1] = "Monday";
+        week[2] = "Tuesday";
+        week[3] = "Wednesday";
+        week[4] = "Thursday";
+        week[5] = "Friday";
+        week[6] = "Saturday";
         return week[input];
     };
 });
-myapp.filter('monthstring', function() {
-    return function(input) {
+myapp.filter('monthstring', function () {
+    return function (input) {
         var month = [];
-        month[0]="Jan";
-        month[1]="Feb";
-        month[2]="Mar";
-        month[3]="Apr";
-        month[4]="May";
-        month[5]="Jun";
-        month[6]="Jul";
+        month[0] = "Jan";
+        month[1] = "Feb";
+        month[2] = "Mar";
+        month[3] = "Apr";
+        month[4] = "May";
+        month[5] = "Jun";
+        month[6] = "Jul";
         return month[input];
     };
 });
