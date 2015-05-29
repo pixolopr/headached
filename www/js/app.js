@@ -101,6 +101,15 @@ var myapp = angular.module('starter', ['ionic', 'controllers', 'database'])
                     controller: 'appointmentCtrl'
                 }
             }
+        })
+        .state('app.history', {
+            url: "/history",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/history.html",
+                    controller: 'historyCtrl'
+                }
+            }
         });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');

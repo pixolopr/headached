@@ -2,7 +2,7 @@ var answersetcarry = [];
 var queset = [];
 var userinfo = {};
 var clearques = true;
- var reportinsertid; 
+var reportinsertid;
 var cont = angular.module('controllers', [])
 
 
@@ -78,9 +78,12 @@ var cont = angular.module('controllers', [])
 
 .controller('termsCtrl', function ($scope) {
 
-})
+    })
     .controller('homeCtrl', function ($scope) {
-    
+
+    })
+    .controller('historyCtrl', function ($scope) {
+
     })
 
 .controller('loginCtrl', function ($scope, $location) {
@@ -108,7 +111,7 @@ var cont = angular.module('controllers', [])
         if ($scope.logindata.password == pass.password) {
             /*$.jStorage.set("logindata", $scope.logindata);
             var a = $.jStorage.get("logindata");*/
-            $.jStorage.set("user",pass);
+            $.jStorage.set("user", pass);
             $location.path('/app/questions');
             $scope.$apply();
         } else {
@@ -188,7 +191,7 @@ var cont = angular.module('controllers', [])
     };
 })
 
-.controller('signupCtrl', function ($scope,  $location) {
+.controller('signupCtrl', function ($scope, $location) {
     clearques = '';
     $scope.user = {};
     $scope.que = [];
@@ -381,7 +384,7 @@ var cont = angular.module('controllers', [])
 })
 
 .controller('reportCtrl', function ($scope, $interval) {
-       
+
         $scope.value = '0%';
         $scope.sinus = 0;
         console.log($scope.sinus);
@@ -447,7 +450,7 @@ var cont = angular.module('controllers', [])
             tx.executeSql("INSERT INTO reports(userid ,username ,headache) VALUES('" + $scope.reportinfo.id + "','" + $scope.reportinfo.username + "','" + $scope.headache + "')", [], function (tx, results) {
                 console.log("Added");
                 console.log(results.insertId);
-                reportinsertid=results.insertId;
+                reportinsertid = results.insertId;
             }, null);
         })
 
@@ -547,17 +550,17 @@ var cont = angular.module('controllers', [])
 
         $scope.appvalues = [26420154, 26420156];
 
-        $scope.setappointment = function (appvalue, i, mv,time) {
+        $scope.setappointment = function (appvalue, i, mv, time) {
             console.log(mv);
             if ($scope.appvalues.indexOf(mv) <= -1) {
                 //insert app value in database
                 db.transaction(function (tx) {
-                    tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date,month,time) VALUES('" + mv + "','" + appvalue + "','" + userinfo.username + "','" + $scope.date[i] + "','"+$scope.month[i]+"','"+time+"')", [], function (tx, results) {
+                    tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date,month,time) VALUES('" + mv + "','" + appvalue + "','" + userinfo.username + "','" + $scope.date[i] + "','" + $scope.month[i] + "','" + time + "')", [], function (tx, results) {
                         console.log("added");
-console.log(results.insertId);
+                        console.log(results.insertId);
                         $scope.updateid(results.insertId);
                     }, null);
-                    
+
                 })
 
                 $scope.appvalues.push(mv);
@@ -568,13 +571,13 @@ console.log(results.insertId);
                 $scope.changepopup("The appointment is already booked !<br>Take another appointment.");
             }
         };
-        $scope.updateid=function(appointmentinsertid){
-        db.transaction(function(tx){
-        tx.executeSql("UPDATE `reports` SET `appointment_id`="+appointmentinsertid+" WHERE `rowid`='"+reportinsertid+"'",[],function(tx,results){
-            console.log("updated");
-                     } ,null);
-        });
-        
+        $scope.updateid = function (appointmentinsertid) {
+            db.transaction(function (tx) {
+                tx.executeSql("UPDATE `reports` SET `appointment_id`=" + appointmentinsertid + " WHERE `rowid`='" + reportinsertid + "'", [], function (tx, results) {
+                    console.log("updated");
+                }, null);
+            });
+
         };
         $scope.changepopup = function (msg) {
             var p = $ionicPopup.show({
