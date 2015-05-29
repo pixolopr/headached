@@ -1,6 +1,6 @@
 <ion-view view-title="Patient History">
   <ion-content>
     <h1>My History</h1>
-      <ion-list ng-repeat="x in patienthistory"><div>{{x.headache}}</div><div>{{x.time}}pm({{x.date}}/{{x.month}})</div></ion-list>
+      <ion-list ng-repeat="x in patienthistory">{{x.headache}} {{x.time}}pm({{x.date}}/{{x.month}})</ion-list>
   </ion-content>
 </ion-view>
