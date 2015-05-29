@@ -24,7 +24,7 @@ db.transaction(function (tx) {
     
     db.transaction(function (tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username varchar , password varchar, gender varchar, email varchar, contact varchar,answer varchar,question varchar,age Integer )');
-        //tx.executeSql('DROP TABLE  USERS ');
+      // tx.executeSql('DROP TABLE  reports ');
     });
 });
 db.transaction(function (tx) {

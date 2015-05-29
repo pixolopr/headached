@@ -3,7 +3,7 @@ var queset = [];
 var userinfo = {};
 var clearques = true;
 var reportinsertid;
-var jstoragevalue={};
+var jstoragevalue = {};
 var cont = angular.module('controllers', [])
 
 
@@ -88,8 +88,21 @@ var cont = angular.module('controllers', [])
             $location.path("/app/login");
         };
     })
-    .controller('historyCtrl', function ($scope) {
+    .controller('historyCtrl', function ($scope, $location) {
+        if ($.jStorage.get("user") == null) {
+            $location.path("/app/login");
+        } else {
+            $scope.patienthistory = [];
+            db.transaction(function (tx) {
+                tx.executeSql("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports`,`appointments` WHERE `reports`.`appointment_id`=`appointments`.`app_id` AND `reports`.`userid`='" + $.jStorage.get("user").id + "' ", [], function (tx, results) {
+                    for (var s = 0; s < results.rows.length; s++) {
+                        $scope.patienthistory.push(results.rows.item(s));
+                        console.log("created");
 
+                    };console.log($scope.patienthistory);
+                }, null);
+            });
+        };
     })
 
 
@@ -215,95 +228,95 @@ var cont = angular.module('controllers', [])
 
 
     });
-    $scope.signupctrl=function(){
-    clearques = '';
-    $scope.user = {};
-    $scope.que = [];
-    db.transaction(function (tx) {
-        tx.executeSql('select * from secret_question', [], function (tx, results) {
-            for (var j = 0; j <= 4; j++) {
-                $scope.que.push(results.rows.item(j));
+    $scope.signupctrl = function () {
+        clearques = '';
+        $scope.user = {};
+        $scope.que = [];
+        db.transaction(function (tx) {
+            tx.executeSql('select * from secret_question', [], function (tx, results) {
+                for (var j = 0; j <= 4; j++) {
+                    $scope.que.push(results.rows.item(j));
 
+                }
+                return $scope.que.queid;
+            }, null);
+        });
+        $scope.secret = {};
+        $scope.question = function (i) {
+            // $scope.secret.question=$scope.que.queid[i];
+
+            console.log("hi");
+            //  $scope.user=$scope.que[i];
+            //console.log($scope.secret.question);
+            console.log($scope.user);
+        }
+
+        $scope.change = function () {
+
+            console.log($scope.user);
+            $scope.namerequired = '';
+            $scope.genderrequired = '';
+            $scope.emailrequired = '';
+            $scope.passwordrequired = '';
+            $scope.contactrequired = '';
+
+            var signup = function () {
+                db.transaction(function (tx) {
+                    tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact,answer,question,age) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "','" + $scope.user.ans + "','" + $scope.user.que + "','" + $scope.user.age + "')", [], function (tx, results) {
+                        console.log("ADDED TO DAtABASE");
+                        $location.path('/app/login');
+
+                        $scope.$apply();
+                    }, null);
+                });
+
+            };
+
+            if (!$scope.user.name) {
+                $scope.namerequired = 'Name Required !';
+            };
+            if (!$scope.user.gender) {
+                $scope.genderrequired = 'Gender Required !';
+            };
+            if (!$scope.user.email) {
+                $scope.emailrequired = 'Email Required !';
+            };
+            if (!$scope.user.password) {
+                $scope.passwordrequired = 'Password Required !';
+            };
+            if (!$scope.user.contact) {
+                $scope.contactrequired = 'Contact Required !';
             }
-            return $scope.que.queid;
-        }, null);
-    });
-    $scope.secret = {};
-    $scope.question = function (i) {
-        // $scope.secret.question=$scope.que.queid[i];
+            if (!$scope.user.que) {
+                $scope.querequired = 'Question Required !';
+            }
+            if (!$scope.user.ans) {
+                $scope.ansrequired = 'Answer Required !';
+            } else {
 
-        console.log("hi");
-        //  $scope.user=$scope.que[i];
-        //console.log($scope.secret.question);
-        console.log($scope.user);
-    }
+                //$.jStorage.set("users", $scope.user);
+                db.transaction(function (tx) {
+                    tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.name + "'", [], function (tx, results) {
+                        console.log(results.rows);
+                        if (results.rows.length > 0) {
+                            $scope.exist = "Username already exist !";
+                            console.log($scope.exist);
+                            $scope.user.name = "";
+                            //SHOW MESSAGE THAT USERNAME ALREADY EXIST
+                        } else {
+                            //NEW USER
+                            /*$jStorage.set("user", 9);*/
+                            $.jStorage.set("user", $scope.user);
 
-    $scope.change = function () {
+                            signup();
+                        };
+                    }, null);
 
-        console.log($scope.user);
-        $scope.namerequired = '';
-        $scope.genderrequired = '';
-        $scope.emailrequired = '';
-        $scope.passwordrequired = '';
-        $scope.contactrequired = '';
+                });
 
-        var signup = function () {
-            db.transaction(function (tx) {
-                tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact,answer,question,age) VALUES ('" + $scope.user.name + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "','" + $scope.user.ans + "','" + $scope.user.que + "','" + $scope.user.age + "')", [], function (tx, results) {
-                    console.log("ADDED TO DAtABASE");
-                    $location.path('/app/login');
 
-                    $scope.$apply();
-                }, null);
-            });
-
+            };
         };
-
-        if (!$scope.user.name) {
-            $scope.namerequired = 'Name Required !';
-        };
-        if (!$scope.user.gender) {
-            $scope.genderrequired = 'Gender Required !';
-        };
-        if (!$scope.user.email) {
-            $scope.emailrequired = 'Email Required !';
-        };
-        if (!$scope.user.password) {
-            $scope.passwordrequired = 'Password Required !';
-        };
-        if (!$scope.user.contact) {
-            $scope.contactrequired = 'Contact Required !';
-        }
-        if (!$scope.user.que) {
-            $scope.querequired = 'Question Required !';
-        }
-        if (!$scope.user.ans) {
-            $scope.ansrequired = 'Answer Required !';
-        } else {
-
-            //$.jStorage.set("users", $scope.user);
-            db.transaction(function (tx) {
-                tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.name + "'", [], function (tx, results) {
-                    console.log(results.rows);
-                    if (results.rows.length > 0) {
-                        $scope.exist = "Username already exist !";
-                        console.log($scope.exist);
-                        $scope.user.name = "";
-                        //SHOW MESSAGE THAT USERNAME ALREADY EXIST
-                    } else {
-                        //NEW USER
-                        /*$jStorage.set("user", 9);*/
-                        $.jStorage.set("user", $scope.user);
-
-                        signup();
-                    };
-                }, null);
-
-            });
-
-
-        };
-    };
     };
 })
 
@@ -416,15 +429,15 @@ var cont = angular.module('controllers', [])
     };
 })
 
-.controller('reportCtrl', function ($scope, $interval,$location) {
-   /*  $scope.$on('$ionicView.enter', function () {
+.controller('reportCtrl', function ($scope, $interval, $location) {
+        /*  $scope.$on('$ionicView.enter', function () {
 
-        $scope.reportctrl();
-        console.log("quesCtrl");
+             $scope.reportctrl();
+             console.log("quesCtrl");
 
 
-    });
-    */
+         });
+         */
         if ($.jStorage.get("user") == null) {
             $location.path("/app/login");
         } else {
@@ -433,9 +446,9 @@ var cont = angular.module('controllers', [])
             console.log($scope.sinus);
             $scope.migrane = 0;
             $scope.cluster = 0;
-           // $scope.reportinfo = userinfo;
-            $scope.reportinfo=$.jStorage.get("user");
-            jStoragevalue=$scope.reportinfo;
+            // $scope.reportinfo = userinfo;
+            $scope.reportinfo = $.jStorage.get("user");
+            jStoragevalue = $scope.reportinfo;
             //$scope.reportinfo.headache = $scope.headache;
             console.log($scope.reportinfo);
 
@@ -478,7 +491,7 @@ var cont = angular.module('controllers', [])
             };
 
             $scope.medicine = function () {
-                
+
                 db.transaction(function (tx) {
                     tx.executeSql("SELECT * FROM `MEDICINES` WHERE `headache`='" + $scope.headache + "' ", [], function (tx, results) {
                         if ($scope.remedy.length <= results.rows.length) {
@@ -501,7 +514,7 @@ var cont = angular.module('controllers', [])
             })
 
             var givevalue = function () {
-                 console.log(reportinfo1);
+                console.log(reportinfo1);
                 console.log(i);
                 $scope.sinus = a;
                 $scope.migrane = b;
@@ -514,9 +527,9 @@ var cont = angular.module('controllers', [])
             console.log(userinfo);
             console.log(answersetcarry);
         };
-  
+
     })
-    .controller('appointmentCtrl', function ($scope, $ionicPopup,$location) {
+    .controller('appointmentCtrl', function ($scope, $ionicPopup, $location) {
         clearques;
         if ($.jStorage.get("user") == null) {
             $location.path("/app/login");
