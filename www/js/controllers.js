@@ -602,7 +602,7 @@ var cont = angular.module('controllers', [])
     };
 
     //BOOKING AN APPOINTMENT FUNCTION
-    $scope.setappointment = function (appvalue, i, mv, time) {
+    $scope.setappointment = function (i, mv, time) {
         if ($scope.appvalues.indexOf(mv) <= -1) {
             //insert app value in database
             db.transaction(function (tx) {
