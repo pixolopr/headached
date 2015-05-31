@@ -606,7 +606,7 @@ var cont = angular.module('controllers', [])
         if ($scope.appvalues.indexOf(mv) <= -1) {
             //insert app value in database
             db.transaction(function (tx) {
-                    tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date,month,time) VALUES('" + mv + "','" + appvalue + "','" +$scope. user.username + "','" + $scope.date[i] + "','" + $scope.month[i] + "','" + time + "')", [], function (tx, results) {
+                    tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date,month,time) VALUES('" + mv + "','" + mv + "','" + $scope.user.username + "','" + $scope.date[i] + "','" + $scope.month[i] + "','" + time + "')", [], function (tx, results) {
                         console.log("added with ID");
                         console.log(results.insertId);
                         $scope.updateid(results.insertId);
@@ -614,7 +614,7 @@ var cont = angular.module('controllers', [])
 
                 })
                 //ADDING INTO BOOKED ARRAY TO CHANGE COLOR
-                $scope.appvalues.push(mv);
+            $scope.appvalues.push(mv);
         } else {
             $scope.changepopup("The appointment is already booked !<br>Take another appointment.");
         };
