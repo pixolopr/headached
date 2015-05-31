@@ -526,7 +526,7 @@ var cont = angular.module('controllers', [])
 
 .controller('appointmentCtrl', function ($scope, $ionicPopup, $location) {
 
-    //CHECK IF YSER AVAILAB:E
+    //CHECK IF USER AVAILAB:E
     if ($.jStorage.get("user") == null) {
         $location.path("/app/login");
     };
@@ -606,7 +606,7 @@ var cont = angular.module('controllers', [])
         if ($scope.appvalues.indexOf(mv) <= -1) {
             //insert app value in database
             db.transaction(function (tx) {
-                    tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date,month,time) VALUES('" + mv + "','" + appvalue + "','" + user.username + "','" + $scope.date[i] + "','" + $scope.month[i] + "','" + time + "')", [], function (tx, results) {
+                    tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date,month,time) VALUES('" + mv + "','" + appvalue + "','" +$scope. user.username + "','" + $scope.date[i] + "','" + $scope.month[i] + "','" + time + "')", [], function (tx, results) {
                         console.log("added with ID");
                         console.log(results.insertId);
                         $scope.updateid(results.insertId);

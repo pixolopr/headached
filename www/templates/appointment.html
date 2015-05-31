@@ -1,7 +1,30 @@
 <ion-view view-title="Appointment">
     <ion-content>
+<<<<<<< HEAD
         <div class="centertext">
             <h4>Take An Appointment</h4>
+=======
+        <h1>Appointment</h1>
+        <!--<div class="loader">
+
+			<div class="loaderfill" style="width:{{value}}">{{value}}</div>
+			<br>-->
+        <div>We recommend you Dr. Subhash P.Pawar. His clinic is open from 4pm-7pm on Mondays to Sundays </br> Call to take an appointment</br> for any cancellations please call 7679879878</div>
+        <h4>Address: vidya bhavan schoole se straight fir left, pan patti ke opposite, Ghatkopar (East)</h4>
+
+
+        <div ng-repeat="w in week">{{w | daystring}}</div>
+        <div ng-repeat="d in date"> {{d}}</div>
+        <!--<div ng-repeat="m in month"> {{m | monthstring}} </div>-->
+        <div>{{y}}</div>
+        {{w.toString() + d.toString() + m.toString() + y.toString() + '4'}}
+        <div ng-repeat="mv in modelvalues">
+            {{mv}}<br>
+            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv) > -1 }" ng-click="setappointment('26420154',$index,mv,4)">4:00 pm-5:00 pm</div><!--{{appvalues.indexOf(mv)}}--><br>
+            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 1) > -1 }" ng-click="setappointment('26420155',$index,mv+1,5)">5:00 pm-6:00 pm</div><!--{{appvalues.indexOf(mv + 1)}}--><br>
+            <div class="slot" ng-class="{bookedslot: appvalues.indexOf(mv + 2) > -1 }" ng-click="setappointment('26420156',$index,mv+2,6)">6:00 pm-7:00 pm</div><br>
+            
+>>>>>>> origin/master
         </div>
         <div class="lefttext">We recommend you Dr. Hamish D'Souza for the headache you are suffering from.
             <br> His clinic is open from 4pm-7pm from Monday to Saturday.
