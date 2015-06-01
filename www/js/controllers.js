@@ -430,94 +430,108 @@ var cont = angular.module('controllers', [])
         $scope.sinus = 0;
         $scope.migrane = 0;
         $scope.cluster = 0;
+
+        var getremedy = true;
+        
+        regularfunctions();
     });
+    var getremedy = true;
     $scope.remedy = [];
     $scope.sinus = 0;
     $scope.migrane = 0;
     $scope.cluster = 0;
     console.log(answersetcarry);
 
-    $scope.user = $.jStorage.get("user");
+    var regularfunctions = function () {
+        $scope.user = $.jStorage.get("user");
 
-    //ADDING ANSWER VALUES TO HEAD ACHE COUNTER
-    for (var i = 0; i < answersetcarry.length; i++) {
-        if (i < 7) {
-            $scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
-            console.log($scope.sinus);
-        } else if (i < 13) {
-            $scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
-        } else if (i < 20) {
-            $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
-        } else {
-            //$scope.common = $scope.common + parseFloat(answersetcarry[i]);
-            $scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
-            $scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
-            $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
+
+        //ADDING ANSWER VALUES TO HEAD ACHE COUNTER
+        for (var i = 0; i < answersetcarry.length; i++) {
+            if (i < 7) {
+                $scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
+                console.log($scope.sinus);
+            } else if (i < 13) {
+                $scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
+            } else if (i < 20) {
+                $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
+            } else {
+                //$scope.common = $scope.common + parseFloat(answersetcarry[i]);
+                $scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
+                $scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
+                $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
+            };
+
         };
+
+        console.log($scope.sinus);
+        console.log($scope.migrane);
+        console.log($scope.cluster);
+
+        //CALCULATING HEAD ACHE PERCENTAGE
+        var a = Math.round($scope.sinus * 100 / 9);
+        var b = Math.round($scope.migrane * 100 / 8);
+        var c = Math.round($scope.cluster * 100 / 9);
+
+        //INITIALIZE REMEDY ARRAY
+        $scope.remedy = [];
+
+        //DETECT GREATEST HEAD ACHE
+        if (a > b) {
+            if (a > c) {
+                $scope.headache = 'Sinus';
+            } else {
+                $scope.headache = 'Cluster';
+            };
+        } else if (b > a) {
+            if (b > c) {
+                $scope.headache = 'Migraine';
+            } else {
+                $scope.headache = 'Cluster';
+            };
+        } else {
+            $scope.headche = 'Sinus';
+        };
+
+        //INSERT INTO REPORT THE HEADACHE
+        db.transaction(function (tx) {
+            console.log($scope.headache);
+            tx.executeSql("INSERT INTO reports(userid ,username ,headache) VALUES('" + $scope.user.id + "','" + $scope.user.username + "','" + $scope.headache + "')", [], function (tx, results) {
+                console.log("Added");
+                console.log(results.insertId);
+                reportinsertid = results.insertId;
+            }, null);
+        });
+
+        var givevalue = function () {
+            console.log(i);
+            $scope.sinus = a;
+            $scope.migrane = b;
+            $scope.cluster = c;
+            $scope.value = '50%';
+        };
+        var giveval = $interval(givevalue, 1000, 1);
 
     };
 
-    console.log($scope.sinus);
-    console.log($scope.migrane);
-    console.log($scope.cluster);
 
-    //CALCULATING HEAD ACHE PERCENTAGE
-    var a = Math.round($scope.sinus * 100 / 9);
-    var b = Math.round($scope.migrane * 100 / 8);
-    var c = Math.round($scope.cluster * 100 / 9);
-
-    //INITIALIZE REMEDY ARRAY
-    $scope.remedy = [];
-
-    //DETECT GREATEST HEAD ACHE
-    if (a > b) {
-        if (a > c) {
-            $scope.headache = 'Sinus';
-        } else {
-            $scope.headache = 'Cluster';
-        };
-    } else if (b > a) {
-        if (b > c) {
-            $scope.headache = 'Migraine';
-        } else {
-            $scope.headache = 'Cluster';
-        };
-    } else {
-        $scope.headche = 'Sinus';
-    };
-
-    //INSERT INTO REPORT THE HEADACHE
-    db.transaction(function (tx) {
-        tx.executeSql("INSERT INTO reports(userid ,username ,headache) VALUES('" + $scope.user.id + "','" + $scope.user.username + "','" + $scope.headache + "')", [], function (tx, results) {
-            console.log("Added");
-            console.log(results.insertId);
-            reportinsertid = results.insertId;
-        }, null);
-    })
-
-    var givevalue = function () {
-        console.log(i);
-        $scope.sinus = a;
-        $scope.migrane = b;
-        $scope.cluster = c;
-        $scope.value = '50%';
-    };
-    var giveval = $interval(givevalue, 1000, 1);
 
     //GET REMEDY FUNTION
     $scope.medicine = function () {
+        if (getremedy == true) {
+            db.transaction(function (tx) {
+                tx.executeSql("SELECT * FROM `MEDICINES` WHERE `headache`='" + $scope.headache + "' ", [], function (tx, results) {
+                    if ($scope.remedy.length <= results.rows.length) {
+                        for (var p = 0; p < results.rows.length; p++) {
+                            $scope.remedy.push(results.rows.item(p));
+                        }
 
-        db.transaction(function (tx) {
-            tx.executeSql("SELECT * FROM `MEDICINES` WHERE `headache`='" + $scope.headache + "' ", [], function (tx, results) {
-                if ($scope.remedy.length <= results.rows.length) {
-                    for (var p = 0; p < results.rows.length; p++) {
-                        $scope.remedy.push(results.rows.item(p));
                     }
 
-                }
-
-            }, null);
-        });
+                }, null);
+            });
+            getremedy = false;
+        };
     };
 
 })
