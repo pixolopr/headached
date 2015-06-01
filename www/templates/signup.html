@@ -1,14 +1,9 @@
 <ion-view view-title="Sign-up">
     <ion-content>
 
-        <div class="signupbg list list-inset">
+        <div class="signupbg list list-inset" style="margin-top: 10%;">
             <label class="item item-input">
-                <input type="text" ng-model="user.name" placeholder="First Name" required>
-                <span ng-show="namerequired">{{namerequired}}</span>
-                <div ng-hide="results.rows.length >0">{{exist}}</div>
-            </label>
-            <label class="item item-input">
-                <input type="text" ng-model="user.name" placeholder="Last Name" required>
+                <input type="text" ng-model="user.username" placeholder="Username" required>
                 <span ng-show="namerequired">{{namerequired}}</span>
                 <div ng-hide="results.rows.length >0">{{exist}}</div>
             </label>
@@ -16,21 +11,22 @@
                 <input type="text" placeholder="Gender" required>
                 <span ng-show="genderrequired">{{genderrequired}}</span>
             </label>-->
-            <span class="list">
-                <label class="item item-radio">
-                <input type="radio" name="group">
+            <div class="label">Gender:</div>
+            <label class="item item-radio">
+                <input type="radio" name="group" value="Male" ng-model="user.gender">
                 <div class="item-content">
                     Male
                 </div>
                 <i class="radio-icon ion-checkmark"></i>
-                </label>
-                <label class="item item-radio">
-                <input type="radio" name="group">
+            </label>
+            <label class="item item-radio">
+                <input type="radio" name="group" value="Female" ng-model="user.gender">
                 <div class="item-content">
                     Female
                 </div>
                 <i class="radio-icon ion-checkmark"></i>
-                </label>
+            </label>
+            <span class="list">
             </span>
 
 
@@ -43,7 +39,7 @@
                 <span ng-show="emailrequired">{{emailrequired}}</span>
             </label>
             <label class="item item-input">
-                <input type="text" ng-model="user.password" placeholder="Password" required>
+                <input type="password" ng-model="user.password" placeholder="Password" required>
                 <span ng-show="passwordrequired">{{passwordrequired}}</span>
             </label>
             <label class="item item-input">
@@ -51,11 +47,11 @@
                 <span ng-show="contactrequired">{{contactrequired}}</span>
             </label>
             <div>
-                <select ng-model="user.que">
-                    <!--<option value="select">--Choose any question--</option>-->
+                <select ng-model="user.que" style="width: 100%">
                     <option ng-repeat="z in que">{{z.questions}}</option>
                 </select>
-
+            </div>
+            <div>
                 <br>
                 <span>{{querequired}}</span>
                 <br>
@@ -63,15 +59,13 @@
                     <input type="text" ng-model="user.ans" placeholder="Answer" required>
                     <span>{{ansrequired}}</span>
                 </label>
-
-
             </div>
         </div>
         <div ng-repeat="y in users">{{y}}</div>
-          <button ng-click= "change()" class="button button-balanced signupbutton">
-                   Sign Up
-                </button>
-        
+        <button ng-click="change()" class="button button-balanced signupbutton">
+            Sign Up
+        </button>
+
         <!--   <div class="signupbg">
             <input type="text" ng-model="user.name" placeholder="Name" required class="inputfields">
             <span ng-show="namerequired">{{namerequired}}</span>
