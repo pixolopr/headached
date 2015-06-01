@@ -73,11 +73,21 @@ var cont = angular.module('controllers', [])
 
     })*/
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
-    // Form data for the login modal
-    $scope.loginData = {};
+        // Form data for the login modal
+        $scope.loginData = {};
 
 
-})
+    })
+    .controller('menuCtrl', function ($scope, $ionicModal, $timeout, $location) {
+        $scope.logout = function () {
+            $.jStorage.set("user", null);
+            $location.path("/app/login");
+        };
+
+        $scope.user = $.jStorage.get('user');
+
+
+    })
 
 .controller('termsCtrl', function ($scope) {
 
@@ -91,19 +101,21 @@ var cont = angular.module('controllers', [])
     .controller('historyCtrl', function ($scope, $location) {
         if ($.jStorage.get("user") == null) {
             $location.path("/app/login");
-        } else {
-            $scope.patienthistory = [];
-            db.transaction(function (tx) {
-                tx.executeSql("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports`,`appointments` WHERE `reports`.`appointment_id`=`appointments`.`app_id` AND `reports`.`userid`='" + $.jStorage.get("user").id + "' ", [], function (tx, results) {
-                    for (var s = 0; s < results.rows.length; s++) {
-                        $scope.patienthistory.push(results.rows.item(s));
-                        console.log("created");
-
-                    };
-                    console.log($scope.patienthistory);
-                }, null);
-            });
         };
+        
+        $scope.user = $.jStorage.get('user');
+        
+        $scope.patienthistory = [];
+        db.transaction(function (tx) {
+            tx.executeSql("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports`,`appointments` WHERE `reports`.`appointment_id`=`appointments`.`app_id` AND `reports`.`userid`='" + $.jStorage.get("user").id + "' ", [], function (tx, results) {
+                for (var s = 0; s < results.rows.length; s++) {
+                    $scope.patienthistory.push(results.rows.item(s));
+                    console.log("created");
+
+                };
+                console.log($scope.patienthistory);
+            }, null);
+        });
     })
 
 
@@ -635,9 +647,9 @@ var cont = angular.module('controllers', [])
         });
 
     };
-    
+
     //FINISH FUNCTION
-    $scope.gotohome = function(){
+    $scope.gotohome = function () {
         $location.path("/app/home");
     };
 })

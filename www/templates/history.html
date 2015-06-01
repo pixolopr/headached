@@ -1,6 +1,9 @@
 <ion-view view-title="Patient History">
     <ion-content>
-        <h1>My History</h1>
+        <h4 class="centertext">My History</h4>
+        <div class="padding8p"><strong>Name :</strong> {{user.username}}
+            <br><strong>Gender :</strong> {{user.gender}}
+            <br><strong>Age :</strong> {{user.age}}</div><br>
         <ion-list>
             <ion-item ng-repeat="x in patienthistory">
                 {{x.headache}} {{x.time}}pm({{x.date}} {{x.month|monthstring}})
