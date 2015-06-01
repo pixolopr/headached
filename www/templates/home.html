@@ -1,25 +1,19 @@
 <ion-view view-title="Home">
+    <ion-nav-bar class="bar-stable nav-bar-container">
+    </ion-nav-bar>
     <ion-content>
-        <div class="card">
-            <div class="item item-text-wrap">
-                <h2>Take Test</h2>
-            </div>
+        <div class="list card no-border">
+            <a href="#/app/questions" class="item item-icon-left homecard">
+                <i class="icon ion-medkit"></i> Take Test
+            </a>
+
+            <a href="#/app/history" class="item item-icon-left homecard">
+                <i class="icon ion-man"></i> Patient History
+            </a>
+
+            <a class="item item-icon-left homecard" ng-click="logout()">
+                <i class="icon ion-power"></i> Logout
+            </a>
         </div>
-        <div class="card">
-           <a href="#app/history"> <div class="item item-text-wrap">
-                <h2>Patient History</h2></a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="item item-text-wrap" ng-click="logout()">
-                <h2>Logout</h2>
-            </div>
-        </div>
-        <!--<div class="card">
-            <div class="item item-text-wrap">
-                <h2>
-                    mail apk to bharat.prabhu99@gmail.com tonight</h2>
-            </div>
-        </div>-->
     </ion-content>
 </ion-view>

@@ -594,6 +594,7 @@ var cont = angular.module('controllers', [])
     //FUNCTION TO UPDATE REPORT TABLEW WITH APPOINTMENT ID
     $scope.updateid = function (appointmentinsertid) {
         db.transaction(function (tx) {
+            console.log($scope.user.username);
             tx.executeSql("UPDATE `reports` SET `appointment_id`=" + appointmentinsertid + " WHERE `rowid`='" + reportinsertid + "'", [], function (tx, results) {
                 console.log("updated");
             }, null);
@@ -633,5 +634,10 @@ var cont = angular.module('controllers', [])
     ]
         });
 
+    };
+    
+    //FINISH FUNCTION
+    $scope.gotohome = function(){
+        $location.path("/app/home");
     };
 })
