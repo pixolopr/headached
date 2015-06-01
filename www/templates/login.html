@@ -1,5 +1,7 @@
 <ion-view view-title="Login">
     <ion-content>
+        <ion-nav-bar class="bar-stable nav-bar-container">
+        </ion-nav-bar>
         <!--<html>
         <head>
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -54,7 +56,6 @@ $(document).ready(function(){
                     <span ng-show="!loginsuccess(results.rows.item(0).password)" ng-hide="error.length<0"> {{error}}</span>
 
                     <input type="text" id="login" ng-model="logindata.username" placeholder="Username" required>
-                    <div ng-hide="error.length>0">Enter username!</div>
 
                 </label>
                 <label class="item item-input ">
@@ -66,7 +67,7 @@ $(document).ready(function(){
 
             </div>
 
-            <button ng-click="login()" class="button button-assertive loginbutton">
+            <button ng-click="login()" class="button button-dark loginbutton">
                 Login
             </button>
             <!--<div>{{forget}}</div>
@@ -84,13 +85,13 @@ $(document).ready(function(){
 
         </body>
     </html>-->
-            <div style="    margin-top: 88%;">Don't have an account? Register yourself. 
-            <a href="#app/signup">
-                <button class="button button-balanced signupbutton">
-                   Sign Up
-                </button>
-            </a>
-                </div>
+            <div style="margin-top: 88%;margin-left: 15%;">Don't have an account? Register yourself.<br></div>
+                <a href="#app/signup">
+                    <button class="button button-balanced bottombutton">
+                        Sign Up
+                    </button>
+                </a>
+            
 
         </div>
     </ion-content>

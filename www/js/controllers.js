@@ -93,6 +93,10 @@ var cont = angular.module('controllers', [])
 
     })
     .controller('homeCtrl', function ($scope, $location) {
+        if ($.jStorage.get("user") == null) {
+            $location.path("/app/login");
+        };
+        
         $scope.logout = function () {
             $.jStorage.set("user", null);
             $location.path("/app/login");
