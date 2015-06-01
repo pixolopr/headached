@@ -1,13 +1,20 @@
 <ion-view view-title="Report">
     <ion-content>
-        <h1>Report</h1>
-        <!--<div class="loader">
+        <h4 class="centertext">Report</h4>
+        <div class="row">
+            <div class="col">
+                <img src="img/manheadache.jpg"   width="100%" ng-if="user.gender == 'Male'"/>
+                <img src="img/womanheadache.jpg"   width="100%" ng-if="user.gender != 'Male'"/>
+            </div>
+            <div class="col">
+                <div class="padding8p"><strong>Name :</strong> {{user.username}}
+                    <br><strong>Gender :</strong> {{user.gender}}
+                    <br><strong>Age :</strong> {{user.age}}</div>
+            </div>
+            <div class="col"></div>
+        </div>
 
-			<div class="loaderfill" style="width:{{value}}">{{value}}</div>
-			<br>-->
-        <div class="padding8p"><strong>Name :</strong> {{user.username}}
-            <br><strong>Gender :</strong> {{user.gender}}
-            <br><strong>Age :</strong> {{user.age}}</div><br>
+        <br>
         <span>Sinus Headache</span>
         <div class="loader">
             <div class="loaderfill" style="width:{{sinus}}%">{{sinus}}%</div>
@@ -28,21 +35,21 @@
 		<br>-->
         <a href="#app/appointment">
             <div class="submit" style="text-align:center;">
-                <button class="button button-positive">Appointment</button>
+                <button class="button button-dark bottombutton">Get Appointment</button>
         </a>
         <br>
         <br>
         <a href="#app/report">
             <div class="submit" style="text-align:center;">
-                <button class="button button-positive" ng-click="medicine()">Remedy</button>
+                <button class="button button-dark bottombutton" ng-click="medicine()">Remedy</button>
         </a>
         <div ng-show="remedy.length>0">
             <span>Probably,you have {{headache}}</span>
             <br>
             <div>
-                <div ng-repeat="j in remedy">{{j.method}}
+                <div class="row" ng-repeat="j in remedy">{{j.method}}
                     <br>
-                    <div>{{j.mediname}}</div>
+                    <div class="col">{{j.mediname}}</div>
                 </div>
             </div>
         </div>

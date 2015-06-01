@@ -36,7 +36,7 @@ a:link {
 
 .loader {
     height: 26px;
-    border-color: blueviolet;
+    border-color: rgb(68,68,68);
     border-width: 1px;
     border-style: solid;
     text-align: center;
@@ -44,7 +44,7 @@ a:link {
 
 .loaderfill {
     height: 26px;
-    background-color: blueviolet;
+    background-color: rgb(68,68,68);
     transition: 1s ease;
     color: white;
     width: 0%;

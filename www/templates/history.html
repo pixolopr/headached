@@ -1,22 +1,33 @@
 <ion-view view-title="Patient History">
     <ion-content>
         <h4 class="centertext">My History</h4>
-        <div class="padding8p"><strong>Name :</strong> {{user.username}}
-            <br><strong>Gender :</strong> {{user.gender}}
-            <br><strong>Age :</strong> {{user.age}}</div>
+        <div class="row">
+            <div class="col">
+                <img src="img/manheadache.jpg" width="100%" ng-if="user.gender == 'Male'" />
+                <img src="img/womanheadache.jpg" width="100%" ng-if="user.gender != 'Male'" />
+            </div>
+            <div class="col">
+                <div class="padding8p"><strong>Name :</strong> {{user.username}}
+                    <br><strong>Gender :</strong> {{user.gender}}
+                    <br><strong>Age :</strong> {{user.age}}</div>
+            </div>
+            <div class="col"></div>
+        </div>
         <br>
         <ion-list>
             <ion-item>
                 <div class="row" style="font-size:80%">
                     <div class="col">Sr. No.</div>
                     <div class="col">Headache</div>
-                    <div class="col">Medicine <br>Prescribed</div>
-                    <div class="col">Appointment <br> Date</div>
+                    <div class="col">Medicine
+                        <br>Prescribed</div>
+                    <div class="col">Appoint-
+                        <br>ment Date</div>
                     <div class="col">Time</div>
                 </div>
             </ion-item>
-            <ion-item ng-repeat="x in patienthistory"  ng-class="{listdistinct:$index%2 == 0}">
-               <div class="row">
+            <ion-item ng-repeat="x in patienthistory" ng-class="{listdistinct:$index%2 == 0}">
+                <div class="row">
                     <div class="col">{{$index + 1}}</div>
                     <div class="col">{{x.headache}}</div>
                     <div class="col">Yes</div>

@@ -96,7 +96,7 @@ var cont = angular.module('controllers', [])
         if ($.jStorage.get("user") == null) {
             $location.path("/app/login");
         };
-        
+
         $scope.logout = function () {
             $.jStorage.set("user", null);
             $location.path("/app/login");
@@ -106,9 +106,9 @@ var cont = angular.module('controllers', [])
         if ($.jStorage.get("user") == null) {
             $location.path("/app/login");
         };
-        
+
         $scope.user = $.jStorage.get('user');
-        
+
         $scope.patienthistory = [];
         db.transaction(function (tx) {
             tx.executeSql("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports`,`appointments` WHERE `reports`.`appointment_id`=`appointments`.`app_id` AND `reports`.`userid`='" + $.jStorage.get("user").id + "' ", [], function (tx, results) {
@@ -341,76 +341,74 @@ var cont = angular.module('controllers', [])
     console.log(clearques);
     if ($.jStorage.get("user") == null) {
         $location.path("/app/login");
-    } else {
-        $scope.$on('$ionicView.enter', function () {
+    };
+    $scope.$on('$ionicView.enter', function () {
 
-            $scope.questionctrl();
-            console.log("quesCtrl");
+        $scope.questionctrl();
+        console.log("quesCtrl");
 
+
+    });
+
+
+    $scope.questionctrl = function () {
+        $scope.que = {};
+        console.log($scope.que);
+
+
+        console.log(clearques);
+        $scope.question = [];
+        if (clearques == true) {
+            $scope.answerset = [];
+        };
+
+        clearques = true;
+
+
+        console.log($scope.answerset);
+        db.transaction(function (tx) {
+            tx.executeSql("SELECT * FROM `QUESTIONS`", [], function (tx, results) {
+                console.log("hi");
+                for (var i = 0; i < 22; i++) {
+                    $scope.question.push(results.rows.item(i));
+                    $scope.$apply();
+                    //	console.log(results.rows);
+                }
+                queset = $scope.question;
+                console.log(queset);
+                console.log($scope.question);
+            }, null);
 
         });
 
-
-        $scope.questionctrl = function () {
-            $scope.que = {};
-            console.log($scope.que);
-
-
-            console.log(clearques);
-            $scope.question = [];
-            if (clearques == true) {
-                $scope.answerset = [];
+        $scope.showreport = function () {
+            if ($scope.answerset.length == 22) {
+                console.log($location.path());
+                $location.path("/app/answers");
+            } else {
+                $scope.showpopup("Fill all answers !");
+                //ERROR MESSAGE TO FILL ALL QUESTONS
+                //alert("All questions are Compulsory...!");
             };
-
-            clearques = true;
-
 
             console.log($scope.answerset);
-            db.transaction(function (tx) {
-                //
-                tx.executeSql("SELECT * FROM `QUESTIONS`", [], function (tx, results) {
-                    console.log("hi");
-                    for (var i = 0; i < 22; i++) {
-                        $scope.question.push(results.rows.item(i));
-                        $scope.$apply();
-                        //	console.log(results.rows);
-                    }
-                    queset = $scope.question;
-                    console.log(queset);
-                    console.log($scope.question);
-                }, null);
 
-            });
+            answersetcarry = $scope.answerset;
+        };
+        $scope.showpopup = function (msg) {
+            var mypopup = $ionicPopup.show({
+                template: '<div style="text-align:center">' + msg + '</div>',
+                buttons: [
 
-            $scope.showreport = function () {
-                if ($scope.answerset.length == 22) {
-                    console.log($location.path());
-                    $location.path("/app/answers");
-                } else {
-                    $scope.showpopup("Fill all answers !");
-                    //ERROR MESSAGE TO FILL ALL QUESTONS
-                    //alert("All questions are Compulsory...!");
-                };
-
-                console.log($scope.answerset);
-
-                answersetcarry = $scope.answerset;
-            };
-            $scope.showpopup = function (msg) {
-                var mypopup = $ionicPopup.show({
-                    template: '<div style="text-align:center">' + msg + '</div>',
-                    buttons: [
-
-                        {
-                            text: '<b>Ok</b>',
-                            type: 'button-positive',
+                    {
+                        text: '<b>Ok</b>',
+                        type: 'button-positive',
       }
     ]
-                });
+            });
 
-            }
-        }
-    };
+        };
+    }
 
 })
 
@@ -420,26 +418,21 @@ var cont = angular.module('controllers', [])
 .controller('answersCtrl', function ($scope, $location) {
     if ($.jStorage.get("user") == null) {
         $location.path("/app/login");
-    } else {
-        console.log("report page");
-        //console.log(answersetreport);
-        //$scope.question = [];
-        //$scope.answerset = [];
-        clearques = false;
-        $scope.answers = answersetcarry;
-        $scope.questionset = queset;
-        //$scope.answerset = [];
-        console.log(queset);
-        $scope.submit = function () {
+    };
+    console.log("report page");
+    clearques = false;
+    $scope.answers = answersetcarry;
+    $scope.questionset = queset;
+    console.log(queset);
+    $scope.submit = function () {
 
-            if ($scope.answers.length == 22) {
-                clearques = true;
-                $location.path("/app/report");
-            } else {
-                clearques = false;
-                $location.path("/app/questions");
-            };
-        }
+        if ($scope.answers.length == 22) {
+            clearques = true;
+            $location.path("/app/report");
+        } else {
+            clearques = false;
+            $location.path("/app/questions");
+        };
     };
 })
 
@@ -450,10 +443,12 @@ var cont = angular.module('controllers', [])
         $location.path("/app/login");
     };
 
-    //INITIATE HEAD ACHE TYPES
-    $scope.sinus = 0;
-    $scope.migrane = 0;
-    $scope.cluster = 0;
+    $scope.$on('$ionicView.enter', function () {
+        $scope.remedy = [];
+        $scope.sinus = 0;
+        $scope.migrane = 0;
+        $scope.cluster = 0;
+    });
 
     $scope.user = $.jStorage.get("user");
 
