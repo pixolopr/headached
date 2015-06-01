@@ -157,7 +157,7 @@ var cont = angular.module('controllers', [])
                 /*$.jStorage.set("logindata", $scope.logindata);
                 var a = $.jStorage.get("logindata");*/
                 $.jStorage.set("user", pass);
-                $location.path('/app/questions');
+                $location.path('/app/home');
                 $scope.$apply();
             } else {
                 $scope.invalid = "Invalid Password !";
