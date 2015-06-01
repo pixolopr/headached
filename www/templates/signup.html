@@ -47,21 +47,17 @@
                 <span ng-show="contactrequired">{{contactrequired}}</span>
             </label>
             <div>
-                <select ng-model="user.que" style="width: 100%">
+                <select ng-model="user.que" style="width: 100%; margin-top: 2%;  margin-bottom: 2%;">
                     <option ng-repeat="z in que">{{z.questions}}</option>
                 </select>
             </div>
             <div>
-                <br>
-                <span>{{querequired}}</span>
-                <br>
                 <label class="item item-input">
                     <input type="text" ng-model="user.ans" placeholder="Answer" required>
                     <span>{{ansrequired}}</span>
                 </label>
             </div>
         </div>
-        <div ng-repeat="y in users">{{y}}</div>
         <button ng-click="change()" class="button button-balanced signupbutton">
             Sign Up
         </button>

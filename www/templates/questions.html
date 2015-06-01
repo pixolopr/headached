@@ -5,14 +5,44 @@
                 {{y.quesid}} : {{y.question}}
             </div>
 
-            <div ng-if="y.answer1 == 'Yes'" class="options">
-                <input type="radio" value="1" ng-model="answerset[$index]">Yes
-                <input type="radio" value="0" ng-model="answerset[$index]">No
+            <div ng-if="y.answer1 == 'Yes'" class="options row">
+                <label class="item item-radio col" style="  font-size: 17px;">
+                    <input type="radio" value="1" ng-model="answerset[$index]">
+                    <div class="item-content"  style="width: 50%;">
+                        Yes
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio col" style="  font-size: 17px;">
+                    <input type="radio" value="0" ng-model="answerset[$index]">
+                    <div class="item-content">
+                        No
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
             </div>
-            <div ng-if="y.answer1 != 'Yes'" class="options">
-                <input type="radio" value="0" ng-model="answerset[$index]">Low
-                <input type="radio" value="0.5" ng-model="answerset[$index]">Medium
-                <input type="radio" value="1" ng-model="answerset[$index]">High
+            <div ng-if="y.answer1 != 'Yes'" class="options row">
+                <label class="item item-radio col" style="  font-size: 17px;">
+                    <input type="radio" value="0" ng-model="answerset[$index]">
+                    <div class="item-content" style="width: 50%;">
+                        Low
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio col" style="  font-size: 17px;">
+                    <input type="radio" value="0.5" ng-model="answerset[$index]">
+                    <div class="item-content" style="width: 50%;">
+                        Medium
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+                <label class="item item-radio col" style="  font-size: 17px;">
+                    <input type="radio" value="1" ng-model="answerset[$index]">
+                    <div class="item-content"  style="width: 50%;">
+                        High
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
             </div>
         </div>
         <div class="submit" style="text-align:center;">

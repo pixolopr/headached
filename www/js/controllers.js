@@ -432,7 +432,7 @@ var cont = angular.module('controllers', [])
         $scope.cluster = 0;
 
         var getremedy = true;
-        
+
         regularfunctions();
     });
     var getremedy = true;
@@ -546,6 +546,8 @@ var cont = angular.module('controllers', [])
     //TAKE USER DETAILS IN VAR
     $scope.user = $.jStorage.get('user');
 
+    var takeappointment = true;
+
     //BOOKED APPOINTMENT ARRAY
     $scope.appvalues = [];
 
@@ -617,17 +619,22 @@ var cont = angular.module('controllers', [])
     //BOOKING AN APPOINTMENT FUNCTION
     $scope.setappointment = function (i, mv, time) {
         if ($scope.appvalues.indexOf(mv) <= -1) {
-            //insert app value in database
-            db.transaction(function (tx) {
+            if (takeappointment == true) {
+                //insert app value in database
+                db.transaction(function (tx) {
                     tx.executeSql("INSERT INTO appointments(app_id,appvalue,patient,date,month,time) VALUES('" + mv + "','" + mv + "','" + $scope.user.username + "','" + $scope.date[i] + "','" + $scope.month[i] + "','" + time + "')", [], function (tx, results) {
                         console.log("added with ID");
                         console.log(results.insertId);
                         $scope.updateid(results.insertId);
                     }, null);
 
-                })
+                });
+                takeappointment = false;
                 //ADDING INTO BOOKED ARRAY TO CHANGE COLOR
-            $scope.appvalues.push(mv);
+                $scope.appvalues.push(mv);
+            } else {
+                $scope.changepopup("You have already booked a slot, you may need to cancel the appointment before changing it");
+            };
         } else {
             $scope.changepopup("The appointment is already booked !<br>Take another appointment.");
         };
