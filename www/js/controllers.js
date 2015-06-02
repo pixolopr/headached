@@ -56,7 +56,7 @@ var cont = angular.module('controllers', [])
             } else {
                 $scope.password = "Oops, very close";
             };
-            
+
         };
     })
 
@@ -199,6 +199,20 @@ var cont = angular.module('controllers', [])
             if (!$scope.user.username) {
                 $scope.namerequired = 'Name Required !';
                 errorcount++;
+            } else {
+                db.transaction(function (tx) {
+                    tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.username + "'", [], function (tx, results) {
+                        console.log(results.rows);
+                        if (results.rows.length > 0) {
+                            //SHOW MESSAGE THAT USERNAME ALREADY EXIST
+                            $scope.namerequired = "Username already exist !";
+                            $scope.$apply();
+                            $scope.user.name = "";
+                        };
+
+                    }, null);
+
+                });
             };
             if (!$scope.user.gender) {
                 $scope.genderrequired = 'Gender Required !';
@@ -229,20 +243,8 @@ var cont = angular.module('controllers', [])
                 errorcount++;
             };
             if (errorcount == 0) {
-                db.transaction(function (tx) {
-                    tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.username + "'", [], function (tx, results) {
-                        console.log(results.rows);
-                        if (results.rows.length > 0) {
-                            //SHOW MESSAGE THAT USERNAME ALREADY EXIST
-                            $scope.namerequired = "Username already exist !";
-                            $scope.user.name = "";
-                        } else {
-                            //NEW USER
-                            signup();
-                        };
-                    }, null);
-
-                });
+                //NEW USER
+                signup();
             };
         };
     };
