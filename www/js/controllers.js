@@ -89,6 +89,10 @@ var cont = angular.module('controllers', [])
 
     })
 
+.controller('forgotCtrl', function ($scope, $location) {
+    $scope.checkanswer = function()
+    {};
+})
 .controller('homeCtrl', function ($scope, $location) {
     if ($.jStorage.get("user") == null) {
         $location.path("/app/login");

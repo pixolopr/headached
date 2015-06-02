@@ -216,3 +216,11 @@ activated {
     padding: 2%;
     color: white;
 }
+
+.item-radio input:checked ~ .item-content {
+    background: #88EEAA;
+}
+
+.item-radio input:checked ~ .answersdisabled {
+    background: whitesmoke;
+}

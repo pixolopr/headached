@@ -65,6 +65,15 @@ var myapp = angular.module('starter', ['ionic', 'controllers', 'database'])
                 }
             }
         })
+        .state('app.forgot', {
+            url: "/forgot",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/forgot.html",
+                    controller: 'forgotCtrl'
+                }
+            }
+        })
         .state('app.questions', {
             url: "/questions",
             views: {
