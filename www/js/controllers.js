@@ -349,6 +349,14 @@ var cont = angular.module('controllers', [])
     };
 
     var regularfunctions = function () {
+        var getremedy = true;
+        $scope.remedy = [];
+        $scope.sinus = 0;
+        $scope.migrane = 0;
+        $scope.cluster = 0;
+        console.log(answersetcarry);
+
+
         $scope.user = $.jStorage.get("user");
 
 
