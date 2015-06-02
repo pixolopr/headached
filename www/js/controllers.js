@@ -35,6 +35,7 @@ var cont = angular.module('controllers', [])
                 console.log($scope.forgot.username);
                 tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.forgot.username + "'", [], function (tx, results) {
                     if (results.rows.length > 0) {
+                        $scope.error = "";
                         $scope.question = results.rows.item(0).question;
                         passwordval = results.rows.item(0).password;
                         answerval = results.rows.item(0).answer;
