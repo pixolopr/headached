@@ -343,6 +343,11 @@ var cont = angular.module('controllers', [])
     $scope.cluster = 0;
     console.log(answersetcarry);
 
+    //FINISH FUNCTION
+    $scope.gotohome = function () {
+        $location.path("/app/home");
+    };
+
     var regularfunctions = function () {
         $scope.user = $.jStorage.get("user");
 
@@ -442,11 +447,10 @@ var cont = angular.module('controllers', [])
         $location.path("/app/login");
     };
 
-    var maketrue = function()
-    {
+    var maketrue = function () {
         takeappointment = true;
     };
-    
+
     $scope.$on('$ionicView.enter', function () {
         takeappointment = true;
         maketrue();
