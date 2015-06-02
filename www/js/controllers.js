@@ -193,7 +193,6 @@ var cont = angular.module('controllers', [])
                         $scope.$apply();
                     }, null);
                 });
-
             };
 
             if (!$scope.user.username) {
