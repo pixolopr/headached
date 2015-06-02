@@ -207,44 +207,50 @@ var cont = angular.module('controllers', [])
                             //SHOW MESSAGE THAT USERNAME ALREADY EXIST
                             $scope.namerequired = "Username already exist !";
                             $scope.$apply();
-                            $scope.user.name = "";
+                            errorcount++;
+                            $scope.user.username = "";
+
+                        } else {
+                            proceed();
                         };
 
                     }, null);
 
                 });
             };
-            if (!$scope.user.gender) {
-                $scope.genderrequired = 'Gender Required !';
-                errorcount++;
-            };
-            if (!$scope.user.email) {
-                $scope.emailrequired = 'Email Required !';
-                errorcount++;
-            };
-            if (!$scope.user.password) {
-                $scope.passwordrequired = 'Password Required !';
-                errorcount++;
-            };
-            if (!$scope.user.age) {
-                $scope.agerequired = 'Age Required !';
-                errorcount++;
-            };
-            if (!$scope.user.contact) {
-                $scope.contactrequired = 'Contact Required !';
-                errorcount++;
-            };
-            if (!$scope.user.que) {
-                $scope.querequired = 'Question Required !';
-                errorcount++;
-            };
-            if (!$scope.user.ans) {
-                $scope.ansrequired = 'Answer Required !';
-                errorcount++;
-            };
-            if (errorcount == 0) {
-                //NEW USER
-                signup();
+            var proceed = function () {
+                if (!$scope.user.gender) {
+                    $scope.genderrequired = 'Gender Required !';
+                    errorcount++;
+                };
+                if (!$scope.user.email) {
+                    $scope.emailrequired = 'Email Required !';
+                    errorcount++;
+                };
+                if (!$scope.user.password) {
+                    $scope.passwordrequired = 'Password Required !';
+                    errorcount++;
+                };
+                if (!$scope.user.age) {
+                    $scope.agerequired = 'Age Required !';
+                    errorcount++;
+                };
+                if (!$scope.user.contact) {
+                    $scope.contactrequired = 'Contact Required !';
+                    errorcount++;
+                };
+                if (!$scope.user.que) {
+                    $scope.querequired = 'Question Required !';
+                    errorcount++;
+                };
+                if (!$scope.user.ans) {
+                    $scope.ansrequired = 'Answer Required !';
+                    errorcount++;
+                };
+                if (errorcount == 0) {
+                    //NEW USER
+                    signup();
+                };
             };
         };
     };
