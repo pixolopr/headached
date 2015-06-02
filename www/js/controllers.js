@@ -78,7 +78,7 @@ var cont = angular.module('controllers', [])
 
     $scope.patienthistory = [];
     db.transaction(function (tx) {
-        tx.executeSql("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports` LEFT OUTER JOIN `appointments` ON `reports`.`appointment_id`=`appointments`.`app_id` AND `reports`.`username`='" + $.jStorage.get("user").username + "' ", [], function (tx, results) {
+        tx.executeSql("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports` INNER JOIN `appointments` ON `reports`.`appointment_id`=`appointments`.`app_id` AND `reports`.`username`='" + $.jStorage.get("user").username + "' ", [], function (tx, results) {
             for (var s = 0; s < results.rows.length; s++) {
                 $scope.patienthistory.push(results.rows.item(s));
                 console.log("created");
