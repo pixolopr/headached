@@ -31,7 +31,7 @@
                     <div class="col col-25 centertext">{{x.headache}}</div>
                     <div class="col col-20 centertext">Yes</div>
                     <div class="col col-25 centertext">{{x.date}} {{x.month|monthstring}}</div>
-                    <div class="col col-20 centertext">{{x.time +  pm}}</div>
+                    <div class="col col-20 centertext" ng-show="x.time != null">{{x.time +  'pm'}}</div>
                 </div>
             </ion-item>
         </ion-list>

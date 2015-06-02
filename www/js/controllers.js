@@ -90,14 +90,14 @@ var cont = angular.module('controllers', [])
 
 
 .controller('loginCtrl', function ($scope, $location) {
-    
+
     $scope.$on('$ionicView.enter', function () {
         $scope.loginctrl();
         console.log("quesCtrl");
         $scope.invalid = "";
         $scope.error = "";
     });
-    
+
     $scope.loginctrl = function () {
         $scope.logindata = {};
 
@@ -108,7 +108,7 @@ var cont = angular.module('controllers', [])
 
         $scope.logindata.username = "";
         $scope.logindata.password = "";
-        
+
         //REDIRECT USER FUNCTION
         var loginsuccess = function (userinfo) {
             if ($scope.logindata.password == userinfo.password) {
@@ -128,7 +128,7 @@ var cont = angular.module('controllers', [])
         $scope.removepasserror = function () {
             $scope.invalid = "";
         };
-        
+
         //LOGIN BUTTON FUNCTION
         $scope.login = function (x) {
             db.transaction(function (tx) {
@@ -168,6 +168,7 @@ var cont = angular.module('controllers', [])
         $scope.secret = {};
 
         $scope.change = function () {
+            var errorcount = 0;
             $scope.namerequired = '';
             $scope.genderrequired = '';
             $scope.emailrequired = '';
@@ -185,30 +186,39 @@ var cont = angular.module('controllers', [])
 
             };
 
-            if (!$scope.user.name) {
+            if (!$scope.user.username) {
                 $scope.namerequired = 'Name Required !';
+                errorcount++;
             };
             if (!$scope.user.gender) {
                 $scope.genderrequired = 'Gender Required !';
+                errorcount++;
             };
             if (!$scope.user.email) {
                 $scope.emailrequired = 'Email Required !';
+                errorcount++;
             };
             if (!$scope.user.password) {
                 $scope.passwordrequired = 'Password Required !';
+                errorcount++;
             };
             if (!$scope.user.age) {
                 $scope.agerequired = 'Age Required !';
+                errorcount++;
             };
             if (!$scope.user.contact) {
                 $scope.contactrequired = 'Contact Required !';
+                errorcount++;
             };
             if (!$scope.user.que) {
                 $scope.querequired = 'Question Required !';
+                errorcount++;
             };
             if (!$scope.user.ans) {
                 $scope.ansrequired = 'Answer Required !';
-            } else {
+                errorcount++;
+            };
+            if (errorcount == 0) {
                 db.transaction(function (tx) {
                     tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.name + "'", [], function (tx, results) {
                         console.log(results.rows);
@@ -218,7 +228,6 @@ var cont = angular.module('controllers', [])
                             $scope.user.name = "";
                         } else {
                             //NEW USER
-                            $.jStorage.set("user", $scope.user);
                             signup();
                         };
                     }, null);
@@ -242,7 +251,7 @@ var cont = angular.module('controllers', [])
         };
         clearques = true;
     });
-
+    $scope.answerset = [];
     $scope.que = {};
     console.log($scope.que);
 
@@ -409,12 +418,14 @@ var cont = angular.module('controllers', [])
 
     //GET REMEDY FUNTION
     $scope.medicine = function () {
+        console.log($scope.headache);
         if (getremedy == true) {
             db.transaction(function (tx) {
                 tx.executeSql("SELECT * FROM `MEDICINES` WHERE `headache`='" + $scope.headache + "' ", [], function (tx, results) {
                     if ($scope.remedy.length <= results.rows.length) {
                         for (var p = 0; p < results.rows.length; p++) {
                             $scope.remedy.push(results.rows.item(p));
+                            $scope.$apply();
                         };
                     };
                 }, null);
@@ -430,6 +441,16 @@ var cont = angular.module('controllers', [])
     if ($.jStorage.get("user") == null) {
         $location.path("/app/login");
     };
+
+    var maketrue = function()
+    {
+        takeappointment = true;
+    };
+    
+    $scope.$on('$ionicView.enter', function () {
+        takeappointment = true;
+        maketrue();
+    });
 
     //TAKE USER DETAILS IN VAR
     $scope.user = $.jStorage.get('user');
