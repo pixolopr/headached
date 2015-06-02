@@ -6,7 +6,7 @@ db.transaction(function (tx) {});
 //tx.executeSql('DROP TABLE USERS');
 /*tx.executeSql('CREATE TABLE IF NOT EXISTS USERS (id Integer PRIMARY KEY AUTOINCREMENT, username varchar, password varchar, gender varchar, email varchar, contact varchar )');*/
 db.transaction(function (tx) {
-    tx.executeSql('CREATE TABLE IF NOT EXISTS reports (userid INTEGER,username VARCHAR,headache VARCHAR,appointment_id integer,FOREIGN KEY (userid) REFERENCES USERS(id)   , FOREIGN KEY (headache) REFERENCES MEDICINES(headache) )');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS reports (username VARCHAR,headache VARCHAR,appointment_id integer,FOREIGN KEY (userid) REFERENCES USERS(id)   , FOREIGN KEY (headache) REFERENCES MEDICINES(headache) )');
     //tx.executeSql('DROP TABLE reports');
 });
 

@@ -6,77 +6,9 @@ var reportinsertid;
 var jstoragevalue = {};
 var cont = angular.module('controllers', [])
 
-
-
-/*.factory('MyDatabase', function ($location) {
-
-    //WRITE DATABASE QUERIES HERE
-    return {
-
-        getusername: function () {
-            console.log("funstion called");
-            db.transaction(function (tx) {
-                tx.executeSql("SELECT `username` FROM `users` WHERE `id`= '1'", [], function (tx, results) {
-                    user = results.rows.item(0);
-                    console.log(user);
-                    //console.log(cont.controller('questionsCtrl')().done());
-                    //console.log(angular.element(document.getElementById('questionsCtrl')));
-                    //console.log(angular.element(document.getElementById('questionsCtrl')).scope());
-                }, null);
-            })
-        },
-    }
-})*/
-
-
-
-/*.factory('usersignup', function ($location) {
-        var uid = 1;
-
-        //contacts array to hold list of all contacts
-        $location.users = [{}];
-        return {
-            //save method create a new contact if not already exists
-            //else update the existing object
-            save: function (user) {
-                if (user.id == null) {
-                    //if this is new contact, add it in contacts array
-                    user.id = uid++;
-                    users.push(user);
-                } else {
-                    //for existing contact, find this contact using id
-                    //and update it.
-                  +  for (i in users) {
-                        if (users[i].id == user.id) {
-                            users[i] = user;
-                        }
-                    }
-                }
-
-            }
-        }
-        return {
-            //simply search contacts list for given id
-            //and returns the contact object if found
-            get: function (id) {
-                for (i in users) {
-                    if (users[i].id == id) {
-                        return users[i];
-                    }
-                }
-
-            }
-
-
-        }
-
-
-    })*/
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
         // Form data for the login modal
         $scope.loginData = {};
-
-
     })
     .controller('menuCtrl', function ($scope, $ionicModal, $timeout, $location) {
         $scope.logout = function () {
@@ -88,44 +20,6 @@ var cont = angular.module('controllers', [])
 
 
     })
-    /* //FORGOT PASSWORD FUNCTION
-            $scope.forgetpassword = function (x) {
-                $scope.userenter = 0;
-                console.log($scope.userenter);
-                if ($scope.logindata.username) {
-                    db.transaction(function (tx) {
-                        tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
-                            console.log(results.rows);
-                            if (results.rows.length > 0) {
-                                console.log(results.rows.item(0));
-
-                                $scope.forget = results.rows.item(0).question;
-                            } else {
-                                $scope.error = "User does not exists !";
-                                $scope.userenter = 1;
-                            }
-                        }, null)
-                    });
-                }
-
-
-                $scope.passwordval = '';
-                
-
-                $scope.answer = {};
-                $scope.answer.user = "";
-                $scope.check = function () {
-                    //$scope.answer.user = "";
-                    console.log($scope.answer);
-                    if ($scope.answer.user == $scope.answerval) {
-                        $scope.password = $scope.passwordval;
-                    } else {
-                        $scope.password = '';
-                    };
-
-
-                };
-            };*/
     .controller('forgotCtrl', function ($scope, $location) {
         $scope.forgot = {};
         $scope.forgot.username = "";
@@ -163,16 +57,17 @@ var cont = angular.module('controllers', [])
             $scope.$apply();
         };
     })
-    .controller('homeCtrl', function ($scope, $location) {
-        if ($.jStorage.get("user") == null) {
-            $location.path("/app/login");
-        };
 
-        $scope.logout = function () {
-            $.jStorage.set("user", null);
-            $location.path("/app/login");
-        };
-    })
+.controller('homeCtrl', function ($scope, $location) {
+    if ($.jStorage.get("user") == null) {
+        $location.path("/app/login");
+    };
+
+    $scope.logout = function () {
+        $.jStorage.set("user", null);
+        $location.path("/app/login");
+    };
+})
 
 .controller('historyCtrl', function ($scope, $location) {
     if ($.jStorage.get("user") == null) {
@@ -189,21 +84,20 @@ var cont = angular.module('controllers', [])
                 console.log("created");
 
             };
-            console.log($scope.patienthistory);
         }, null);
     });
 })
 
 
 .controller('loginCtrl', function ($scope, $location) {
-    clearques;
+    
     $scope.$on('$ionicView.enter', function () {
-
         $scope.loginctrl();
         console.log("quesCtrl");
-
-
+        $scope.invalid = "";
+        $scope.error = "";
     });
+    
     $scope.loginctrl = function () {
         $scope.logindata = {};
 
@@ -214,6 +108,7 @@ var cont = angular.module('controllers', [])
 
         $scope.logindata.username = "";
         $scope.logindata.password = "";
+        
         //REDIRECT USER FUNCTION
         var loginsuccess = function (userinfo) {
             if ($scope.logindata.password == userinfo.password) {
@@ -221,25 +116,31 @@ var cont = angular.module('controllers', [])
                 $location.path('/app/home');
                 $scope.$apply();
             } else {
+                $scope.logindata.password = "";
                 $scope.invalid = "Invalid Password !";
-                console.log($scope.invalid);
-                //$scope.logindata.password = "";
-            }
+                $scope.$apply();
+            };
         };
 
+        $scope.removeusererror = function () {
+            $scope.error = "";
+        };
+        $scope.removepasserror = function () {
+            $scope.invalid = "";
+        };
+        
         //LOGIN BUTTON FUNCTION
         $scope.login = function (x) {
             db.transaction(function (tx) {
                 tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
-                    console.log(results.rows);
                     if (results.rows.length > 0) {
-                        console.log(results.rows.item(0));
                         userinfo = results.rows.item(0);
                         loginsuccess(results.rows.item(0));
                     } else {
                         $scope.logindata.username = "";
                         //SHOW MESSAGE THAt USER DOES NOT EXIST
                         $scope.error = "User does not exist!";
+                        $scope.$apply();
                     };
                 }, null);
             });
@@ -250,11 +151,7 @@ var cont = angular.module('controllers', [])
 
 .controller('signupCtrl', function ($scope, $location) {
     $scope.$on('$ionicView.enter', function () {
-
         $scope.signupctrl();
-        console.log("quesCtrl");
-
-
     });
     $scope.signupctrl = function () {
         clearques = '';
@@ -264,36 +161,24 @@ var cont = angular.module('controllers', [])
             tx.executeSql('select * from secret_question', [], function (tx, results) {
                 for (var j = 0; j <= 4; j++) {
                     $scope.que.push(results.rows.item(j));
-
-                }
+                };
                 return $scope.que.queid;
             }, null);
         });
         $scope.secret = {};
-        $scope.question = function (i) {
-            // $scope.secret.question=$scope.que.queid[i];
-
-            console.log("hi");
-            //  $scope.user=$scope.que[i];
-            //console.log($scope.secret.question);
-            console.log($scope.user);
-        }
 
         $scope.change = function () {
-
-            console.log($scope.user);
             $scope.namerequired = '';
             $scope.genderrequired = '';
             $scope.emailrequired = '';
+            $scope.agerequired = '';
             $scope.passwordrequired = '';
             $scope.contactrequired = '';
 
             var signup = function () {
                 db.transaction(function (tx) {
                     tx.executeSql("INSERT INTO `USERS` (username,password,gender, email,contact,answer,question,age) VALUES ('" + $scope.user.username + "', '" + $scope.user.password + "','" + $scope.user.gender + "','" + $scope.user.email + "','" + $scope.user.contact + "','" + $scope.user.ans + "','" + $scope.user.que + "','" + $scope.user.age + "')", [], function (tx, results) {
-                        console.log("ADDED TO DAtABASE");
                         $location.path('/app/login');
-
                         $scope.$apply();
                     }, null);
                 });
@@ -312,37 +197,33 @@ var cont = angular.module('controllers', [])
             if (!$scope.user.password) {
                 $scope.passwordrequired = 'Password Required !';
             };
+            if (!$scope.user.age) {
+                $scope.agerequired = 'Age Required !';
+            };
             if (!$scope.user.contact) {
                 $scope.contactrequired = 'Contact Required !';
-            }
+            };
             if (!$scope.user.que) {
                 $scope.querequired = 'Question Required !';
-            }
+            };
             if (!$scope.user.ans) {
                 $scope.ansrequired = 'Answer Required !';
             } else {
-
-                //$.jStorage.set("users", $scope.user);
                 db.transaction(function (tx) {
                     tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.name + "'", [], function (tx, results) {
                         console.log(results.rows);
                         if (results.rows.length > 0) {
-                            $scope.exist = "Username already exist !";
-                            console.log($scope.exist);
-                            $scope.user.name = "";
                             //SHOW MESSAGE THAT USERNAME ALREADY EXIST
+                            $scope.namerequired = "Username already exist !";
+                            $scope.user.name = "";
                         } else {
                             //NEW USER
-                            /*$jStorage.set("user", 9);*/
                             $.jStorage.set("user", $scope.user);
-
                             signup();
                         };
                     }, null);
 
                 });
-
-
             };
         };
     };
@@ -375,8 +256,7 @@ var cont = angular.module('controllers', [])
             for (var i = 0; i < 22; i++) {
                 $scope.question.push(results.rows.item(i));
                 $scope.$apply();
-                //	console.log(results.rows);
-            }
+            };
             queset = $scope.question;
         }, null);
 
@@ -395,7 +275,6 @@ var cont = angular.module('controllers', [])
         var mypopup = $ionicPopup.show({
             template: '<div style="text-align:center">' + msg + '</div>',
             buttons: [
-
                 {
                     text: '<b>Ok</b>',
                     type: 'button-dark',
@@ -469,7 +348,6 @@ var cont = angular.module('controllers', [])
             } else if (i < 20) {
                 $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
             } else {
-                //$scope.common = $scope.common + parseFloat(answersetcarry[i]);
                 $scope.sinus = $scope.sinus + parseFloat(answersetcarry[i]);
                 $scope.migrane = $scope.migrane + parseFloat(answersetcarry[i]);
                 $scope.cluster = $scope.cluster + parseFloat(answersetcarry[i]);
@@ -509,7 +387,7 @@ var cont = angular.module('controllers', [])
         //INSERT INTO REPORT THE HEADACHE
         db.transaction(function (tx) {
             console.log($scope.headache);
-            tx.executeSql("INSERT INTO reports(userid ,username ,headache) VALUES('" + $scope.user.id + "','" + $scope.user.username + "','" + $scope.headache + "')", [], function (tx, results) {
+            tx.executeSql("INSERT INTO reports(username ,headache) VALUES('" + $scope.user.username + "','" + $scope.headache + "')", [], function (tx, results) {
                 console.log("Added");
                 console.log(results.insertId);
                 reportinsertid = results.insertId;
@@ -537,16 +415,13 @@ var cont = angular.module('controllers', [])
                     if ($scope.remedy.length <= results.rows.length) {
                         for (var p = 0; p < results.rows.length; p++) {
                             $scope.remedy.push(results.rows.item(p));
-                        }
-
-                    }
-
+                        };
+                    };
                 }, null);
             });
             getremedy = false;
         };
     };
-
 })
 
 .controller('appointmentCtrl', function ($scope, $ionicPopup, $location) {
