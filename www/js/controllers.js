@@ -74,18 +74,26 @@ var cont = angular.module('controllers', [])
         $location.path("/app/login");
     };
 
+    $scope.$on('$ionicView.enter', function () {
+        regularfunctions();
+    });
+
     $scope.user = $.jStorage.get('user');
 
-    $scope.patienthistory = [];
-    db.transaction(function (tx) {
-        tx.executeSql("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports` INNER JOIN `appointments` ON `reports`.`appointment_id`=`appointments`.`app_id` AND `reports`.`username`='" + $.jStorage.get("user").username + "' ", [], function (tx, results) {
-            for (var s = 0; s < results.rows.length; s++) {
-                $scope.patienthistory.push(results.rows.item(s));
-                console.log("created");
+    var regularfunctions = function () {
+        $scope.patienthistory = [];
+        db.transaction(function (tx) {
+            console.log("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports`,`appointments` WHERE `reports`.`appointment_id`=`appointments`.`app_id` AND `reports`.`username`='" + $.jStorage.get("user").username + "' ");
+            tx.executeSql("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports` LEFT OUTER JOIN `appointments` ON `reports`.`appointment_id`=`appointments`.`app_id` WHERE `reports`.`username`='" + $.jStorage.get("user").username + "' ", [], function (tx, results) {
+                console.log(results.rows);
+                for (var s = 0; s < results.rows.length; s++) {
+                    $scope.patienthistory.push(results.rows.item(s));
+                    console.log("created");
 
-            };
-        }, null);
-    });
+                };
+            }, null);
+        });
+    };
 })
 
 
@@ -253,7 +261,7 @@ var cont = angular.module('controllers', [])
         clearques = true;
         regularfunction();
     });
-    var regularfunction = function() {
+    var regularfunction = function () {
         if (clearques == true) {
             $scope.answerset = [];
         };
