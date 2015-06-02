@@ -248,9 +248,16 @@ var cont = angular.module('controllers', [])
     $scope.$on('$ionicView.enter', function () {
         if (clearques == true) {
             $scope.answerset = [];
+
         };
         clearques = true;
+        regularfunction();
     });
+    var regularfunction = function() {
+        if (clearques == true) {
+            $scope.answerset = [];
+        };
+    };
     $scope.answerset = [];
     $scope.que = {};
     console.log($scope.que);
@@ -302,11 +309,16 @@ var cont = angular.module('controllers', [])
     if ($.jStorage.get("user") == null) {
         $location.path("/app/login");
     };
-    console.log("report page");
-    clearques = false;
-    $scope.answers = answersetcarry;
-    $scope.questionset = queset;
-    console.log(queset);
+    $scope.$on('$ionicView.enter', function () {
+
+        regularfunctions();
+    });
+    var regularfunctions = function () {
+        clearques = false;
+        $scope.answers = answersetcarry;
+        $scope.questionset = queset;
+        console.log(queset);
+    };
     $scope.submit = function () {
 
         if ($scope.answers.length == 22) {
@@ -317,6 +329,7 @@ var cont = angular.module('controllers', [])
             $location.path("/app/questions");
         };
     };
+
 })
 
 .controller('reportCtrl', function ($scope, $interval, $location) {
@@ -331,8 +344,8 @@ var cont = angular.module('controllers', [])
         $scope.sinus = 0;
         $scope.migrane = 0;
         $scope.cluster = 0;
-
-        var getremedy = true;
+        console.log("ctrl called");
+        getremedy = true;
 
         regularfunctions();
     });
@@ -349,7 +362,8 @@ var cont = angular.module('controllers', [])
     };
 
     var regularfunctions = function () {
-        var getremedy = true;
+        clearques = true;
+        getremedy = true;
         $scope.remedy = [];
         $scope.sinus = 0;
         $scope.migrane = 0;
@@ -405,7 +419,7 @@ var cont = angular.module('controllers', [])
         } else {
             $scope.headche = 'Sinus';
         };
-
+        answersetcarry = [];
         //INSERT INTO REPORT THE HEADACHE
         db.transaction(function (tx) {
             console.log($scope.headache);
@@ -431,7 +445,7 @@ var cont = angular.module('controllers', [])
 
     //GET REMEDY FUNTION
     $scope.medicine = function () {
-        console.log($scope.headache);
+        console.log(getremedy);
         if (getremedy == true) {
             db.transaction(function (tx) {
                 tx.executeSql("SELECT * FROM `MEDICINES` WHERE `headache`='" + $scope.headache + "' ", [], function (tx, results) {
