@@ -230,7 +230,7 @@ var cont = angular.module('controllers', [])
             };
             if (errorcount == 0) {
                 db.transaction(function (tx) {
-                    tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.name + "'", [], function (tx, results) {
+                    tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.user.username + "'", [], function (tx, results) {
                         console.log(results.rows);
                         if (results.rows.length > 0) {
                             //SHOW MESSAGE THAT USERNAME ALREADY EXIST
