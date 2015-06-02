@@ -161,38 +161,147 @@ db.transaction(function (tx) {
     tx.executeSql('INSERT INTO QUESTIONS VALUES (22,"Do you suffer from irritability?","Yes")')
 });
 
+
 db.transaction(function (tx) {
-    tx.executeSql('INSERT INTO MEDICINES VALUES (1,"Sinus","Allopathy","1. Paracetamol 2. Diclofenac sodium 3. Ibuprofen Antibiotics:-  1. Ampicillin 2. Amoxicillin 3. Cephalexin 4.Ciprofloxacin ")')
+    tx.executeSql('INSERT INTO MEDICINES VALUES (1,"Sinus","Allopathy","1. Paracetamol ")')
 });
 
 db.transaction(function (tx) {
-    tx.executeSql('INSERT INTO MEDICINES VALUES (2,"Migraine","Allopathy","1. Paracetamol 2. Diclofenac sodium 3. Ibuprofen Antibiotics:-  1. Ampicillin 2. Amoxicillin 3. Cephalexin 4.Ciprofloxacin ")')
+    tx.executeSql('INSERT INTO MEDICINES VALUES (2,"Sinus","Allopathy"," 2. Diclofenac sodium ")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (3,"Sinus","Allopathy","3. Ibuprofen  ")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (4,"Sinus","Allopathy","4. Ampicillin  ")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (5,"Sinus","Allopathy"," 5. Amoxicillin ")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (6,"Sinus","Allopathy"," 6. Cephalexin ")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (7,"Sinus","Allopathy","7. Ciprofloxacin ")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (8,"Migraine","Allopathy","1. Paracetamol ")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (9,"Migraine","Allopathy","2. Diclofenac sodium ")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (10,"Migraine","Allopathy","3. Ibuprofen ")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (11,"Migraine","Allopathy","4. Ampicillin")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (12,"Migraine","Allopathy","5. Amoxicillin")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (13,"Migraine","Allopathy","6. Cephalexin ")')
+});
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (14,"Migraine","Allopathy","7.Ciprofloxacin ")')
 });
 
 
 db.transaction(function (tx) {
-    tx.executeSql('INSERT INTO MEDICINES VALUES (3,"Cluster","Allopathy","1. Paracetamol 2. Diclofenac sodium 3. Ibuprofen Antibiotics:-  1. Ampicillin 2. Amoxicillin 3. Cephalexin 4.Ciprofloxacin ")')
+    tx.executeSql('INSERT INTO MEDICINES VALUES (15,"Cluster","Allopathy","1. Paracetamol")')
 });
 
 
 db.transaction(function (tx) {
-    tx.executeSql('INSERT INTO MEDICINES VALUES (4,"Sinus","Ayurvedic","Remedy 1: Steam inhalation taken five to six times a day with holy basil (Tulsi) can be very effective in curing sinusitis. In case of acute sinus pain, steam may be required for seven to ten days and in chronic sinusitis pain it may continue for two years. Doing Pranayam (yogic breathing) in the form of Kapal Bhaati (forced exhalation) can help to drain out pollutants from the sinuses.                                                                                                                   Remedy 2: One should practice ‘kunjar’, ‘jalneti’ ‘rubberneti’ and ‘ghritneti’ after waking up at 4:30 am and relieving oneself. Thereafter, at around six in the morning a person should massage their abdomen, face and spinal cord and then have a foot bath and sponge bath using water water infused with neem leaves. At 8 am, you should have some lemon juice with honey or orange juice  in half a glass of warm water. At eleven in the morning aperson should have lemon juice, honey, orange or some seasonal fruits. In the afternoon at 2 pm, take water, honey, soup or fruit juice. Keep covering your face and neck after taking hot steam. At 6 pm take seasonal fruits like pomegranate, orange, sweet orange, papaya, apple, pear or others.                                                                                                                                                                                                                                                                    Remedy 3: Avoid having milk, sugar, coffee, white flour, fried or oily products made of gram flour, refined fast food, carbonated soft drinks and other such drinks, biscuits, bread, meat, liquor, cigarette, toffee and chocolates.Improvement in diet regime is the permanent treatment of the disease.                                                                                                                                                                                                          Remedy 4: In the beginning of the problem, one should have lemon juice with water for three days or fast, having water only. Then, for next five days keep a strict watch on your diet, eliminating the above mentioned foods. After a week, increase the amount you eat, including foods like roti during lunch and dinner along with vegetables, salad, curd and sprouted cereals. After recovery, the patient should regularly have a vapour bath in the morning. Afterwards, cold waist bath and spinal cord bath is also suggested, which increases one’s immunity.                                                                                                                                            Remedy 5: A good remedy is to have ginger with honey. All you need to do is mix ginger powder with jaggery and make tablets weighing 5 grams (approx.). Have these tablets twice a day. Alternatively, you could have a concoction made with 11 leaves of basil (tulsi), black pepper 11 in number, sugar candy 20 grams, ginger 2 grams and one glass full of water. Boil all the ingredients till it is reduced to half, strain it and have it while it is still warm. Don’t take bath for around one-and-a-half hour after having this medicine and make sure you rest for a while. Continue these activities for five days and you should get imminent relief.                                                                                                                                                      Remedy 6: One should perform pranayama, janusheershasan, ardhmatyendrasan, dhanurasan, chakrasan, shalabasan, bhujangasan, sarvangasan, halasan, matyasan, shavasan, morning walk and meditation for 15 minutes, which helps in increasing the immunity. These are some simple steps to avoid and overcome sinusitis. ")')
+    tx.executeSql('INSERT INTO MEDICINES VALUES (16,"Cluster","Allopathy","2. Diclofenac sodium ")')
+});
+
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (17,"Cluster","Allopathy","3. Ibuprofen ")')
+});
+
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (18,"Cluster","Allopathy","4. Ampicillin ")')
+});
+
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (19,"Cluster","Allopathy","5. Amoxicillin ")')
+});
+
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (20,"Cluster","Allopathy","6. Cephalexin ")')
+});
+
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (21,"Cluster","Allopathy","7.Ciprofloxacin ")')
+});
+
+
+
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (22,"Sinus","Ayurvedic","Remedy 1: Steam inhalation taken five to six times a day with holy basil (Tulsi) can be very effective in curing sinusitis. In case of acute sinus pain, steam may be required for seven to ten days and in chronic sinusitis pain it may continue for two years. Doing Pranayam (yogic breathing) in the form of Kapal Bhaati (forced exhalation) can help to drain out pollutants from the sinuses. ")')
+});                                                                                                                   
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (23,"Sinus","Ayurvedic","Remedy 2: One should practice ‘kunjar’, ‘jalneti’ ‘rubberneti’ and ‘ghritneti’ after waking up at 4:30 am and relieving oneself. Thereafter, at around six in the morning a person should massage their abdomen, face and spinal cord and then have a foot bath and sponge bath using water water infused with neem leaves. At 8 am, you should have some lemon juice with honey or orange juice  in half a glass of warm water. At eleven in the morning aperson should have lemon juice, honey, orange or some seasonal fruits. In the afternoon at 2 pm, take water, honey, soup or fruit juice. Keep covering your face and neck after taking hot steam. At 6 pm take seasonal fruits like pomegranate, orange, sweet orange, papaya, apple, pear or others. ")')
+});                                                                                                                                                                                                                                                                    
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (24,"Sinus","Ayurvedic","Remedy 3: Avoid having milk, sugar, coffee, white flour, fried or oily products made of gram flour, refined fast food, carbonated soft drinks and other such drinks, biscuits, bread, meat, liquor, cigarette, toffee and chocolates.Improvement in diet regime is the permanent treatment of the disease. ")')
+});                                                                                                                                               db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (25,"Sinus","Ayurvedic","Remedy 4: In the beginning of the problem, one should have lemon juice with water for three days or fast, having water only. Then, for next five days keep a strict watch on your diet, eliminating the above mentioned foods. After a week, increase the amount you eat, including foods like roti during lunch and dinner along with vegetables, salad, curd and sprouted cereals. After recovery, the patient should regularly have a vapour bath in the morning. Afterwards, cold waist bath and spinal cord bath is also suggested, which increases one’s immunity. ")')
+});                                                                                                                                            db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (26,"Sinus","Ayurvedic","Remedy 5: A good remedy is to have ginger with honey. All you need to do is mix ginger powder with jaggery and make tablets weighing 5 grams (approx.). Have these tablets twice a day. Alternatively, you could have a concoction made with 11 leaves of basil (tulsi), black pepper 11 in number, sugar candy 20 grams, ginger 2 grams and one glass full of water. Boil all the ingredients till it is reduced to half, strain it and have it while it is still warm. Don’t take bath for around one-and-a-half hour after having this medicine and make sure you rest for a while. Continue these activities for five days and you should get imminent relief.  ")')
+});                                                                                                                                               db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (27,"Sinus","Ayurvedic","Remedy 6: One should perform pranayama, janusheershasan, ardhmatyendrasan, dhanurasan, chakrasan, shalabasan, bhujangasan, sarvangasan, halasan, matyasan, shavasan, morning walk and meditation for 15 minutes, which helps in increasing the immunity. These are some simple steps to avoid and overcome sinusitis. ")')
 });
 
 db.transaction(function (tx) {
-    tx.executeSql('INSERT INTO MEDICINES VALUES (5,"Migraine","Ayurvedic","                                                                 Remedy 1: Natural home remedy using carrot juice and spinach juice:                                                                               1.Take ½ glass of carrot juice.                                                                                                                    2. Add ½ glass of spinach juice.                                                                                                                  3. Mix well.                                                                                                                                     4. Drink this juice to cure migraine and cluster headaches.                                                                                 Remedy 2: Natural home remedy using cabbage leaves:                                                                                             1. Crush a few cabbage leaves.                                                                                                                  2. Apply it on the forehead with a cloth.                                                                                                    Remedy 3: Natural home remedy using lemons:                                                                                                        1. Remove peels from 5 lemons.                                                                                                                  2. Grind them well.                                                                                                                             3. Add a little water and make paste.                                                                                                            4. Apply this paste on the forehead.                                                                                                           Remedy 4: Natural home remedy using chamomile powder:                                                                                           1. Add chamomile powder to 1 cup of boiling water.                                                                                                2. Transfer the liquid to a cup.                                                                                                                  3. Drink when hot.                                                                                                                              4. It gives fast relief from migraine and cluster headache. ")')
+    tx.executeSql('INSERT INTO MEDICINES VALUES (28,"Migraine","Ayurvedic","                                                                 Remedy 1: Natural home remedy using carrot juice and spinach juice:                                                                               1.Take ½ glass of carrot juice.                                                                                                                    2. Add ½ glass of spinach juice.                                                                                                                  3. Mix well.                                                                                                                                     4. Drink this juice to cure migraine and cluster headaches. ")')
+});                                                                                
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (29,"Migraine","Ayurvedic","Remedy 2: Natural home remedy using cabbage leaves:                                                                                             1. Crush a few cabbage leaves.                                                                                                                  2. Apply it on the forehead with a cloth.")')
 });
 db.transaction(function (tx) {
-    tx.executeSql('INSERT INTO MEDICINES VALUES (6,"Cluster","Ayurvedic","                                                                  Remedy 1: Natural home remedy using carrot juice and spinach juice:                                                                               1.Take ½ glass of carrot juice.                                                                                                                   2. Add ½ glass of spinach juice.                                                                                                                  3. Mix well.                                                                                                                                      4. Drink this juice to cure migraine and cluster headaches                                                                                   Remedy 2: Natural home remedy using cabbage leaves:                                                                                                1. Crush a few cabbage leaves.                                                                                                                   2. Apply it on the forehead with a cloth.                                                                                                          Remedy 3: Natural home remedy using lemons:                                                                                                      1. Remove peels from 5 lemons.                                                                                                                    2. Grind them well.                                                                                                                                3. Add a little water and make paste.                                                                                                              4. Apply this paste on the forehead.                                                                                                            Remedy 4: Natural home remedy using chamomile powder:                                                                                              1. Add chamomile powder to 1 cup of boiling water.                                                                                               2. Transfer the liquid to a cup.                                                                                                                3. Drink when hot.                                                                                                                                4. It gives fast relief from migraine and cluster headache. ")')
+    tx.executeSql('INSERT INTO MEDICINES VALUES (30,"Migraine","Ayurvedic","Remedy 3: Natural home remedy using lemons:                                                                                                        1. Remove peels from 5 lemons.                                                                                                                  2. Grind them well.                                                                                                                             3. Add a little water and make paste.                                                                                                            4. Apply this paste on the forehead.  ")')
 });
-
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (31,"Migraine","Ayurvedic", "Remedy 4: Natural home remedy using chamomile powder:                                                                                           1. Add chamomile powder to 1 cup of boiling water.                                                                                                2. Transfer the liquid to a cup.                                                                                                                  3. Drink when hot.                                                                                                                              4. It gives fast relief from migraine and cluster headache. ")')
+});
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (32,"Cluster","Ayurvedic","                                                                  Remedy 1: Natural home remedy using carrot juice and spinach juice:                                                                               1.Take ½ glass of carrot juice.                                                                                                                   2. Add ½ glass of spinach juice.                                                                                                                  3. Mix well.                                                                                                                                      4. Drink this juice to cure migraine and cluster headaches ")')
+});                                                                                   
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (33,"Cluster","Ayurvedic","                                                                  Remedy 2: Natural home remedy using cabbage leaves:                                                                                                1. Crush a few cabbage leaves.                                                                                                                   2. Apply it on the forehead with a cloth. ")')
+});
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (34,"Cluster","Ayurvedic","                                                                  Remedy 3: Natural home remedy using lemons:                                                                                                      1. Remove peels from 5 lemons.                                                                                                                    2. Grind them well.                                                                                                                                3. Add a little water and make paste.                                                                                                              4. Apply this paste on the forehead. ")')
+});
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO MEDICINES VALUES (35,"Cluster","Ayurvedic","                                                                  Remedy 4: Natural home remedy using chamomile powder:                                                                                              1. Add chamomile powder to 1 cup of boiling water.                                                                                               2. Transfer the liquid to a cup.                                                                                                                3. Drink when hot.                                                                                                                                4. It gives fast relief from migraine and cluster headache. ")')
+});
 
 
 
 // origin/master
 
 
-//});
+
 
 var mydatabase = angular.module('database', ['controllers']);
 /*factory('MyDatabase1', function ($location) {
