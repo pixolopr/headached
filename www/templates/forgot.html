@@ -13,8 +13,11 @@
             {{question}}
         </div>
         <br>
-        <input type="text" placeholder="answer" ng-model="forgot.answer" ng-change="checkanswer()" class="inputfield">
+        <input type="text" placeholder="answer" ng-model="forgot.answer" class="inputfield">
         <br>
+        <button class="button button-dark bottombutton" ng-click="checkanswer()">
+            <span>Go</span>
+        </button>
         <strong>Password : </strong> {{password}}
     </ion-content>
 </ion-view>

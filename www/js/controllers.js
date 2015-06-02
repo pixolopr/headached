@@ -52,10 +52,11 @@ var cont = angular.module('controllers', [])
         $scope.checkanswer = function () {
             if ($scope.forgot.answer == answerval) {
                 $scope.password = passwordval;
+                $scope.$apply();
             } else {
                 $scope.password = "Oops, very close";
             };
-            $scope.$apply();
+            
         };
     })
 
