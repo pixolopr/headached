@@ -224,3 +224,12 @@ activated {
 .item-radio input:checked ~ .answersdisabled {
     background: whitesmoke;
 }
+
+.errortext {
+    color: red;
+}
+
+.inputfield {
+    width: 100%;
+    background-color: beige;
+}

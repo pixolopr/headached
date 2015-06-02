@@ -1,8 +1,20 @@
 <ion-view view-title="Forgot Password">
-  <ion-content>
-    <h4 class="centertext">Forgot Password</h4>
-    question in angular expression
-    <input type="text">
-    <strong>Password : </strong> password in angular expression
-  </ion-content>
+    <ion-content class="padding8p">
+        <h4 class="centertext">Forgot Password</h4>
+        <input type="text" placeholder="Username" ng-model="forgot.username" class="inputfield">
+        <div class="errortext">
+            {{error}}
+        </div>
+        <button class="button button-dark bottombutton" ng-click="getquestion()">
+            <span>Go</span>
+        </button>
+        <br>
+        <div>
+            {{question}}
+        </div>
+        <br>
+        <input type="text" placeholder="answer" ng-model="forgot.answer" ng-change="checkanswer()" class="inputfield">
+        <br>
+        <strong>Password : </strong> {{password}}
+    </ion-content>
 </ion-view>

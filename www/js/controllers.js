@@ -88,21 +88,91 @@ var cont = angular.module('controllers', [])
 
 
     })
+    /* //FORGOT PASSWORD FUNCTION
+            $scope.forgetpassword = function (x) {
+                $scope.userenter = 0;
+                console.log($scope.userenter);
+                if ($scope.logindata.username) {
+                    db.transaction(function (tx) {
+                        tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
+                            console.log(results.rows);
+                            if (results.rows.length > 0) {
+                                console.log(results.rows.item(0));
 
-.controller('forgotCtrl', function ($scope, $location) {
-    $scope.checkanswer = function()
-    {};
-})
-.controller('homeCtrl', function ($scope, $location) {
-    if ($.jStorage.get("user") == null) {
-        $location.path("/app/login");
-    };
+                                $scope.forget = results.rows.item(0).question;
+                            } else {
+                                $scope.error = "User does not exists !";
+                                $scope.userenter = 1;
+                            }
+                        }, null)
+                    });
+                }
 
-    $scope.logout = function () {
-        $.jStorage.set("user", null);
-        $location.path("/app/login");
-    };
-})
+
+                $scope.passwordval = '';
+                
+
+                $scope.answer = {};
+                $scope.answer.user = "";
+                $scope.check = function () {
+                    //$scope.answer.user = "";
+                    console.log($scope.answer);
+                    if ($scope.answer.user == $scope.answerval) {
+                        $scope.password = $scope.passwordval;
+                    } else {
+                        $scope.password = '';
+                    };
+
+
+                };
+            };*/
+    .controller('forgotCtrl', function ($scope, $location) {
+        $scope.forgot = {};
+        $scope.forgot.username = "";
+        $scope.question = "Enter username to get question";
+        $scope.forgot.answer = "";
+        $scope.password = "";
+        $scope.error = "";
+        var passwordval = "";
+        var answerval = "";
+
+        $scope.getquestion = function () {
+            db.transaction(function (tx) {
+                console.log($scope.forgot.username);
+                tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.forgot.username + "'", [], function (tx, results) {
+                    if (results.rows.length > 0) {
+                        $scope.question = results.rows.item(0).question;
+                        passwordval = results.rows.item(0).password;
+                        answerval = results.rows.item(0).answer;
+                        $scope.$apply();
+                    } else {
+                        $scope.error = "User does not exist";
+                        $scope.$apply();
+                    };
+
+                }, null);
+            });
+        };
+
+        $scope.checkanswer = function () {
+            if ($scope.forgot.answer == answerval) {
+                $scope.password = passwordval;
+            } else {
+                $scope.password = "Oops, very close";
+            };
+            $scope.$apply();
+        };
+    })
+    .controller('homeCtrl', function ($scope, $location) {
+        if ($.jStorage.get("user") == null) {
+            $location.path("/app/login");
+        };
+
+        $scope.logout = function () {
+            $.jStorage.set("user", null);
+            $location.path("/app/login");
+        };
+    })
 
 .controller('historyCtrl', function ($scope, $location) {
     if ($.jStorage.get("user") == null) {
@@ -113,7 +183,7 @@ var cont = angular.module('controllers', [])
 
     $scope.patienthistory = [];
     db.transaction(function (tx) {
-        tx.executeSql("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports`,`appointments` WHERE `reports`.`appointment_id`=`appointments`.`app_id` AND `reports`.`userid`='" + $.jStorage.get("user").id + "' ", [], function (tx, results) {
+        tx.executeSql("SELECT `reports`.`headache`,`appointments`.`date`,`appointments`.`month`,`appointments`.`time` FROM `reports` LEFT OUTER JOIN `appointments` ON `reports`.`appointment_id`=`appointments`.`app_id` AND `reports`.`username`='" + $.jStorage.get("user").username + "' ", [], function (tx, results) {
             for (var s = 0; s < results.rows.length; s++) {
                 $scope.patienthistory.push(results.rows.item(s));
                 console.log("created");
@@ -142,23 +212,12 @@ var cont = angular.module('controllers', [])
             $location.path('app/home');
         };
 
-
-        /*//login
-        SELECT *.....$anchorScroll
-        $.jStorage.set('user', result {name, age....})
-    
-        //logout
-        $.jStorage.set('user', null)*/
-
-
         $scope.logindata.username = "";
         $scope.logindata.password = "";
         //REDIRECT USER FUNCTION
-        var loginsuccess = function (pass) {
-            if ($scope.logindata.password == pass.password) {
-                /*$.jStorage.set("logindata", $scope.logindata);
-                var a = $.jStorage.get("logindata");*/
-                $.jStorage.set("user", pass);
+        var loginsuccess = function (userinfo) {
+            if ($scope.logindata.password == userinfo.password) {
+                $.jStorage.set("user", userinfo);
                 $location.path('/app/home');
                 $scope.$apply();
             } else {
@@ -176,66 +235,16 @@ var cont = angular.module('controllers', [])
                     if (results.rows.length > 0) {
                         console.log(results.rows.item(0));
                         userinfo = results.rows.item(0);
-                        /*  if($scope.logindata.password.length<=0){
-					$scope.forget = results.rows.item(0).question;
-                    }*/
                         loginsuccess(results.rows.item(0));
                     } else {
                         $scope.logindata.username = "";
-                        $scope.error = "User does not exist!";
-                        console.log($scope.error);
                         //SHOW MESSAGE THAt USER DOES NOT EXIST
+                        $scope.error = "User does not exist!";
                     };
                 }, null);
             });
         };
 
-        //FORGOT PASSWORD FUNCTION
-        $scope.forgetpassword = function (x) {
-            $scope.userenter = 0;
-            console.log($scope.userenter);
-            if ($scope.logindata.username) {
-                db.transaction(function (tx) {
-                    tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
-                        console.log(results.rows);
-                        if (results.rows.length > 0) {
-                            console.log(results.rows.item(0));
-
-                            $scope.forget = results.rows.item(0).question;
-                        } else {
-                            $scope.error = "User does not exists !";
-                            $scope.userenter = 1;
-                        }
-                    }, null)
-                });
-            }
-
-
-            $scope.passwordval = '';
-            db.transaction(function (tx) {
-                tx.executeSql("SELECT * FROM `USERS` WHERE `username` = '" + $scope.logindata.username + "'", [], function (tx, results) {
-                    if (results.rows.length > 0) {
-                        $scope.passwordval = results.rows.item(0).password;
-                        $scope.answerval = results.rows.item(0).answer;
-                    }
-
-                }, null);
-            });
-
-            $scope.answer = {};
-            $scope.answer.user = "";
-            $scope.check = function () {
-                //$scope.answer.user = "";
-                console.log($scope.answer);
-                if ($scope.answer.user == $scope.answerval) {
-                    $scope.password = $scope.passwordval;
-                } else {
-                    $scope.password = '';
-                };
-
-
-            };
-        };
     };
 })
 
