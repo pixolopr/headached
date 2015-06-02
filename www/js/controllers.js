@@ -90,7 +90,7 @@ var cont = angular.module('controllers', [])
                 for (var s = 0; s < results.rows.length; s++) {
                     $scope.patienthistory.push(results.rows.item(s));
                     console.log("created");
-
+                    $scope.$apply();
                 };
             }, null);
         });
