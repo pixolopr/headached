@@ -1,4 +1,4 @@
-var answersetcarry = [];
+ var answersetcarry = [];
 var queset = [];
 var userinfo = {};
 var clearques = true;

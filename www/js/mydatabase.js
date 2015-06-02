@@ -71,6 +71,11 @@ db.transaction(function (tx) {
     console.log("yup");
     //tx.executeSql('DROP TABLE USERS');
 });
+db.transaction(function (tx) {
+    tx.executeSql('INSERT INTO USERS VALUES (2, "ghiridhar2712","Achiever","male","ghiridhar2712","96993973058","Cricket","Which is your favourite sports","18")');
+    console.log("yup");
+    //tx.executeSql('DROP TABLE USERS');
+});
 
 
 db.transaction(function (tx) {
